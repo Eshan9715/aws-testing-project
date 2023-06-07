@@ -9,6 +9,10 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+
+        <p>
+          Project was settled for testing with AWS Instance.
+        </p>
         <a
           className="App-link"
           href="https://reactjs.org"
