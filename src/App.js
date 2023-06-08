@@ -1,29 +1,80 @@
-import logo from './logo.svg';
-import './App.css';
+import {Routes, Route} from 'react-router-dom'
+import {useSelector} from 'react-redux';
+import {useState,useEffect} from 'react'
+import { lazy, Suspense } from 'react';
+
+import axios from 'axios'
+
+import Home from './pages/Home';
+
+import Navbar from './components/Navbar';
+
+import NotFound from './pages/NotFound';
+import Login from './pages/Login';
+import Register from './pages/Register';
+
+const Dashboard = lazy(() => import('./pages/Dashboard'));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+  const loggedUser = useSelector(state=> state.auth.value);
 
-        <p>
-          Project was settled for testing with AWS Instance.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   //creating IP state
+   const [ip,setIP] = useState('');
+    
+   //creating function to load ip address from the API
+   const getData = async()=>{
+       const res = await axios.get('https://geolocation-db.com/json/')
+       console.log(res.data);
+       setIP(res.data.IPv4)
+   }
+   
+   useEffect(()=>{
+       //passing getData method to the lifecycle method
+       getData()
+   },[])
+
+   const PrivateRoutes  = ()=>{
+    return(
+      <div>
+        <Suspense fallback={<h1>Loading...</h1>}>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='*' element={<NotFound/>} />
+
+        </Routes>
+        </Suspense>
+      </div>
+    )
+   }
+
+   const PublicRoutes = ()=>{
+    return(
+      <div>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Login/>} />
+          <Route path='/register' element={<Register />} />
+          <Route path='*' element={<NotFound/>} />
+
+        </Routes>
+      </div>
+    )
+   }
+
+   console.log('your IP Address is:' + ip)
+
+  return (
+    <>
+    <Navbar/>
+    {!(loggedUser.isLoggedIn) && <PublicRoutes/>}
+    {loggedUser.isLoggedIn && <PrivateRoutes/>}
+    </>
   );
+  
 }
 
 export default App;
+
+
+
