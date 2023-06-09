@@ -6,8 +6,9 @@ import { lazy, Suspense } from 'react';
 import axios from 'axios'
 
 import Home from './pages/Home';
-
 import Navbar from './components/Navbar';
+import BottomNav from './components/BottomNav';
+import Sidenavbar from './components/Sidenavbar';
 
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
@@ -67,8 +68,11 @@ function App() {
   return (
     <>
     <Navbar/>
+    {loggedUser.isLoggedIn && <Sidenavbar/>}
     {!(loggedUser.isLoggedIn) && <PublicRoutes/>}
     {loggedUser.isLoggedIn && <PrivateRoutes/>}
+    {loggedUser.isLoggedIn && <BottomNav/>}
+
     </>
   );
   
