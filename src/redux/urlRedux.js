@@ -2,13 +2,13 @@ import {createSlice} from '@reduxjs/toolkit'
 
 export const urlSlice = createSlice({
     name : 'url',
-    initialState: { isURL: 'http://ec2-13-233-174-28.ap-south-1.compute.amazonaws.com'},
+    initialState: { isURL: 'http://localhost:5000'},
     reducers: {
         local(state){
-            state.isURL = 'http://ec2-13-233-174-28.ap-south-1.compute.amazonaws.com'
+            state.isURL = 'http://localhost:5000'
         },
         server(state){
-            state.isURL = 'http://ec2-13-233-174-28.ap-south-1.compute.amazonaws.com'                //'https://cute-blue-kangaroo-tam.cyclic.app'
+            state.isURL = 'http://localhost:5000'                //'https://cute-blue-kangaroo-tam.cyclic.app'
         },
     },
 
