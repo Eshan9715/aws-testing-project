@@ -39,7 +39,7 @@ function App() {
       <div>
         <Suspense fallback={<h1>Loading...</h1>}>
         <Routes>
-          <Route path='/' element={<Home/>}/>
+          {/* <Route path='/' element={<Home/>}/> */}
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='*' element={<NotFound/>} />
 
