@@ -59,6 +59,8 @@ const SalesDashBD = () => {
               <div className='flex justify-center items-center'>
               <div className='w-full'>
                 {/* <Slider data={viewRates} title='Exports from Sri lanka' currency='USD'/> */}
+                {/* <Slider data={viewRates} title='Exports from Sri lanka' currency='USD'/> */}
+
               </div>
               </div>
 
