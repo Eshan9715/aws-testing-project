@@ -13,9 +13,9 @@ const Login = () => {
   // const[isSignup, setIsSignup] = useState('')
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isURL = useSelector((state)=> state.url.isURL);
-  var http = isURL;  
-  console.log(isURL);
+  //const isURL = useSelector((state)=> state.url.isURL);
+  var http = process.env.REACT_APP_BASE_URL;
+  console.log(http);
   const[loading, setLoading] = useState(false)
 
   const [details, setDetails] = useState([])

@@ -15,6 +15,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
+const BQuering = lazy(() => import('./pages/BQuering'));
+const Requests = lazy(() => import('./pages/Requests'));
 
 function App() {
   const loggedUser = useSelector(state=> state.auth.value);
@@ -42,6 +44,10 @@ function App() {
           {/* <Route path='/' element={<Home/>}/> */}
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='*' element={<NotFound/>} />
+          <Route path='/bquering' element={<BQuering />} />
+          <Route path='/req' element={<Requests />} />
+
+
 
         </Routes>
         </Suspense>

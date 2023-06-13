@@ -58,7 +58,7 @@ const Navbar = ({childern}) => {
         text-black'>
           <div className='w-8 md:w-12 lg:w-16'>
             <img src={fri} alt=''className='rounded-full' 
-            onClick={()=> dispatch(local())}
+            onClick={()=> navigate('/')}
 
               />
           </div>

@@ -11,10 +11,10 @@ import Success from '../components/Success';
 import Selects from '../components/Selects';
 
 const Register = () => {
-    const [details, setDetails] = useState([])
-    const navigate = useNavigate();
-    const isURL = useSelector((state)=> state.url.isURL);
-  var http = isURL;  
+  const [details, setDetails] = useState([])
+  const navigate = useNavigate();
+  //const isURL = useSelector((state)=> state.url.isURL);
+  var http = process.env.REACT_APP_BASE_URL;  
     const tradeTerms = [{key:1, value:"Imports only"}, {key:2, value:"Exports only"}, {key:3, value:"Both"} ]
 
     const formArray = [1, 2, 3];
