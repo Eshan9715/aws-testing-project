@@ -4,7 +4,7 @@ import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik'
 import React, {useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { userSchema9, userSchema9L } from './userValidation'
+import { userSchema9, userSchema9L } from '../Default/userValidation'
 
 var Schedules=[];
 var LSchedules=[];

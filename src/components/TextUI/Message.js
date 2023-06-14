@@ -1,5 +1,5 @@
 import React from 'react'
-import user from '../assets/user.png'
+import user from '../../assets/user.png'
 import moment from 'moment'
 
 export const Message = ({type,msg,time,person,chatReply}) => {

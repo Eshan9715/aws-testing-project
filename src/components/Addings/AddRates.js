@@ -5,9 +5,9 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { lclRates, userSchema8 } from './userValidation'
-import { TextFields } from './TextFields'
-import Automan from './Automan'
+import { lclRates, userSchema8 } from '../Default/userValidation'
+import { TextFields } from '../TextUI/TextFields'
+import Automan from '../TextUI/AutoText'
 
 var rates=[];
 var lRates = {}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import { BasicDateTimePicker } from './BasicDateTimePicker'
+import { BasicDateTimePicker } from '../TextUI/BasicDateTimePicker'
 import { useNavigate } from 'react-router-dom';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';

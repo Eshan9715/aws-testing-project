@@ -2,8 +2,8 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Box } from '@mui/material';
-import anchor from '../assets/anchor.png'
-import city from '../assets/city.png'
+import anchor from '../../assets/anchor.png'
+import city from '../../assets/city.png'
 
 const AutoText = ({options, title, setPortData}) =>{
 

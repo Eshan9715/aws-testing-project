@@ -6,16 +6,16 @@ import { lazy, Suspense } from 'react';
 import axios from 'axios'
 
 import Home from './pages/Home';
-import Navbar from './components/Navbar';
-import BottomNav from './components/BottomNav';
-import Sidenavbar from './components/Sidenavbar';
+import Navbar from './components/Default/Navbar';
+import BottomNav from './components/Default/BottomNav';
+import Sidenavbar from './components/Default/Sidenavbar';
 
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
-import Register from './pages/Register';
+// import Register from './pages/Register';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-const BQuering = lazy(() => import('./pages/BQuering'));
+// const BQuering = lazy(() => import('./pages/BQuering'));
 const Requests = lazy(() => import('./pages/Requests'));
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
           {/* <Route path='/' element={<Home/>}/> */}
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='*' element={<NotFound/>} />
-          <Route path='/bquering' element={<BQuering />} />
+          {/* <Route path='/bquering' element={<BQuering />} /> */}
           <Route path='/req' element={<Requests />} />
 
 
@@ -61,7 +61,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>} />
-          <Route path='/register' element={<Register />} />
+          {/* <Route path='/register' element={<Register />} /> */}
           <Route path='*' element={<NotFound/>} />
 
         </Routes>

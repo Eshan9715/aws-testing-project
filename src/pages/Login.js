@@ -3,9 +3,9 @@ import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux';
 import { Form, Formik } from 'formik';
-import { loginSchema } from '../components/userValidation';
-import {TextFields} from '../components/TextFields'
-import Navbar from '../components/Navbar';
+import { loginSchema } from '../components/Default/userValidation';
+import {TextFields} from '../components/TextUI/TextFields'
+import Navbar from '../components/Default/Navbar';
 import logbg from '../assets/loginbg.jpg';
 import { login } from '../redux/authRedux';
 

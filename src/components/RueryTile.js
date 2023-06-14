@@ -3,28 +3,28 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import AddRates from './AddRates';
+import AddRates from './Addings/AddRates';
 import DirectionsBoatFilledIcon from '@mui/icons-material/DirectionsBoatFilled';
-import AddSchedule from './AddSchedule';
+import AddSchedule from './Addings/AddSchedule';
 import  storage  from "../components/firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useNavigate } from 'react-router-dom';
-import ValuesBox from './ValuesBox';
+import ValuesBox from './Viewings/ValuesBox';
 import ves from '../assets/ship.png'
 import boxes from '../assets/boxes.png'
 import crane from '../assets/crane.png'
 
 import officer from '../assets/officer.png'
 import factory from '../assets/factory.png'
-import RateBox from './RateBox';
+import RateBox from './Viewings/RateBox';
 import chatLogo from '../assets/chatLogo.png'
 import { useSelector } from 'react-redux';
-import ViewBL from './ViewBL';
+import ViewBL from './Viewings/ViewBL';
 import clock from '../assets/clock.png'
-import AddCutOff from './AddCutOff';
+import AddCutOff from './Addings/AddCutOff';
 import { Badge, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel, FormGroup, Switch, TextField } from '@mui/material';
-import ChatBox from './ChatBox';
-import { BasicDatePicker } from './BasicDatePicker';
+import ChatBox from './TextUI/ChatBox';
+import { BasicDatePicker } from './TextUI/BasicDatePicker';
 
 var keyDoc = '';
 var storageRef = ''

@@ -3,7 +3,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import {useSelector} from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Adminapproval from './Adminapprovel';
+// import Adminapproval from './Adminapprovel';
 
 
 const Hero = () => {
@@ -70,7 +70,7 @@ const Hero = () => {
             </div>
         </div>
 
-        <Adminapproval show={show} close={()=>setShow(false)} />
+        {/* <Adminapproval show={show} close={()=>setShow(false)} /> */}
 
     </div>  
     )

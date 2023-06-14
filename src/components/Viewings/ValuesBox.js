@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import carg from '../assets/cargo.png'
+import carg from '../../assets/cargo.png'
 
 const ValuesBox = ({bk,fc,lc,item,c1,c2,c3,c4, t1,t2,t3,t4,t5,f1,f2,f3,f4,f5}) => {
     const [isVisible, setIsvisible] = useState(false)

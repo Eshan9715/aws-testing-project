@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Button from './button';
 import { Link, useNavigate } from 'react-router-dom';
-import fri from '../assets/fri.png'
+import fri from '../../assets/fri.png'
 import {useDispatch, useSelector} from 'react-redux';
-import { logout } from '../redux/authRedux';
-import { local } from '../redux/urlRedux';
+import { logout } from '../../redux/authRedux';
+import { local } from '../../redux/urlRedux';
 
 const Navbar = ({childern}) => {
   // const isLoggedIn = useSelector((state)=> state.auth.isLoggedIn);
