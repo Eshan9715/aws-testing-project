@@ -1,10 +1,8 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-import Sidenavbar from '../components/Sidenavbar'
-import Slider from '../sliders/Slider'
-import SliderAct from '../sliders/SliderActs'
-import {exports, recentAct, recentMails} from '../Data'
-import SliderMails from '../sliders/SliderMails'
+// import Slider from '../sliders/Slider'
+// import SliderAct from '../sliders/SliderActs'
+import {recentAct} from '../Data'
+// import SliderMails from '../sliders/'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
@@ -93,7 +91,7 @@ const SalesDashBD = () => {
             <div className=' my-4'>
               <div className='flex justify-center items-center'>
               <div className='w-full'>
-                <Slider data={viewRates} title='Exports from Sri lanka' currency='USD'/>
+                {/* <Slider data={viewRates} title='Exports from Sri lanka' currency='USD'/> */}
               </div>
               </div>
 
@@ -121,7 +119,7 @@ const SalesDashBD = () => {
                         </button> 
                     </div> 
 
-                    <SliderAct data={recentAct}/>   
+                    {/* <SliderAct data={recentAct}/>    */}
                     
                     {/* {recentAct.map(act=>(
                         <div className="w-full flex px-3 py-2 bg-white shadow-md hover:shodow-lg rounded-lg mt-5" key={act.id}>
@@ -157,7 +155,7 @@ const SalesDashBD = () => {
                             </svg>
                         </button> 
                     </div>    
-                    <SliderMails data={recentMails}/>
+                    {/* <SliderMails data={recentMails}/> */}
                     
                     {/* {recentMails.map(act=>(
                         <div className="w-full flex px-3 py-2 bg-white shadow-md hover:shodow-lg rounded-lg mt-5" key={act.id}>
