@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import { BasicDateTimePicker } from '../TextUI/BasicDateTimePicker'
+// import { BasicDateTimePicker } from '../TextUI/BasicDateTimePicker'
 import { useNavigate } from 'react-router-dom';
-import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TextField } from '@mui/material';
 
 const AddCutOff = ({show,close,title,id,data}) => {
-    const isURL = useSelector((state)=> state.url.isURL);
-    var http = isURL;  
-
+  var http = process.env.REACT_APP_BASE_URL;
+  
     const navigate = useNavigate();
     const [etdCol, setetdCol] = useState(null)
     const [fclClo, setfclClo] = useState(null)
@@ -32,7 +31,7 @@ const AddCutOff = ({show,close,title,id,data}) => {
       setData(data)
     }, [data]);
 
-    console.log(Data)
+    // console.log(Data)
 
     const sendRequest = async() =>{
         CUTOFF.ETDCOL = etdCol;
@@ -80,7 +79,7 @@ const AddCutOff = ({show,close,title,id,data}) => {
         {ctf?.length===0 && 
         <div className='w-3/4 flex flex-col justify-center items-center gap-2'>
 
-          <BasicDateTimePicker label={"B/L Cutoff"} setDateTime={setblClo}/>
+          {/* <BasicDateTimePicker label={"B/L Cutoff"} setDateTime={setblClo}/>
           {blClo===null && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add B/L CutOff here!</p>}
 
           <BasicDateTimePicker label={"FCL Closing"} setDateTime={setfclClo}/>
@@ -90,14 +89,14 @@ const AddCutOff = ({show,close,title,id,data}) => {
           {vgmClo===null && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add VGM CutOff here!</p>}
 
           <BasicDateTimePicker label={"ETD Colombo"} setDateTime={setetdCol}/>
-          {etdCol===null && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add ETD Colombo here!</p>}
+          {etdCol===null && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add ETD Colombo here!</p>} */}
 
         </div>}
 
         {ctf?.length>0 && 
         <div className='w-3/4 flex flex-col justify-center items-center gap-2'>
 
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateTimePicker
               renderInput={(props) => <TextField {...props} />}
               label={'Add B/L CutOff here!'}
@@ -154,7 +153,7 @@ const AddCutOff = ({show,close,title,id,data}) => {
 
               }}
             />
-          </LocalizationProvider>
+          </LocalizationProvider> */}
 
         </div>}
 

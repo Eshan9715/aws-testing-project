@@ -1,19 +1,19 @@
 import React from 'react'
 // import Slider from '../sliders/Slider'
 // import SliderAct from '../sliders/SliderActs'
-import {recentAct} from '../Data'
+// import {recentAct} from '../Data'
 // import SliderMails from '../sliders/'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 //var http = "http://localhost:5000";  
 //var http =  "https://cute-plum-caterpillar-tie.cyclic.app" 
 
 const SalesDashBD = () => {
-    const isURL = useSelector((state)=> state.url.isURL);
-    var http = isURL;  
+    var http = process.env.REACT_APP_BASE_URL;
+  
     const [viewRates, setViewRates] = useState([])
 
     useEffect(() => {

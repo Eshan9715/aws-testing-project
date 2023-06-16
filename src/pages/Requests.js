@@ -17,8 +17,7 @@ const Requests = () => {
 
     const loggedUser = useSelector(state=> state.auth.value);
 
-    const isURL = useSelector((state)=> state.url.isURL);
-    var http = isURL;  
+    var http = process.env.REACT_APP_BASE_URL;
     const [sfrueryData, setsFRueryData] = useState([])
     const [cfrueryData, setcFRueryData] = useState([])
 
@@ -116,135 +115,133 @@ const Requests = () => {
       };
 
   return (
-    <>
         <div className={`w-full h-screen flex overflow-hidden justify-end items-center text-black bg-white`}>               
-              <div className='w-[100%] mdd:w-[90%] flex justify-start items-center h-full flex-col p-4 gap-3'>
+            <div className='w-[100%] mdd:w-[90%] flex justify-start items-center h-full flex-col p-4 gap-3'>
 
-                  {screenSize.width >= 1610 && 
-                  <div className="flex w-[85%] mt-[65px] justify-center fixed items-start">
-                      {role==='salesman' && <ul className="flex w-full text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                {screenSize.width >= 1610 && 
+                <div className="flex w-[85%] mt-[65px] justify-center fixed items-start">
+                    {role==='salesman' && <ul className="flex w-full text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                        
+                        {tabData.map(e=>(
+                        <li className="mr-2 py-1.5" role="presentation" key={e.id}>
+                        <Badge color='error' badgeContent={sRfinalizedFullCargo?.filter(er=> (er.status===e.fact)).length}  >
+                            <button onClick={()=>setTabmode(e.fact)}  className={`inline-block ${tabmode===e.fact? "bg-orange-500 text-white": (sRfinalizedFullCargo?.filter(er=> er.status===e.fact).length)!==0? 'bg-white text-black shadow-lg': 'bg-gray-500 text-white'} px-3 py-3  rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{e.topic}</button>
+                        </Badge>
+                        </li> 
+                        ))}
+                        
+                    </ul>}
+
+                    {(role==='crd' || role==='lcl-crd') && <ul className="flex w-full text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                        
+                        {tabData.slice(2).map(e=>(
+                        <li className="mr-2 py-1.5" role="presentation" key={e.id}>
+                        <Badge color='error' badgeContent={sRfinalizedFullCargo?.filter(er=> (er.status===e.fact)).length}  >
+                            <button onClick={()=>setTabmode(e.fact)}  className={`inline-block ${tabmode===e.fact? "bg-orange-500 text-white": (sRfinalizedFullCargo?.filter(er=> er.status===e.fact).length)!==0? 'bg-white text-black shadow-lg': 'bg-gray-500 text-white'} px-3 py-3  rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{e.topic}</button>
+                        </Badge>
+                        </li> 
+                        ))}
+                        
+                    </ul>}
+
+                </div>}
+
+                {screenSize.width < 1610 && 
+                    <div className="flex w-[90%] lg:mt-[65px] mt-[45px] md:mt-[50px] justify-center fixed items-start">
+                        <SliderTabs SData={sRfinalizedFullCargo} chooseTab={chooseTab} />
+                    </div>                   
+                }
+
+                
+                <div className='w-[95%] lg:mt-[120px] mt-[100px] max-h-screen overflow-y-auto overflow-x-hidden mb-2'>
+                {role==='salesman' && sRfinalizedFullCargo?.filter(e=> e.status===tabmode).length!==0?
+
+                    sRfinalizedFullCargo?.filter(e=> e.status===tabmode).sort((a,b)=> new Date(b.updatedAt) - new Date(a.updatedAt)).map((obj,index)=>(
+                    <RueryTile key={index}
+                        OportName={obj.origin} 
+                        DportName={obj.destination} 
+                        containerMode={obj.containerMode}
+                        cargos={obj.cargo} 
+                        status={obj.status}
+                        rDate={obj.rDate}
+                        savedDate = {obj.createdAt}
+                        updatedDate = {obj.updatedAt}
+                        user = {obj.uName}  
+                        company = {obj.uCompany} 
+                        id = {obj._id}
+                        crd= {obj.crd}
+                        commodity = {obj.commodity}
+                        freight = {obj.freight}
+                        role = {role}
+                        rates = {obj.rates}
+                        schedules = {obj.schedules}
+                        releaseOrder = {obj.releaseOrder}
+                        selVessel = {obj.selVessel}
+                        selShipLine = {obj.selShipLine}
+                        //blData = {obj.blData[0]}
+                        selVoyage = {obj.selVoyage}
+                        loggedID = {ID}
+                        loggedNM = {name}
+                        type={obj.type}
+                                                                            
+                    />
+                    )): role==='salesman' && sRfinalizedFullCargo?.filter(e=> e.status===tabmode).length===0 &&
+                    <>
+                        <div className='flex justify-center mt-3 flex-col items-center min-h-screen border-2 w-full rounded-md bg-gray-100 text-lg'>
+                            <img src={noData} alt='' className='w-[300px]' />
+                            <p>No relevant data here!</p>
+
+                        </div>
+                    </>
+                    }
+
+                    {(role==='crd' || role==='lcl-crd') && cRfinalizedFullCargo?.filter(e=> e.status===tabmode).length!==0?
+
+                        cRfinalizedFullCargo?.filter(e=> e.status===tabmode).sort((a,b)=> new Date(b.updatedAt) - new Date(a.updatedAt)).map((obj,index)=>(
+                        <RueryTile key={index}
+                            OportName={obj.origin} 
+                            DportName={obj.destination} 
+                            containerMode={obj.containerMode}
+                            cargos={obj.cargo} 
+                            status={obj.status}
+                            rDate={obj.rDate}
+                            savedDate = {obj.createdAt}
+                            user = {obj.uName}  
+                            company = {obj.uCompany} 
+                            id = {obj._id}
+                            commodity = {obj.commodity}
+                            freight = {obj.freight}
+                            assigned = {obj.receiver}
+                            crd= {obj.crd}
+                            role={role}
+                            rates = {obj.rates}
+                            schedules = {obj.schedules}
+                            releaseOrder = {obj.releaseOrder}
+                            selVessel = {obj.selVessel}
+                            selShipLine = {obj.selShipLine}
+                            selVoyage = {obj.selVoyage}
+                            loggedID = {ID}
+                            loggedNM = {name}
+                            type={obj.type}
+                            yard={obj.yard}
+
+                            // show = {}                             
+
+                        />
+                        )): (role==='crd' || role==='lcl-crd') && cRfinalizedFullCargo?.filter(e=> e.status===tabmode).length===0 &&
+                        <>
+                            <div className='w-full mt-3 flex justify-center flex-col items-center h-screen border-2 rounded-md bg-gray-100 text-lg'>
+                                <img src={noData} alt='' className='w-[300px]' />
+                                <p>No relevant data here!</p>
+
+                            </div>
+                        </>
+                        }
+
+                </div>
                           
-                          {tabData.map(e=>(
-                          <li className="mr-2 py-1.5" role="presentation" key={e.id}>
-                          <Badge color='error' badgeContent={sRfinalizedFullCargo?.filter(er=> (er.status===e.fact)).length}  >
-                              <button onClick={()=>setTabmode(e.fact)}  className={`inline-block ${tabmode===e.fact? "bg-orange-500 text-white": (sRfinalizedFullCargo?.filter(er=> er.status===e.fact).length)!==0? 'bg-white text-black shadow-lg': 'bg-gray-500 text-white'} px-3 py-3  rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{e.topic}</button>
-                          </Badge>
-                          </li> 
-                          ))}
-                          
-                      </ul>}
-
-                      {(role==='crd' || role==='lcl-crd') && <ul className="flex w-full text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
-                          
-                          {tabData.slice(2).map(e=>(
-                          <li className="mr-2 py-1.5" role="presentation" key={e.id}>
-                          <Badge color='error' badgeContent={sRfinalizedFullCargo?.filter(er=> (er.status===e.fact)).length}  >
-                              <button onClick={()=>setTabmode(e.fact)}  className={`inline-block ${tabmode===e.fact? "bg-orange-500 text-white": (sRfinalizedFullCargo?.filter(er=> er.status===e.fact).length)!==0? 'bg-white text-black shadow-lg': 'bg-gray-500 text-white'} px-3 py-3  rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{e.topic}</button>
-                          </Badge>
-                          </li> 
-                          ))}
-                          
-                      </ul>}
-
-                  </div>}
-
-                  {screenSize.width < 1610 && 
-                      <div className="flex w-[90%] lg:mt-[65px] mt-[45px] md:mt-[50px] justify-center fixed items-start">
-                          <SliderTabs SData={sRfinalizedFullCargo} chooseTab={chooseTab} />
-                      </div>                   
-                  }
-
-                  
-                  <div className='w-[95%] lg:mt-[120px] mt-[100px] max-h-screen overflow-y-auto overflow-x-hidden mb-2'>
-                  {role==='salesman' && sRfinalizedFullCargo?.filter(e=> e.status===tabmode).length!==0?
-
-                      sRfinalizedFullCargo?.filter(e=> e.status===tabmode).sort((a,b)=> new Date(b.updatedAt) - new Date(a.updatedAt)).map((obj,index)=>(
-                      <RueryTile key={index}
-                          OportName={obj.origin} 
-                          DportName={obj.destination} 
-                          containerMode={obj.containerMode}
-                          cargos={obj.cargo} 
-                          status={obj.status}
-                          rDate={obj.rDate}
-                          savedDate = {obj.createdAt}
-                          updatedDate = {obj.updatedAt}
-                          user = {obj.uName}  
-                          company = {obj.uCompany} 
-                          id = {obj._id}
-                          crd= {obj.crd}
-                          commodity = {obj.commodity}
-                          freight = {obj.freight}
-                          role = {role}
-                          rates = {obj.rates}
-                          schedules = {obj.schedules}
-                          releaseOrder = {obj.releaseOrder}
-                          selVessel = {obj.selVessel}
-                          selShipLine = {obj.selShipLine}
-                          //blData = {obj.blData[0]}
-                          selVoyage = {obj.selVoyage}
-                          loggedID = {ID}
-                          loggedNM = {name}
-                          type={obj.type}
-                                                                              
-                      />
-                      )): role==='salesman' && sRfinalizedFullCargo?.filter(e=> e.status===tabmode).length===0 &&
-                      <>
-                          <div className='flex justify-center mt-3 flex-col items-center min-h-screen border-2 w-full rounded-md bg-gray-100 text-lg'>
-                              <img src={noData} alt='' className='w-[300px]' />
-                              <p>No relevant data here!</p>
-
-                          </div>
-                      </>
-                      }
-
-                      {(role==='crd' || role==='lcl-crd') && cRfinalizedFullCargo?.filter(e=> e.status===tabmode).length!==0?
-
-                          cRfinalizedFullCargo?.filter(e=> e.status===tabmode).sort((a,b)=> new Date(b.updatedAt) - new Date(a.updatedAt)).map((obj,index)=>(
-                          <RueryTile key={index}
-                              OportName={obj.origin} 
-                              DportName={obj.destination} 
-                              containerMode={obj.containerMode}
-                              cargos={obj.cargo} 
-                              status={obj.status}
-                              rDate={obj.rDate}
-                              savedDate = {obj.createdAt}
-                              user = {obj.uName}  
-                              company = {obj.uCompany} 
-                              id = {obj._id}
-                              commodity = {obj.commodity}
-                              freight = {obj.freight}
-                              assigned = {obj.receiver}
-                              crd= {obj.crd}
-                              role={role}
-                              rates = {obj.rates}
-                              schedules = {obj.schedules}
-                              releaseOrder = {obj.releaseOrder}
-                              selVessel = {obj.selVessel}
-                              selShipLine = {obj.selShipLine}
-                              selVoyage = {obj.selVoyage}
-                              loggedID = {ID}
-                              loggedNM = {name}
-                              type={obj.type}
-                              yard={obj.yard}
-
-                              // show = {}                             
-
-                          />
-                          )): (role==='crd' || role==='lcl-crd') && cRfinalizedFullCargo?.filter(e=> e.status===tabmode).length===0 &&
-                          <>
-                              <div className='w-full mt-3 flex justify-center flex-col items-center h-screen border-2 rounded-md bg-gray-100 text-lg'>
-                                  <img src={noData} alt='' className='w-[300px]' />
-                                  <p>No relevant data here!</p>
-
-                              </div>
-                          </>
-                          }
-
-                  </div>
-                            
-              </div>
-          </div>
-    </>
+            </div>
+        </div>
   )
 }
 

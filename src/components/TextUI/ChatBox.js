@@ -13,8 +13,7 @@ var fullAllRemarks = []
 
 const ChatBox = ({show,title,close,id,role,userID,loggedName,status,containerType}) => {
 
-    const isURL = useSelector((state)=> state.url.isURL);
-    var http = isURL;  
+  var http = process.env.REACT_APP_BASE_URL;
     const messagesRef = useRef(null);
     const activeRef = useRef(null);
     const textRef = useRef(null);

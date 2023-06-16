@@ -24,15 +24,15 @@ import clock from '../assets/clock.png'
 import AddCutOff from './Addings/AddCutOff';
 import { Badge, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel, FormGroup, Switch, TextField } from '@mui/material';
 import ChatBox from './TextUI/ChatBox';
-import { BasicDatePicker } from './TextUI/BasicDatePicker';
+// import { BasicDatePicker } from './TextUI/BasicDatePicker';
 
 var keyDoc = '';
 var storageRef = ''
 
 const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,loggedNM,type,commodity,shremarks, remarks, cargos, releaseOrder, selVoyage, freight, selShipLine,rates,schedules, crd,assignedCRD, status, rDate, savedDate, user,role, company,id, layout ,selVessel,assigned,yard,cutoff}) => {
     const navigate = useNavigate();
-    const isURL = useSelector((state)=> state.url.isURL);
-    var http = isURL;  
+    var http = process.env.REACT_APP_BASE_URL;
+  
     const[show, setShow] = useState(false)
     const[newShow, setNewShow] = useState(false)
 
@@ -55,7 +55,7 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
     const[loading, setLoading] = useState(false)
     const[lsoading, setLSoading] = useState(false)
 
-    console.log(cutoff)
+    // console.log(cutoff)
 
     const OportKeys = OportName.split(",");
     const DportKeys = DportName.split(",");
@@ -863,7 +863,7 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
                                     }}
                                 />                                    
                                 
-                                <BasicDatePicker label={"New Valid date"} setDate={setNDate}/>
+                                {/* <BasicDatePicker label={"New Valid date"} setDate={setNDate}/> */}
                                 </div>
                                 {/* <Switch
                                     checked={checked}

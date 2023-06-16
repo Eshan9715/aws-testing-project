@@ -14,8 +14,8 @@ var lRates = {}
 var lratesArr = []
 
 const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
-    const isURL = useSelector((state)=> state.url.isURL);
-    var http = isURL;  
+  var http = process.env.REACT_APP_BASE_URL;
+  
     const navigate = useNavigate();
     const [re, setRe] = useState([])
     const [lre, setlRe] = useState([])
