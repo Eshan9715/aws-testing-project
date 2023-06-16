@@ -153,6 +153,7 @@ const ReqList = () => {
                           freight = {obj.freight}
                           selVoyage={obj.selVoyage}
                           updatedDate = {obj.updatedAt}
+                          type={obj.type}
 
 
                       

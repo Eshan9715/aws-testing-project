@@ -18,7 +18,7 @@ const Dashboard = lazy(() => import('./pages/Dashboard'));
 // const BQuering = lazy(() => import('./pages/BQuering'));
 const Requests = lazy(() => import('./pages/Requests'));
 const ReqList = lazy(() => import('./pages/ReqList'));
-
+const Clients = lazy(() => import('./pages/Clients'));
 
 function App() {
   const loggedUser = useSelector(state=> state.auth.value);
@@ -49,9 +49,7 @@ function App() {
           {/* <Route path='/bquering' element={<BQuering />} /> */}
           <Route path='/req' element={<Requests />} />
           <Route path='/reqlist' element={<ReqList />} />
-
-
-
+          <Route path='/clients' element={<Clients />} />
 
         </Routes>
         </Suspense>
