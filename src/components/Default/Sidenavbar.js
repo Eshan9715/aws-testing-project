@@ -50,15 +50,24 @@ const Sidenavbar = ({children}) => {
        
         { 
             id: 2,
-            val: "Live Query",
-            link:'/bQuering',
+            val: "Add Query",
+            link:'/addquery',
             role: ["user", "consoleOperator"],
-            icon: <svg fill="none" stroke="currentColor" className="w-6 h-6 rtl:-scale-x-100" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"></path>
+            icon: <svg fill="none" stroke="currentColor" stroke-width="1.5" className="w-6 h-6 rtl:-scale-x-100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
         },
         { 
-            id: 3,
+          id: 3,
+          val: "Live Query",
+          link:'/BQuering',
+          role: ["user", "consoleOperator"],
+          icon: <svg fill="none" stroke="currentColor" className="w-6 h-6 rtl:-scale-x-100" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"></path>
+        </svg>
+        },
+        { 
+            id: 4,
             val: "Live Query",
             link:'/req',
             role: ["salesman", "crd","lcl-crd"],
@@ -67,7 +76,7 @@ const Sidenavbar = ({children}) => {
           </svg>
         },
         { 
-            id: 4,
+            id: 5,
             val: "Query list",
             link:'/reqlist',
             role: ["salesman", "crd","lcl-crd"],
@@ -76,7 +85,7 @@ const Sidenavbar = ({children}) => {
           </svg>
         },
         { 
-          id: 5,
+          id: 6,
           val: "Query list",
           link:'/querylist',
           role: ["user"],
@@ -85,7 +94,7 @@ const Sidenavbar = ({children}) => {
         </svg>
         },
         { 
-          id: 6,
+          id: 7,
           val: "LCL List",
           link:'/lclboard',
           role: ["consolemanager"],
@@ -95,7 +104,7 @@ const Sidenavbar = ({children}) => {
         },
          
         { 
-          id: 7,
+          id: 8,
           val: "Clients",
           link:'/clients',
           role: ["salesman","crd","admin","ratesmanager"],
@@ -104,7 +113,7 @@ const Sidenavbar = ({children}) => {
         </svg>
         },
         { 
-          id: 8,
+          id: 9,
           val: "Staff",
           link:'/staff',
           role: ["admin","ratesmanager"],
@@ -113,7 +122,7 @@ const Sidenavbar = ({children}) => {
         </svg>
         },
         { 
-          id: 9,
+          id: 10,
           val: "Settings",
           link:'/settings',
           role: ["admin"],
@@ -123,7 +132,7 @@ const Sidenavbar = ({children}) => {
         </svg>
         },
         { 
-          id: 10,
+          id: 11,
           val: "Rates",
           link:'/rates',
           role: [""],
@@ -132,7 +141,7 @@ const Sidenavbar = ({children}) => {
         </svg>
         },
         { 
-          id: 11,
+          id: 12,
           val: "Analysis",
           link:'/console',
           role: ["consolemanager"],

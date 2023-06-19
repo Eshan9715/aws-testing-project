@@ -1,13 +1,13 @@
 import React,{useState} from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { Form, Formik } from 'formik';
-import { loginSchema } from '../components/Default/userValidation';
-import {TextFields} from '../components/TextUI/TextFields'
-import Navbar from '../components/Default/Navbar';
-import logbg from '../assets/loginbg.jpg';
-import { login } from '../redux/authRedux';
+import { loginSchema } from '../../components/Default/userValidation';
+import {TextFields} from '../../components/TextUI/TextFields'
+import Navbar from '../../components/Default/Navbar';
+import logbg from '../../assets/loginbg.jpg';
+import { login } from '../../redux/authRedux';
 
 const Login = () => {
   // const[isSignup, setIsSignup] = useState('')
@@ -17,6 +17,7 @@ const Login = () => {
   var http = process.env.REACT_APP_BASE_URL;
   console.log(http);
   const[loading, setLoading] = useState(false)
+  const[error, seterror] = useState('')
 
   const [details, setDetails] = useState([])
 
@@ -43,13 +44,13 @@ const Login = () => {
           assignedTo: res.data.user.assignedTo, userImage: (res.data.user.image || res.data.member.image),
            isLoggedIn: true }))
 
-
     setDetails(res.data)
     setLoading(false)
     navigate('/dashboard')
 
   }).catch(err=> {
-    console.log(err);
+    seterror(err.response.data.message);
+    setLoading(false)
   });
 
 }
@@ -105,7 +106,8 @@ const Login = () => {
                                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                         clip-rule="evenodd" />
                                 </svg>}
-                            </button> 
+                            </button>
+                            {error && <p className='text-[12px] text-red-600 mb-1'>{error}</p>} 
                           </Form>
                         </div>
                       )}

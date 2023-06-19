@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Badge } from '@mui/material'
-import RueryTile from '../components/RueryTile'
-import noData from '../assets/noData.png'
+import RueryTile from '../../components/RueryTile'
+import noData from '../../assets/noData.png'
 import { useSelector } from 'react-redux'
-import { tabData } from '../Data'
-import SliderTabs from '../sliders/SliderTabs'
+import { tabData } from '../../Data'
+import SliderTabs from '../../sliders/SliderTabs'
 
 var sRfinalizedFullCargo = []
 var cRfinalizedFullCargo = []
@@ -44,7 +44,6 @@ const Requests = () => {
         })
       }, [screenSize])
     
-      //console.log(screenSize.width)
     
 
     useEffect(() => {
@@ -105,7 +104,7 @@ const Requests = () => {
   
     }, [http, role, name, loggedUser]);
 
-    const [tabmode, setTabmode] = useState('')
+    const [tabmode, setTabmode] = useState('rates pending')
     
     cRfinalizedFullCargo = [...cfrueryData, ...clrueryData]
     sRfinalizedFullCargo = [...sfrueryData, ...slrueryData]
@@ -148,7 +147,7 @@ const Requests = () => {
 
                 {screenSize.width < 1610 && 
                     <div className="flex w-[90%] lg:mt-[65px] mt-[45px] md:mt-[50px] justify-center fixed items-start">
-                        <SliderTabs SData={sRfinalizedFullCargo} chooseTab={chooseTab} />
+                        <SliderTabs SData={sRfinalizedFullCargo} Data={tabData} chooseTab={chooseTab} />
                     </div>                   
                 }
 

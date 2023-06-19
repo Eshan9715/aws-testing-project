@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux';
-import SalesDashBD from './SalesDashBD'
+import SalesDashBD from '../SalesDashBD'
 
 const Dashboard = () => {
     const loggedUser = useSelector((state)=> state.auth.value);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Badge, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@mui/material'
-import DataTable from '../components/Viewings/DataTable'
+import DataTable from '../../components/Viewings/DataTable'
 import { useSelector } from 'react-redux'
 
 //var http = "http://localhost:5000";  

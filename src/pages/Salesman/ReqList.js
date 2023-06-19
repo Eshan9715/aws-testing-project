@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {FormControl, InputLabel, MenuItem, Select, TextField} from '@mui/material'
-import RueryTile from '../components/RueryTile'
-import noData from '../assets/noData.png'
+import RueryTile from '../../components/RueryTile'
+import noData from '../../assets/noData.png'
 import { useSelector } from 'react-redux'
 
 var sRfinalizedFullCargo = []

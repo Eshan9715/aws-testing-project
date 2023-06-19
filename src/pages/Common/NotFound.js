@@ -1,5 +1,5 @@
 import React from 'react'
-import ntf from '../assets/not_found.gif';
+import ntf from '../../assets/not_found.gif';
 import { useNavigate } from 'react-router-dom';
 
 
