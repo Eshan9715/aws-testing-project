@@ -575,7 +575,7 @@ const AddQuery = () => {
                                 obj = {...initialValues, ...values}
                                 console.log(obj)
                                 newobj = {...obj, loading: origin, desty: destination}
-                                console.log("newObj" + newobj)
+                                console.log(newobj)
                                 fclCargo = [...newobj.Containers]        
                                 console.log(fclCargo)
 

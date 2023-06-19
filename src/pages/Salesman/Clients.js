@@ -213,7 +213,7 @@ const Clients = () => {
 
                 </div>
                     
-                <div className="flex items-center justify-center text-center gap-2 bg-white rounded-md px-1 shadow-md">
+                <div className="flex items-center justify-center text-center gap-2">
                     <FormControl sx={{ m: 1, minWidth: 150,borderRadius:2 }} size="small">
                     <InputLabel id="demo-select-small">Catogery</InputLabel>
                     <Select
@@ -246,7 +246,7 @@ const Clients = () => {
                         className='border rounded-md py-1.5 mt-1 w-[150px]' value={search} onChange={(e)=>setSearch(e.target.value)}/>
                 </div>
 
-                <div className="flex items-center justify-center text-center gap-2 bg-white rounded-md px-1 shadow-md">
+                <div className="flex items-center justify-center text-center gap-2">
                     <FormControl sx={{ m: 1, minWidth: 150,borderRadius:2 }} size="small">
                     <InputLabel id="demo-select-small">Sort by</InputLabel>
                     <Select

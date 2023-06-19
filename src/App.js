@@ -20,6 +20,9 @@ const Requests = lazy(() => import('./pages/Salesman/Requests'));
 const ReqList = lazy(() => import('./pages/Salesman/ReqList'));
 const Clients = lazy(() => import('./pages/Salesman/Clients'));
 const AddQuery = lazy(() => import('./pages/Shipper/AddQuery'));
+const QueryList = lazy(() => import('./pages/Shipper/QueryList'));
+const ViewRates = lazy(() => import('./pages/SalesManager/ViewRates'));
+const AddRates = lazy(() => import('./pages/SalesManager/AddRates'));
 
 
 function App() {
@@ -53,7 +56,9 @@ function App() {
           <Route path='/reqlist' element={<ReqList />} />
           <Route path='/clients' element={<Clients />} />
           <Route path='/addquery' element={<AddQuery />} />
-
+          <Route path='/querylist' element={<QueryList />} />
+          <Route path='/viewrates' element={<ViewRates />} />
+          <Route path='/addrates' element={<AddRates />} />
 
         </Routes>
         </Suspense>

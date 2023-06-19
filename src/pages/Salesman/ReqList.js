@@ -109,7 +109,6 @@ const ReqList = () => {
                                   //value={catomode}
                                   label="Catogery"
                                   //onChange={(e)=>setCatomode(e.target.value)}
-                                  className='py-0.5'
                               >
                                   <MenuItem value={"CompanyWise"}>CompanyWise</MenuItem>
                                   <MenuItem value={"StatusWise"}>StatusWise</MenuItem>

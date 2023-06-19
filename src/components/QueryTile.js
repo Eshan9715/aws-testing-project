@@ -480,7 +480,7 @@ const sendFSStatus = async() =>{
 
         {layout!=='list'? 
         <div className='w-full flex justify-start items-center'>
-            <div className={`w-[62%] flex flex-col p-4`}>
+            <div className={`w-[62%] flex flex-col p-3`}>
                     <div className='w-full flex justify-start items-center gap-2'>
                             <div className='flex justify-center items-center gap-2'>
                                 <span>{OportKeys[0]},</span>
@@ -529,7 +529,7 @@ const sendFSStatus = async() =>{
                     </div>                    
             </div>
 
-            <div className="w-[30%] flex flex-col p-4 my-2 gap-0.5">
+            <div className="w-[30%] flex flex-col p-3 my-2 gap-0.5">
                 <div className='flex justify-end items-center gap-2'>
                     <p className='text-xm text-gray-400'>ready by:</p>
                     <p>{rDate.split(",")[1]}</p>
@@ -568,7 +568,7 @@ const sendFSStatus = async() =>{
         </div>:
         
         <div className='w-full flex justify-start items-center'>
-            <div className={`w-[55%] flex flex-col p-4`}>
+            <div className={`w-[55%] flex flex-col p-3`}>
                     <div className='w-full flex justify-start items-center gap-2'>
                             <div className='flex justify-center items-center gap-2'>
                                 <span>{OportKeys[0]},</span>
@@ -610,7 +610,7 @@ const sendFSStatus = async() =>{
                     </div>
             </div>
 
-            <div className="w-[45%] flex  justify-center p-4 my-1 gap-1">
+            <div className="w-[45%] flex  justify-center p-3 my-1 gap-1">
                 <div className='w-full flex'>
                     <div className='w-[30%] flex-col gap-3'>
                         <div className='w-full flex justify-center items-center text-center'>

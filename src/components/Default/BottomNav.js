@@ -16,7 +16,7 @@ const BottomNav = ({children}) => {
         color: "black",
       };
 
-    const tags = [
+      const tags = [
         { 
             id: 1,
             val: "Dashboard",
@@ -29,15 +29,24 @@ const BottomNav = ({children}) => {
        
         { 
             id: 2,
-            val: "Live Query",
-            link:'/bQuering',
+            val: "Add Query",
+            link:'/addquery',
             role: ["user", "consoleOperator"],
-            icon: <svg fill="none" stroke="currentColor" className="w-6 h-6 rtl:-scale-x-100" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"></path>
+            icon: <svg fill="none" stroke="currentColor" stroke-width="1.5" className="w-6 h-6 rtl:-scale-x-100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
         },
         { 
-            id: 3,
+          id: 3,
+          val: "Live Query",
+          link:'/BQuering',
+          role: ["user", "consoleOperator"],
+          icon: <svg fill="none" stroke="currentColor" className="w-6 h-6 rtl:-scale-x-100" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"></path>
+        </svg>
+        },
+        { 
+            id: 4,
             val: "Live Query",
             link:'/req',
             role: ["salesman", "crd","lcl-crd"],
@@ -46,7 +55,7 @@ const BottomNav = ({children}) => {
           </svg>
         },
         { 
-            id: 4,
+            id: 5,
             val: "Query list",
             link:'/reqlist',
             role: ["salesman", "crd","lcl-crd"],
@@ -55,7 +64,7 @@ const BottomNav = ({children}) => {
           </svg>
         },
         { 
-          id: 5,
+          id: 6,
           val: "Query list",
           link:'/querylist',
           role: ["user"],
@@ -64,7 +73,7 @@ const BottomNav = ({children}) => {
         </svg>
         },
         { 
-          id: 6,
+          id: 7,
           val: "LCL List",
           link:'/lclboard',
           role: ["consolemanager"],
@@ -72,9 +81,27 @@ const BottomNav = ({children}) => {
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path>
         </svg>
         },
+        { 
+          id: 8,
+          val: "Add Rates",
+          link:'/addrates',
+          role: ["ratesmanager"],
+          icon: <svg fill="none" stroke="currentColor" stroke-width="1.5" className="w-6 h-6 rtl:-scale-x-100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        },
+        { 
+          id: 9,
+          val: "View Rates",
+          link:'/viewrates',
+          role: ["ratesmanager"],
+          icon: <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" className="w-6 h-6 rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"></path>
+        </svg>
+        },
          
         { 
-          id: 7,
+          id: 10,
           val: "Clients",
           link:'/clients',
           role: ["salesman","crd","admin","ratesmanager"],
@@ -83,7 +110,7 @@ const BottomNav = ({children}) => {
         </svg>
         },
         { 
-          id: 8,
+          id: 11,
           val: "Staff",
           link:'/staff',
           role: ["admin","ratesmanager"],
@@ -92,7 +119,7 @@ const BottomNav = ({children}) => {
         </svg>
         },
         { 
-          id: 9,
+          id: 12,
           val: "Settings",
           link:'/settings',
           role: ["admin"],
@@ -102,16 +129,7 @@ const BottomNav = ({children}) => {
         </svg>
         },
         { 
-          id: 10,
-          val: "Rates",
-          link:'/rates',
-          role: [""],
-          icon: <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" className="w-6 h-6 rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"></path>
-        </svg>
-        },
-        { 
-          id: 11,
+          id: 13,
           val: "Analysis",
           link:'/console',
           role: ["consolemanager"],
@@ -119,8 +137,36 @@ const BottomNav = ({children}) => {
              <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"></path>
              </svg>
         },
-       
+        // { 
+        //   id: 12,
+        //   val: "Analysis",
+        //   link:'/rates',
+        //   role: ["consolemanager"],
+        //   icon: <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" className="w-6 h-6 rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        //   <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"></path>
+        // </svg>
+        // },
+      
+        // { 
+        //   id: 8,
+        //   val: "Mails",
+        //   link:'/createmail',
+        //   role:["user","salesman", "crd","admin","ratesmanager"],
+        //   icon: <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" className="w-6 h-6 rtl:-scale-x-100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        //   <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
+        // </svg>
+        // },
+      //   { 
+      //     id: 9,
+      //     val: "Profile",
+      //     link:'/profile',
+      //     role: ["user","salesman", "crd", "ratesmanager","admin"],
+      //     icon: <svg fill="none" stroke="currentColor" className="w-6 h-6 rtl:-scale-x-100" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      //     <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      //   </svg>
+      // },
     ];
+
   return (
       <>
         <main>{children}</main>
