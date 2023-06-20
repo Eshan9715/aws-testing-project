@@ -9,7 +9,7 @@ import dollar from '../../assets/dollar.png'
 import VesselInputs from '../../components/TextUI/VesselInputs';
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { TextInput } from '../../components/TextUI/TextInput';
-// import { BasicDatePicker } from '../components/BasicDatePicker';
+import { BasicDatePicker } from '../../components/TextUI/BasicDatePicker';
 import { userSchema7 } from '../../components/Default/userValidation';
 import RateTile from '../../components/RateTile';
 import AlertRate from '../../components/DialogBoxes/AlertRate';
@@ -241,13 +241,11 @@ const AddRates = () => {
                         </div>
 
                         <div className='w-2/3 flex justify-center flex-col items-center p-2'>
-                          {/* <div className='w-full grid grid-cols-2 gap-4'> */}
+                          {/* <div className='w-full grid grid-cols-2 gap-4'> */}                          
 
-                          <div className='flex flex-col'>
-                            {/* <BasicDatePicker label={"Valid Date"} setDate={setValidDate} /> */}
-                          </div>
+                          <div className='w-full flex justify-between items-center gap-2'>
 
-                          <div className='w-full flex flex-col'>
+                          <div className='w-3/4 flex flex-col mt-2'>
                             <TextField
                               id="outlined-multiline-static"
                               label="Remarks"
@@ -255,12 +253,18 @@ const AddRates = () => {
                               maxRows={4}
                               value={multiVal}
                               defaultValue=""
-                              className='w-3/4'
                               onChange={e=>setMultiVal(e.target.value)}
                             />
                           { go===true && multiVal==="" && <p className='text-[13px] text-red-600 mb-1'>Add remarks here!</p>}
                           {/* </div> */}
                           </div>
+                          <div className='w-1/4 mt-2'>
+                          <BasicDatePicker label={"Valid until"} setDate={setValidDate} />
+                          </div>
+
+                          </div>
+
+
                           <div className='w-full border-2 my-2 mt-4'>
                           <Formik
                             initialValues={initialConRates}

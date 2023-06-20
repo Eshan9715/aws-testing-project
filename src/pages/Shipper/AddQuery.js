@@ -3,7 +3,7 @@ import AutoText from '../../components/TextUI/AutoText';
 import {Eports} from '../../Data'
 import {  Box, FormControl, InputLabel, MenuItem, TextField } from '@mui/material';
 import Select from '@mui/material/Select';
-// import { BasicDatePicker } from '../../components/BasicDatePicker';
+import { BasicDatePicker } from '../../components/TextUI/BasicDatePicker';
 import AutoForwarder from '../../components/TextUI/AutoForwarder';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ import { TextInput } from '../../components/TextUI/TextInput';
 import { NumberInput } from '../../components/TextUI/NumberInput';
 import CloseIcon from "@mui/icons-material/Close";
 import { userSchema5 } from '../../components/Default/userValidation';
+import moment from 'moment';
 
 
 var fclCargo = []
@@ -89,8 +90,6 @@ const AddQuery = () => {
   const [vol, setVol] = useState('')
   const [filteredData, setFilteredData] = useState([]);
   const [code, setCode] = useState('')
-
-
 
  useEffect(() => {
      setRole(loggedUser.role)
@@ -212,6 +211,7 @@ const AddQuery = () => {
 
  console.log(mngr)
 
+
  const handleChange = (event) => {
     if(role==='user'){
       setMode(event.target.value);
@@ -260,7 +260,7 @@ const AddQuery = () => {
       user: loggedUser.userID,
       receiver: role==='user' ? userData.assignedTo: role==='consoleOperator' && mngr,
       crd: role==='user' ? userData.assignedCRD: '',
-      rDate: rdate,
+      rDate: moment(rdate).format('dddd, MMM Do YYYY'),
       uName: role==='user' ? userData.name : memData.name, 
       uCompany: role==='user' ? userData.companyName: forwd,
       commodity: wordEntered,
@@ -268,7 +268,7 @@ const AddQuery = () => {
     }     
     console.log(newLQuery);
       axios
-      .post("http://localhost:5000/api/lclquery/add",newLQuery)
+      .post(`${http}/api/lclquery/add`,newLQuery)
       .then((res) => {
         console.log(res.data);
       })
@@ -276,8 +276,6 @@ const AddQuery = () => {
         console.log(err);
         // setError(err.response.data.message);
         // console.log(error);
-
-
       })   
         
   };
@@ -297,7 +295,7 @@ const AddQuery = () => {
       user: loggedUser.userID,
       receiver: userData.assignedTo,
       crd: userData.assignedCRD,
-      rDate: rdate,
+      rDate: moment(rdate).format('dddd, MMM Do YYYY'),
       uName: userData.name, 
       uCompany: userData.companyName,
       commodity: wordEntered,
@@ -305,7 +303,7 @@ const AddQuery = () => {
 
     }        
       axios
-      .post("http://localhost:5000/api/fclquery/add",newFQuery)
+      .post(`${http}/api/fclquery/add`,newFQuery)
       .then((res) => {
         console.log(res.data);
       })
@@ -391,7 +389,7 @@ const AddQuery = () => {
                     </div>  
 
                     <div className='flex justify-center items-center'>
-                    {/* <BasicDatePicker label={"Cargo readyness date"} setDate={serRdate}/> */}
+                    <BasicDatePicker label={"Cargo readyness date"} setDate={serRdate}/>
 
                     </div>    
 
