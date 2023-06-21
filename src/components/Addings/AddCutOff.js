@@ -59,14 +59,14 @@ const AddCutOff = ({show,close,title,id,data}) => {
 
         }     
         console.log(CUTOFF)   
-      //   axios
-      //   .put(`${http}/api/fclquery/addCutOff/${id}`,addCUTOFF)
-      //   .then((res) => {
-      //     //console.log(res.data);
+        axios
+        .put(`${http}/api/fclquery/addCutOff/${id}`,addCUTOFF)
+        .then((res) => {
+          //console.log(res.data);
     
-      //   //setlDetails(res.data.lines)
-      //   navigate('/dashboard')
-      // });
+        //setlDetails(res.data.lines)
+        navigate('/dashboard')
+      });
   }
 
     const send = () =>{
