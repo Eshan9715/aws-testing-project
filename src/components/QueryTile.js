@@ -21,8 +21,8 @@ import { useSelector } from 'react-redux';
 import ChatBox from '.././components/TextUI/ChatBox';
 
 const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,company,loggedNM, loggedID, crd, type,user,role,assigned, consoles, cargos, updatedDate, cutoff, status, rDate, savedDate, lastUpdate, id, rates, remarks, bookingData, selShipLine, shremarks, schedules,selVessel,releaseOrder,selVoyage}) => {
-    const isURL = useSelector((state)=> state.url.isURL);
-    var http = isURL;  
+    var http = process.env.REACT_APP_BASE_URL;
+ 
     const OportKeys = OportName.split(",");
     const DportKeys = DportName.split(",");
     //console.log(OportKeys)

@@ -175,97 +175,97 @@ const Clients = () => {
            
             <div className='w-[95%]'>
                 <div className='w-full flex justify-between items-center'>
-                <div className="flex min-w-[320px]">
-                {((role==='salesman') || (role==='crd')) && <h2 className='text-black font-bold text-3xl ml-1'>Clients</h2>}
-                {/* Tabs */}
-                    {role==='admin' && 
-                    <ul className="w-full flex -mb-px text-sm font-medium text-center gap-3" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                    <div className="flex min-w-[320px]">
+                    {((role==='salesman') || (role==='crd')) && <h2 className='text-black font-bold text-3xl ml-1'>Clients</h2>}
+                    {/* Tabs */}
+                        {role==='admin' && 
+                        <ul className="w-full flex -mb-px text-sm font-medium text-center gap-3" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                            
+                            <li className="mr-2 py-1.5" role="presentation">
+                            <Badge color='error' badgeContent={oldcdetails?.filter(e=> e.assignedTo!=="pending").length}>
+                                <button onClick={()=>setTabmode("all")}  className={`inline-block ${tabmode==="all"? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">All</button>
+                            </Badge>
+                            </li>    
+                            <li className="mr-2 py-1.5" role="presentation">
+                            <Badge color='error' badgeContent={pencdetails?.length}  >
+                                <button onClick={()=>setTabmode("pending")}  className={`inline-block ${tabmode==="pending"? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">New Shippers</button>
+                            </Badge>
+                            </li>
+                                        
                         
-                        <li className="mr-2 py-1.5" role="presentation">
-                        <Badge color='error' badgeContent={oldcdetails?.filter(e=> e.assignedTo!=="pending").length}>
-                            <button onClick={()=>setTabmode("all")}  className={`inline-block ${tabmode==="all"? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">All</button>
-                        </Badge>
-                        </li>    
-                        <li className="mr-2 py-1.5" role="presentation">
-                        <Badge color='error' badgeContent={pencdetails?.length}  >
-                            <button onClick={()=>setTabmode("pending")}  className={`inline-block ${tabmode==="pending"? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">New Shippers</button>
-                        </Badge>
-                        </li>
-                                    
-                    
-                    </ul>}
+                        </ul>}
 
-                    {role ==='ratesmanager' && 
-                    <ul className="w-[95%] flex flex-wrap -mb-px text-sm font-medium text-center gap-3" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                        {role ==='ratesmanager' && 
+                        <ul className="w-[95%] flex flex-wrap -mb-px text-sm font-medium text-center gap-3" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                            
+                            
+                            <li className="mr-2 py-1.5" role="presentation">            
+                            <button onClick={()=>setTabmode("all")}  className={`inline-block ${tabmode==='all'? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Assigned<span className='ml-2 px-2 py-0.5 bg-white text-black font-semibold rounded-full w-10 h-8'>{oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")).length}</span></button>                           
+                            </li>
+
+                            <li className="mr-2 py-1.5" role="presentation">
+                            <Badge color='error' badgeContent={pubcdetails?.length}  >
+                                <button onClick={()=>setTabmode("Public")}  className={`inline-block ${tabmode==="Public"? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">New Shippers</button>
+                            </Badge>
+                            </li>                
                         
-                        
-                        <li className="mr-2 py-1.5" role="presentation">            
-                        <button onClick={()=>setTabmode("all")}  className={`inline-block ${tabmode==='all'? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Assigned<span className='ml-2 px-2 py-0.5 bg-white text-black font-semibold rounded-full w-10 h-8'>{oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")).length}</span></button>                           
-                        </li>
+                        </ul>}
 
-                        <li className="mr-2 py-1.5" role="presentation">
-                        <Badge color='error' badgeContent={pubcdetails?.length}  >
-                            <button onClick={()=>setTabmode("Public")}  className={`inline-block ${tabmode==="Public"? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">New Shippers</button>
-                        </Badge>
-                        </li>                
+                    </div>
                     
-                    </ul>}
+                    <div className="flex items-center justify-center text-center gap-2">
+                        <FormControl sx={{ m: 1, minWidth: 150,borderRadius:2 }} size="small">
+                        <InputLabel id="demo-select-small">Catogery</InputLabel>
+                        <Select
+                            value={catomode}
+                            label="Catogery"
+                            onChange={(e)=>setCatomode(e.target.value)}
+                            size='small'              
+                        >                            
+                            <MenuItem value={"Name"}>Name</MenuItem>
+                            <MenuItem value={"CompanyName"}>CompanyName</MenuItem>
+                            <MenuItem value={"Assigned"}>Assigned</MenuItem>
 
-                </div>
+                            {tabmode==="CRD" && <MenuItem value={"Assigned To"}>Assigned To</MenuItem>}
+
+                        </Select>
+                        </FormControl>
+
+                        {catomode!=='' && <svg fill="none" onClick={()=>setCatomode("")} stroke="currentColor" stroke-width="1.5" className='w-5 h-5 cursor-pointer text-gray-400' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>}
                     
-                <div className="flex items-center justify-center text-center gap-2">
-                    <FormControl sx={{ m: 1, minWidth: 150,borderRadius:2 }} size="small">
-                    <InputLabel id="demo-select-small">Catogery</InputLabel>
-                    <Select
-                        value={catomode}
-                        label="Catogery"
-                        onChange={(e)=>setCatomode(e.target.value)}
-                        size='small'              
-                    >                            
-                        <MenuItem value={"Name"}>Name</MenuItem>
-                        <MenuItem value={"CompanyName"}>CompanyName</MenuItem>
-                        <MenuItem value={"Assigned"}>Assigned</MenuItem>
+                        <TextField label="Search" variant="outlined" size="small"  
+                            InputProps={{
+                            endAdornment: <InputAdornment position="start">
+                                {search!=='' && <svg fill="none" onClick={()=>setSearch("")} stroke="currentColor" stroke-width="1.5" className='w-5 h-5 cursor-pointer text-gray-400' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>}
+                            </InputAdornment>,
+                            }}
+                            className='border rounded-md py-1.5 mt-1 w-[150px]' value={search} onChange={(e)=>setSearch(e.target.value)}/>
+                    </div>
 
-                        {tabmode==="CRD" && <MenuItem value={"Assigned To"}>Assigned To</MenuItem>}
+                    <div className="flex items-center justify-center text-center gap-2">
+                        <FormControl sx={{ m: 1, minWidth: 150,borderRadius:2 }} size="small">
+                        <InputLabel id="demo-select-small">Sort by</InputLabel>
+                        <Select
+                            value={satomode}
+                            label="Sort by"
+                            onChange={(e)=>setSatomode(e.target.value)}
+                            size='small'              
+                        >                            
+                            <MenuItem value={"Name (Z-A)"}>Name (Z-A)</MenuItem>
+                            {/* <MenuItem value={"Max: Bookings"}>Max: Bookings</MenuItem> */}
+                            {tabmode!=='Others' && <MenuItem value={"Max: Clients"}>Max: Clients</MenuItem>}
+                        </Select>
+                        </FormControl>
 
-                    </Select>
-                    </FormControl>
-
-                    {catomode!=='' && <svg fill="none" onClick={()=>setCatomode("")} stroke="currentColor" stroke-width="1.5" className='w-5 h-5 cursor-pointer text-gray-400' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>}
-                
-                    <TextField label="Search" variant="outlined" size="small"  
-                        InputProps={{
-                        endAdornment: <InputAdornment position="start">
-                            {search!=='' && <svg fill="none" onClick={()=>setSearch("")} stroke="currentColor" stroke-width="1.5" className='w-5 h-5 cursor-pointer text-gray-400' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>}
-                        </InputAdornment>,
-                        }}
-                        className='border rounded-md py-1.5 mt-1 w-[150px]' value={search} onChange={(e)=>setSearch(e.target.value)}/>
-                </div>
-
-                <div className="flex items-center justify-center text-center gap-2">
-                    <FormControl sx={{ m: 1, minWidth: 150,borderRadius:2 }} size="small">
-                    <InputLabel id="demo-select-small">Sort by</InputLabel>
-                    <Select
-                        value={satomode}
-                        label="Sort by"
-                        onChange={(e)=>setSatomode(e.target.value)}
-                        size='small'              
-                    >                            
-                        <MenuItem value={"Name (Z-A)"}>Name (Z-A)</MenuItem>
-                        {/* <MenuItem value={"Max: Bookings"}>Max: Bookings</MenuItem> */}
-                        {tabmode!=='Others' && <MenuItem value={"Max: Clients"}>Max: Clients</MenuItem>}
-                    </Select>
-                    </FormControl>
-
-                    {satomode!=='' && <svg fill="none" onClick={()=>setSatomode("")} stroke="currentColor" stroke-width="1.5" className='w-5 h-5 cursor-pointer text-gray-400' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>}
-                
-                </div>
+                        {satomode!=='' && <svg fill="none" onClick={()=>setSatomode("")} stroke="currentColor" stroke-width="1.5" className='w-5 h-5 cursor-pointer text-gray-400' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>}
+                    
+                    </div>
                 </div>
             </div>
                     

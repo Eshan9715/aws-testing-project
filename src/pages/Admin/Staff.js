@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import Sidenavbar from '../components/Sidenavbar'
 import axios from 'axios'
 import { FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@mui/material'
-import DataTable from '../components/DataTable'
-import AdminDataTable from '../components/AdminDataTable'
+import DataTable from '../../components/Viewings/DataTable'
+import AdminDataTable from '../../components/Viewings/AdminDataTable'
 import { useSelector } from 'react-redux'
 
 //var http = "http://localhost:5000";  
 //var http =  "https://cute-plum-caterpillar-tie.cyclic.app" 
 
 const Staff = () => {
-    const isURL = useSelector((state)=> state.url.isURL);
-  var http = isURL;  
+  var http = process.env.REACT_APP_BASE_URL;
+  
   const loggedUser = useSelector(state=> state.auth.value);
 
     const [sdetails, setsDetails] = useState([])
@@ -26,7 +24,7 @@ const Staff = () => {
     const [crddetails, setcrdDetails] = useState([])
     const [othdetails, setothDetails] = useState([])
     const [role,setRole] = useState('')
-    const [loading,setLoading] = useState(false)
+    //const [loading,setLoading] = useState(false)
 
     useEffect(() => {
         setRole(loggedUser.role)
@@ -98,20 +96,14 @@ const Staff = () => {
 
   return (
     <>
-        <Navbar/>
-        <div className="min-h-screen w-screen flex overflow-auto text-black bg-white">
-            <div className='w-full flex'>
-                <div className='w-[14%]'>
-                    <Sidenavbar role={role}/>
-                </div>
+        <div className={`w-full h-screen flex overflow-hidden justify-end items-center text-black bg-white`}>               
+            <div className='w-[100%] mdd:w-[90%] flex justify-start items-center h-full flex-col p-4 gap-3'>              
 
-                <div className='w-[86%] min-h-screen p-4 flex flex-col'>
-                    <div className='w-full mt-[80px] flex justify-center items-start p-2 gap-2 flex-col'>
-    
+                <div className='w-[95%] mt-[60px]'>
                     <div className='w-full flex justify-between items-center'>
                         <div className="my-2 flex">
                             <ul className="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
-                               
+                            
                                 <li className="mr-2 py-1.5" role="presentation">
                                     <button onClick={()=>setTabmode("Salesman")} className={`inline-block ${tabmode==="Salesman"? "bg-orange-500": 'bg-gray-500'} px-4 py-3 text-white rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Sales Persons<span className='ml-2 px-2 py-0.5 bg-white text-black font-semibold rounded-full w-10 h-8'>{spdetails.length}</span></button>
                                 </li>
@@ -125,8 +117,8 @@ const Staff = () => {
                             </ul>
 
                         </div>
-                       
-                        <div className="flex items-center justify-center text-center gap-2 bg-white rounded-md px-1 shadow-md">
+                    
+                        <div className="flex items-center justify-center text-center gap-2">
                             <FormControl sx={{ m: 1, minWidth: 150,borderRadius:2 }} size="small">
                             <InputLabel id="demo-select-small">Catogery</InputLabel>
                             <Select
@@ -159,7 +151,7 @@ const Staff = () => {
                                 className='border rounded-md py-1.5 mt-1 w-[150px]' value={search} onChange={(e)=>setSearch(e.target.value)}/>
                         </div>
 
-                        <div className="flex items-center justify-center text-center gap-2 bg-white rounded-md px-1 shadow-md">
+                        <div className="flex items-center justify-center text-center gap-2">
                             <FormControl sx={{ m: 1, minWidth: 150,borderRadius:2 }} size="small">
                             <InputLabel id="demo-select-small">Sort by</InputLabel>
                             <Select
@@ -180,11 +172,9 @@ const Staff = () => {
                         
                         </div>
                     </div>
-
-                    {conditionalComponent()}
-                 
-                    </div>
                 </div> 
+
+                {conditionalComponent()}
             </div>
         </div>
     </>                              

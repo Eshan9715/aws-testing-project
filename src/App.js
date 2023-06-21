@@ -23,6 +23,8 @@ const AddQuery = lazy(() => import('./pages/Shipper/AddQuery'));
 const QueryList = lazy(() => import('./pages/Shipper/QueryList'));
 const ViewRates = lazy(() => import('./pages/SalesManager/ViewRates'));
 const AddRates = lazy(() => import('./pages/SalesManager/AddRates'));
+const Staff = lazy(() => import('./pages/Admin/Staff'));
+
 
 
 function App() {
@@ -59,6 +61,8 @@ function App() {
           <Route path='/querylist' element={<QueryList />} />
           <Route path='/viewrates' element={<ViewRates />} />
           <Route path='/addrates' element={<AddRates />} />
+          <Route path='/staff' element={<Staff />} />
+
 
         </Routes>
         </Suspense>
