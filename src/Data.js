@@ -80,30 +80,39 @@ export const tabShiprData = [
         id:2,
         fact: "rates confirmation",
         topic: "Rates Confirmation"
-    },   
+    },
     {
         id:3,
+        fact: "schedule pending",
+        topic: "Pending Schedules"
+    },   
+    {
+        id:4,
         fact: "vessel pending",
         topic: "Vessel Pending"
     },
-   
     {
-        id:4,
+        id:5,
+        fact: "booking",
+        topic: "Booking & Release"
+    },
+    {
+        id:6,
         fact: "pending cut-off",
         topic: "Pending Cut-Off"
     },
     {
-        id:5,
+        id:7,
         fact: "b/l pending",
         topic: "Cutoff | Pending B/L"
     },
     {
-        id:6,
+        id:8,
         fact: "b/l added",
         topic: "Check | Confirm B/L"
     },
     {
-        id:7,
+        id:9,
         fact: "complete",
         topic: "Completed Queries"
     },
