@@ -1,31 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
 import { BasicDateTimePicker } from '../TextUI/BasicDateTimePicker'
 import { useNavigate } from 'react-router-dom';
-// import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TextField } from '@mui/material';
+import { TextInput } from '../TextUI/TextInput';
 
 const AddCutOff = ({show,close,title,id,data}) => {
   var http = process.env.REACT_APP_BASE_URL;
   
     const navigate = useNavigate();
-    const [etdCol, setetdCol] = useState(null)
+    const [etaCol, setetaCol] = useState(null)
+    const [fclOpen, setfclOpen] = useState(null)
     const [fclClo, setfclClo] = useState(null)
     const [blClo, setblClo] = useState(null)
     const [vgmClo, setvgmClo] = useState(null)
+    const [rfOpen, setrfOpen] = useState(null)
+    const [cpuc, setcpuc] = useState(null)
 
-    const [etdColt, setetdColt] = useState(null)
+
+
+    const [etaColt, setetaColt] = useState(null)
+    const [fclOpent, setfclOpent] = useState(null)
     const [fclClot, setfclClot] = useState(null)
     const [blClot, setblClot] = useState(null)
     const [vgmClot, setvgmClot] = useState(null)
-  
+    const [rfOpent, setrfOpent] = useState(null)
+    const [cpuct, setcpuct] = useState(null)
+
+
+    const [ldetails, setlDetails] = useState([])
+    const [vopr, setvopr] = useState('')
+    const [conopr, setconopr] = useState('')
+    const [termin, settermin] = useState('')
+
     var CUTOFF = {
-      ETDCOL:'',
+      ETACOL:'',
+      FCLOPN:'',
       FCLCLO:'',
       BLCLO:'',
       VGMCLO:'',
+      RFOPN:'',
+      TERMIN:'',
+      VESOP:'',
+      CONOP:''
+
     }
 
     const [Data, setData] = useState({});
@@ -34,18 +51,33 @@ const AddCutOff = ({show,close,title,id,data}) => {
 
     useEffect(() => {
       setData(data)
-    }, [data]);
+      const getLines = ()=>{
+        axios
+        .get(`${http}/api/line`)
+        .then((res) => {
+          console.log(res.data);
+          setlDetails(res.data.lines)
+        })
+        .catch(err=> {
+          console.log(err);
+        })     
+      }
+      getLines();
+    }, [data, http]);
 
     // console.log(Data)
 
     const sendRequest = async() =>{
-        CUTOFF.ETDCOL = etdCol + ' ' + etdColt;
+        CUTOFF.ETACOL = etaCol + ' ' + etaColt;
+        CUTOFF.FCLOPN = fclOpen + ' ' + fclOpent;
         CUTOFF.FCLCLO = fclClo + ' ' + fclClot;
         CUTOFF.BLCLO = blClo + ' ' + blClot;
         CUTOFF.VGMCLO = vgmClo + ' ' + vgmClot;
-        // cutoffs.push(CUTOFF)
-        // console.log(cutoffs)
-
+        CUTOFF.RFOPN = rfOpen + ' ' + rfOpent;
+        CUTOFF.TERMIN = termin;
+        CUTOFF.VESOP = vopr;
+        CUTOFF.CONOP = conopr;
+       
         const addCUTOFF = { 
             cutoff: CUTOFF,
             // cutoffs.map((item) => ({
@@ -70,7 +102,7 @@ const AddCutOff = ({show,close,title,id,data}) => {
   }
 
     const send = () =>{
-      if(etdCol!==null && fclClo!==null && blClo!==null && vgmClo!==null && etdColt!==null && fclClot!==null && blClot!==null && vgmClot!==null ){
+      if(etaCol!==null && fclClo!==null && blClo!==null && vgmClo!==null && etaColt!==null && fclClot!==null && blClot!==null && vgmClot!==null ){
         sendRequest();
         close();
     }
@@ -78,24 +110,45 @@ const AddCutOff = ({show,close,title,id,data}) => {
 
   return (
     <div className={`${show? "fixed inset-0" : "hidden"}  bg-gray-900 bg-opacity-50 w-full z-20 flex justify-center items-center md:ml-20`}>
-    <div className={`flex flex-col bg-white max-w-screen-sm gap-4 rounded-lg shadow-lg`}>
+    <div className={`flex flex-col bg-white max-w-screen-md gap-4 rounded-lg shadow-lg`}>
       <h3 className='text-lg font-semibold text-center p-2 bg-sky-700 text-white'>{title}</h3>
       <div className='w-full flex justify-center items-center'>
           {ctf?.length>0 && 
             <div className='w-full flex justify-center items-center px-16'>
-              <div className='w-full flex-col justify-center items-center'>
+              <div className='w-full flex-col justify-center items-center max-h-[400px] overflow-y-auto overflow-x-hidden gap-2'>
 
-                <BasicDateTimePicker label1={"B/L Cutoff Date"} label2={"B/L Cutoff Time"} setDate={setblClo} setTime={setblClot}/>
-                {((blClo===null) || (blClot===null)) && <p className='w-full text-[11px] text-red-600 flex justify-start'>Add B/L CutOff here!</p>}
+                <BasicDateTimePicker label1={"ETA Colombo Date"} label2={"ETA Colombo Time"} setDate={setetaCol} setTime={setetaColt}/>
+                {((etaCol===null) || (etaColt===null)) && <p className='w-full text-[11px] text-red-600 flex justify-center'>Add ETD Colombo here!</p>}
+
+                <BasicDateTimePicker label1={"FCL Opening Date"} label2={"FCL Opening Time"} setDate={setfclOpen} setTime={setfclOpent}/>
+                {((fclOpen===null) || (fclOpent===null)) && <p className='w-full text-[11px] text-red-600 flex justify-center'>Add FCL Opening here!</p>}
 
                 <BasicDateTimePicker label1={"FCL Closing Date"} label2={"FCL Closing Time"} setDate={setfclClo} setTime={setfclClot}/>
-                {((fclClo===null) || (fclClot===null)) && <p className='w-full text-[11px] text-red-600 flex justify-start'>Add FCL Closing here!</p>}
+                {((fclClo===null) || (fclClot===null)) && <p className='w-full text-[11px] text-red-600 flex justify-center'>Add FCL Closing here!</p>}
+
+                <BasicDateTimePicker label1={"B/L Cutoff Date"} label2={"B/L Cutoff Time"} setDate={setblClo} setTime={setblClot}/>
+                {((blClo===null) || (blClot===null)) && <p className='w-full text-[11px] text-red-600 flex justify-center'>Add B/L CutOff here!</p>}
 
                 <BasicDateTimePicker label1={"VGM Cutoff Date"} label2={"VGM Cutoff Time"} setDate={setvgmClo} setTime={setvgmClot}/>
-                {((vgmClo===null) || (vgmClot===null)) && <p className='w-full text-[11px] text-red-600 flex justify-start'>Add VGM CutOff here!</p>}
+                {((vgmClo===null) || (vgmClot===null)) && <p className='w-full text-[11px] text-red-600 flex justify-center'>Add VGM CutOff here!</p>}
 
-                <BasicDateTimePicker label1={"ETD Colombo Date"} label2={"ETD Colombo Time"} setDate={setetdCol} setTime={setetdColt}/>
-                {((etdCol===null) || (etdColt===null)) && <p className='w-full text-[11px] text-red-600 flex justify-start'>Add ETD Colombo here!</p>}
+                <BasicDateTimePicker label1={"Reefer Opening Date"} label2={"Reefer Opening Time"} setDate={setrfOpen} setTime={setrfOpent}/>
+                {((rfOpen===null) || (rfOpent===null)) && <p className='w-full text-[11px] text-red-600 flex justify-center'>Add Reefer Opening here!</p>}
+
+                <div className='h-0.5 bg-gray-300 w-full my-4 px-4'></div>
+
+                <div className='w-full flex-col justify-center items-center mt-4 space-y-4'>
+                  <TextInput  label='Terminal Name' placeholder='Add terminal name' setValue={settermin}/>
+                  <TextInput label='Vessel Operator' placeholder='Add Vessel Operator' setValue={setvopr}/>
+                  <TextInput label='Container Operator' placeholder='Add Container Operator' setValue={setconopr}/>
+
+                  <div className='h-0.5 bg-gray-300 w-full my-4 px-4'></div>
+                  <p className='w-full text-[11px] text-red-600 flex justify-start'>*Optional</p>
+
+                  <BasicDateTimePicker label1={"Cont: pick-up cutoff Date"} label2={"Container pick-up cutoff Time"} setDate={setcpuc} setTime={setcpuct}/>
+
+                </div>
+
               </div>
             </div>}
 

@@ -1221,7 +1221,6 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
                             </div>
                             <div className='w-full flex justify-center items-center my-3 text-gray-400'>
                                     <p className='font-semibold text-xs mb-2 px-4'>Cut-Offs :</p>
-                                    <img src={clock} alt='' className='w-8 h-8 ml-2' />
                                     {arrCutOff.includes(status) && <ValuesBox item='cutoff' c1={cutof?.BLCLO} c2={cutof?.FCLCLO} c3={cutof?.VGMCLO} c4={cutof?.ETDCOL}/>}
                                                 
                             </div>

@@ -19,6 +19,7 @@ import clock from '../assets/clock.png'
 import pend from '../assets/pend.gif'
 import { useSelector } from 'react-redux';
 import ChatBox from '.././components/TextUI/ChatBox';
+import AlertCutoff from './DialogBoxes/AlertCutoff';
 
 const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,company,loggedNM, loggedID, crd, type,user,role,assigned, consoles, cargos, updatedDate, cutoff, status, rDate, savedDate, lastUpdate, id, rates, remarks, bookingData, selShipLine, shremarks, schedules,selVessel,releaseOrder,selVoyage}) => {
     var http = process.env.REACT_APP_BASE_URL;
@@ -35,6 +36,7 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
     const[sdetails, setsDetails] = useState('')
 
     const [re, setRe] = useState([])
+    const[viewCF, setviewCF] = useState(false)
 
     const [fre, setfRe] = useState([])
     const [fshre, setfshRe] = useState([])
@@ -1024,9 +1026,12 @@ const sendFSStatus = async() =>{
 
                                 <div className='w-1/4 flex justify-center items-center my-3 text-gray-400 ml-3'>
                                     <p className='font-semibold text-xs mb-2 px-4'>Cut-Offs :</p>
-                                    <img src={clock} alt='' className='w-8 h-8 ml-2' />
-                                    {arrCutOff.includes(status) && <ValuesBox item='cutoff' c1={cutof?.BLCLO} c2={cutof?.FCLCLO} c3={cutof?.VGMCLO} c4={cutof?.ETDCOL}/>}
-                                                
+                                    {/* {arrCutOff.includes(status) && <ValuesBox item='cutoff' c1={cutof?.BLCLO} c2={cutof?.FCLCLO} c3={cutof?.VGMCLO} c4={cutof?.ETDCOL}/>} */}
+                                    <button onClick={()=>setviewCF(true)} className= {` text-[13px] bg-red-500 px-2 py-2 w-[100px] flex justify-center items-center gap-2 text-white rounded-lg active`}><svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-5 h-5 mr-2' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>View</button>
+
                                 </div>
                                 
                                 <div className='w-2/4 flex  justify-center items-center my-3 text-gray-400 ml-3'>
@@ -1075,6 +1080,8 @@ const sendFSStatus = async() =>{
                 }
 
                 <AddBL show={showBL} title='Add B/L Instructions' id={id} close={()=>setShowBL(false)} blData={bla}/>
+                <AlertCutoff cutof={cutof} show={viewCF} title='View Cut-Offs' id={id} close={()=>setviewCF(false)}/>
+
                 <ChatBox  person={assigned} containerType={containerMode} status={status}  role={role} show={showQChat} close={()=>setShowQChat(false)} loggedName={loggedNM} userID={loggedID} title='Chat Box' id={id}/>
 
 

@@ -11,6 +11,8 @@ const Navbar = ({childern}) => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [pic, setPic] = useState('');
+  const [role, setrole] = useState('');
+
   const [mail, setMail] = useState('');
   const navigate = useNavigate();
   const [assign,setAssign] = useState('')
@@ -23,6 +25,7 @@ const Navbar = ({childern}) => {
     setPic(loggedUser.userImage)
     setMail(loggedUser.userEmail)
     setAssign(loggedUser.assignedTo)
+    setrole(loggedUser.role)
 
 }, [loggedUser]);
 
@@ -52,7 +55,7 @@ const Navbar = ({childern}) => {
     let [open,setOpen]=useState(false);
 
   return (
-    <div className='shadow-md w-[100%] fixed bg-slate-100 z-50'>
+    <div className={`shadow-md w-[100%] fixed ${role==='user'? 'bg-red-400': role==='salesman'?'bg-green-400':'bg-slate-100'} z-50`}>
       <div className='w-full flex items-center justify-between py-1 px-2'>
         <div className='font-bold md:text-xl text-base cursor-pointer flex items-center font-Monserrat 
         text-black'>
@@ -64,6 +67,8 @@ const Navbar = ({childern}) => {
           </div>
           <p className='track-wider' onClick={()=> navigate('/')}>FLI-BOOKING</p>
         </div>
+
+        <p className='tracking-widest text-lg font-semibold'>{role==='user'? 'SHIPPER': role.toUpperCase()}</p>
       
         <div className='flex flex-col md:flex-row'>
             {
@@ -103,18 +108,8 @@ const Navbar = ({childern}) => {
                          </>
             }
            
-          </div>
+        </div>
 
-        {/* <ul className={`flex items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ':'top-[-490px]'}`}>
-          {
-            Links.map((link)=>(
-              <li key={link.name} className='md:ml-8 text-lg md:my-0 my-3'>
-                <Link to={link.link} className='text-black hover:text-gray-400 duration-500 font-Monserrat '>{link.name}</Link>
-              </li>
-            ))
-          }
-         
-        </ul> */}
       </div>
     </div>
                
