@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-
 export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
 
   return (
@@ -15,7 +14,7 @@ export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
             id="free-solo-2-demo"
             disableClearable
             options={data.length===0? []: data?.map(e=>e.shipperName)}
-            value={formData.shipperName}
+            value={formData?.shipperName}
             onInputChange={(event,value) =>
                 setFormData({ ...formData, shipperName: value })
                 }      
@@ -31,7 +30,7 @@ export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
             )}
             />
         </Stack>
-        {((formData.shipperName==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Shipper name Required!</p>} 
+        {((formData?.shipperName==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Shipper name Required!</p>} 
 
         <Stack spacing={2} sx={{ width: '100%' }}>
         
@@ -40,7 +39,7 @@ export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
             id="free-solo-2-demo"
             disableClearable
             options={data.length===0? []: data?.map(e=>e.shipperAddress)}
-            value={formData.shipperAddress}
+            value={formData?.shipperAddress}
             onInputChange={(event,value) =>
                 setFormData({ ...formData, shipperAddress: value })
                 }      
@@ -56,7 +55,7 @@ export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
             )}
             />
         </Stack>
-        {((formData.shipperAddress==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Shipper address Required!</p>}   
+        {((formData?.shipperAddress==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Shipper address Required!</p>}   
 
 
         <div className='w-full grid grid-cols-2 justify-center items-center py-1 gap-2'>
@@ -68,7 +67,7 @@ export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
                 disableClearable
                 options={data.length===0? []: data?.map(e=>e.shipperTele)}
                
-                value={formData.shipperTele}
+                value={formData?.shipperTele}
                 onInputChange={(event,value) =>
                     setFormData({ ...formData, shipperTele: value })
                     }      
@@ -85,8 +84,8 @@ export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
                 )}
                 />
             </Stack>
-            {((formData.shipperTele==='' ) && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add shipper telephone number here!</p>}   
-            {((formData.shipperTele!=='') && (ischeck) && !(/^(?:0|94|\+94)?(?:|7(0|1|2|4|5|6|7|8)\d)\d{6}$/.test(formData.shipperTele))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid telephone number!</p>}   
+            {((formData?.shipperTele==='' ) && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add shipper telephone number here!</p>}   
+            {((formData?.shipperTele!=='') && (ischeck) && !(/^(?:0|94|\+94)?(?:|7(0|1|2|4|5|6|7|8)\d)\d{6}$/.test(formData.shipperTele))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid telephone number!</p>}   
 
              </div>
             <div className='w-full flex flex-col'>      
@@ -98,7 +97,7 @@ export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
                 disableClearable
                 options={data.length===0? []: data?.map(e=>e.shippermail)}
               
-                value={formData.shippermail}
+                value={formData?.shippermail}
                 onInputChange={(event,value) =>
                     setFormData({ ...formData, shippermail: value })
                     }      
@@ -114,8 +113,8 @@ export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
                 )}
                 />
             </Stack>   
-            {((formData.shippermail==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add shipper email here!</p>}   
-            {((formData.shippermail!=='')  && (ischeck) && !(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(formData.shippermail))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid email address!</p>}   
+            {((formData?.shippermail==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add shipper email here!</p>}   
+            {((formData?.shippermail!=='')  && (ischeck) && !(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(formData.shippermail))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid email address!</p>}   
 
         </div>
         </div>    
@@ -136,7 +135,7 @@ export const ConsigneeDetails = ({formData, setFormData,ischeck,data}) => {
               options={data.length===0? []: data?.map(e=>e.consigneeName)}
               type='number'
             
-              value={formData.consigneeName}
+              value={formData?.consigneeName}
               onInputChange={(event,value) =>
                   setFormData({ ...formData, consigneeName: value })
                   }      
@@ -153,7 +152,7 @@ export const ConsigneeDetails = ({formData, setFormData,ischeck,data}) => {
               )}
               />
           </Stack>   
-          {((formData.consigneeName==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Consignee name Required!</p>} 
+          {((formData?.consigneeName==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Consignee name Required!</p>} 
 
   
           <Stack spacing={2} sx={{ width: '100%' }}>
@@ -163,7 +162,7 @@ export const ConsigneeDetails = ({formData, setFormData,ischeck,data}) => {
               id="free-solo-2-demo"
               disableClearable
               options={data.length===0? []:data?.map(e=>e.consigneeAddress)}
-              value={formData.consigneeAddress}
+              value={formData?.consigneeAddress}
               onInputChange={(event,value) =>
                   setFormData({ ...formData, consigneeAddress: value })
                   }      
@@ -179,7 +178,7 @@ export const ConsigneeDetails = ({formData, setFormData,ischeck,data}) => {
               )}
               />
           </Stack>
-          {((formData.consigneeAddress==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Consignee address Required!</p>}   
+          {((formData?.consigneeAddress==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Consignee address Required!</p>}   
 
           <div className='w-full grid grid-cols-2 justify-center items-center py-1 gap-2'>
           <div className='w-full flex flex-col'>
@@ -192,7 +191,7 @@ export const ConsigneeDetails = ({formData, setFormData,ischeck,data}) => {
                   //   onInputChange={(newInputValue) => {
                   //       setPortData(newInputValue);
                   //     }}
-                  value={formData.consigneeTele}
+                  value={formData?.consigneeTele}
                   onInputChange={(event,value) =>
                       setFormData({ ...formData, consigneeTele: value })
                       }      
@@ -208,8 +207,8 @@ export const ConsigneeDetails = ({formData, setFormData,ischeck,data}) => {
                   )}
                   />
               </Stack>
-              {((formData.consigneeTele==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Consignee telephone number here!</p>}   
-            {((formData.consigneeTele!=='') && (ischeck) && !(/^(?:0|94|\+94)?(?:|7(0|1|2|4|5|6|7|8)\d)\d{6}$/.test(formData.consigneeTele))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid telephone number!</p>}   
+              {((formData?.consigneeTele==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Consignee telephone number here!</p>}   
+            {((formData?.consigneeTele!=='') && (ischeck) && !(/^(?:0|94|\+94)?(?:|7(0|1|2|4|5|6|7|8)\d)\d{6}$/.test(formData.consigneeTele))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid telephone number!</p>}   
         </div>
   
         <div className='w-full flex flex-col'>              
@@ -222,7 +221,7 @@ export const ConsigneeDetails = ({formData, setFormData,ischeck,data}) => {
                   //   onInputChange={(newInputValue) => {
                   //       setPortData(newInputValue);
                   //     }}
-                  value={formData.consigneemail}
+                  value={formData?.consigneemail}
                   onInputChange={(event,value) =>
                       setFormData({ ...formData, consigneemail: value })
                       }      
@@ -238,8 +237,8 @@ export const ConsigneeDetails = ({formData, setFormData,ischeck,data}) => {
                   )}
                   />
               </Stack>   
-              {((formData.consigneemail==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add consignee email here!</p>}   
-            {((formData.consigneemail!=='') && (ischeck) && !(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(formData.consigneemail))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid email address!</p>}   
+              {((formData?.consigneemail==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add consignee email here!</p>}   
+            {((formData?.consigneemail!=='') && (ischeck) && !(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(formData.consigneemail))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid email address!</p>}   
         </div>
           </div>    
       </div>
@@ -260,7 +259,7 @@ export const NotifyDetails = ({formData, setFormData,ischeck,data}) => {
               //   onInputChange={(newInputValue) => {
               //       setPortData(newInputValue);
               //     }}
-              value={formData.notifyName}
+              value={formData?.notifyName}
               onInputChange={(event,value) =>
                   setFormData({ ...formData, notifyName: value })
                   }      
@@ -276,7 +275,7 @@ export const NotifyDetails = ({formData, setFormData,ischeck,data}) => {
               )}
               />
           </Stack>   
-          {((formData.notifyName==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Notify name Required!</p>} 
+          {((formData?.notifyName==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Notify name Required!</p>} 
 
   
           <Stack spacing={2} sx={{ width: '100%' }}>
@@ -286,7 +285,7 @@ export const NotifyDetails = ({formData, setFormData,ischeck,data}) => {
               id="free-solo-2-demo"
               disableClearable
               options={data.length===0? []:data?.map(e=>e.notifyAddress)}
-              value={formData.notifyAddress}
+              value={formData?.notifyAddress}
               onInputChange={(event,value) =>
                   setFormData({ ...formData, notifyAddress: value })
                   }      
@@ -302,7 +301,7 @@ export const NotifyDetails = ({formData, setFormData,ischeck,data}) => {
               )}
               />
           </Stack>
-          {((formData.notifyAddress==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Notify address Required!</p>}   
+          {((formData?.notifyAddress==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Notify address Required!</p>}   
 
   
           <div className='w-full grid grid-cols-2 justify-center items-center py-1 gap-2'>
@@ -316,7 +315,7 @@ export const NotifyDetails = ({formData, setFormData,ischeck,data}) => {
                   //   onInputChange={(newInputValue) => {
                   //       setPortData(newInputValue);
                   //     }}
-                  value={formData.notifyTele}
+                  value={formData?.notifyTele}
                   onInputChange={(event,value) =>
                       setFormData({ ...formData, notifyTele: value })
                       }      
@@ -332,8 +331,8 @@ export const NotifyDetails = ({formData, setFormData,ischeck,data}) => {
                   )}
                   />
               </Stack>
-              {((formData.notifyTele==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Notify telephone number here!</p>}   
-            {((formData.notifyTele!=='') && (ischeck) && !(/^(?:0|94|\+94)?(?:|7(0|1|2|4|5|6|7|8)\d)\d{6}$/.test(formData.notifyTele))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid telephone number!</p>}   
+              {((formData?.notifyTele==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Notify telephone number here!</p>}   
+            {((formData?.notifyTele!=='') && (ischeck) && !(/^(?:0|94|\+94)?(?:|7(0|1|2|4|5|6|7|8)\d)\d{6}$/.test(formData.notifyTele))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid telephone number!</p>}   
             </div>
   
             <div className='w-full flex flex-col'>
@@ -346,7 +345,7 @@ export const NotifyDetails = ({formData, setFormData,ischeck,data}) => {
                   //   onInputChange={(newInputValue) => {
                   //       setPortData(newInputValue);
                   //     }}
-                  value={formData.notifymail}
+                  value={formData?.notifymail}
                   onInputChange={(event,value) =>
                       setFormData({ ...formData, notifymail: value })
                       }      
@@ -362,8 +361,8 @@ export const NotifyDetails = ({formData, setFormData,ischeck,data}) => {
                   )}
                   />
               </Stack>
-              {((formData.notifymail==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Notify email here!</p>}   
-            {((formData.notifymail!=='') && (ischeck) && !(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(formData.notifymail))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid email address!</p>}   
+              {((formData?.notifymail==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Notify email here!</p>}   
+            {((formData?.notifymail!=='') && (ischeck) && !(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(formData.notifymail))) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Invalid email address!</p>}   
             </div>
           </div>    
       </div>
@@ -381,13 +380,13 @@ export const MarkNvalues = ({formData, setFormData,ischeck}) => {
         className='w-full'
         multiline
         rows={4} 
-        value={formData.markNvalues}
+        value={formData?.markNvalues}
         onChange={(event,value) =>
             setFormData({ ...formData, markNvalues: event.target.value })
          }      
     />
 
-      {((formData.markNvalues==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add mark & numbers here!</p>}   
+      {((formData?.markNvalues==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add mark & numbers here!</p>}   
         </div>
     )
 }
@@ -403,12 +402,12 @@ export const CargoDesc = ({formData, setFormData,ischeck}) => {
         className='w-full'
         multiline
         rows={4} 
-        value={formData.cargoDesc}
+        value={formData?.cargoDesc}
         onChange={(event) =>
             setFormData({ ...formData, cargoDesc: event.target.value })
          } 
     />     
-    {((formData.cargoDesc==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add cargo description here!</p>}   
+    {((formData?.cargoDesc==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add cargo description here!</p>}   
   
     </div>
     )
@@ -423,12 +422,12 @@ export const CargoQuantity = ({formData, setFormData,ischeck}) => {
         label={'No Packages'} variant="outlined" 
         placeholder={''}   
         className='w-full'
-        value={formData.NoPackages}
+        value={formData?.NoPackages}
         onChange={(event,value) =>
             setFormData({ ...formData, NoPackages: event.target.value })
          }      
     />
-        {((formData.NoPackages==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add No of Packages here!</p>}   
+        {((formData?.NoPackages==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add No of Packages here!</p>}   
     </div>
 
     <div className='w-full flex flex-col'>
@@ -438,12 +437,12 @@ export const CargoQuantity = ({formData, setFormData,ischeck}) => {
         placeholder={''}   
         type='number'
         className='w-full'
-        value={formData.GrossWeight}
+        value={formData?.GrossWeight}
         onChange={(event,value) =>
             setFormData({ ...formData, GrossWeight: event.target.value })
         }      
     />
-        {((formData.GrossWeight==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Gross Weight here!</p>}   
+        {((formData?.GrossWeight==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Gross Weight here!</p>}   
     </div>
 
     <div className='w-full flex flex-col'>
@@ -453,12 +452,12 @@ export const CargoQuantity = ({formData, setFormData,ischeck}) => {
         placeholder={''}   
         type='number'
         className='w-full'
-        value={formData.NetWeight}
+        value={formData?.NetWeight}
         onChange={(event,value) =>
             setFormData({ ...formData, NetWeight: event.target.value })
         }      
     />
-        {((formData.NetWeight==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Net Weight here!</p>}   
+        {((formData?.NetWeight==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Net Weight here!</p>}   
     </div>
 
     <div className='w-full flex flex-col'>
@@ -468,12 +467,12 @@ export const CargoQuantity = ({formData, setFormData,ischeck}) => {
         placeholder={''}   
         type='number'
         className='w-full'
-        value={formData.Volume}
+        value={formData?.Volume}
         onChange={(event,value) =>
             setFormData({ ...formData, Volume: event.target.value })
         }      
     />    
-        {((formData.Volume==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Cargo volumes in Cbm here!</p>}   
+        {((formData?.Volume==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Cargo volumes in Cbm here!</p>}   
     </div>
 
     </div>
@@ -490,13 +489,13 @@ export const ContainerDetails = ({formData, setFormData,ischeck}) => {
         label={'Container Number'} variant="outlined" 
         placeholder={''}   
         className='w-full'
-        value={formData.containerData}
+        value={formData?.containerData}
         onChange={(event,value) =>
             setFormData({ ...formData, containerData: event.target.value })
          }      
     />
 
-      {((formData.containerData==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add container Data here!</p>}   
+      {((formData?.containerData==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add container Data here!</p>}   
         </div>
 
         <div className='w-full flex flex-col'>
@@ -505,13 +504,13 @@ export const ContainerDetails = ({formData, setFormData,ischeck}) => {
         label={'Seal Number'} variant="outlined" 
         placeholder={''}   
         className='w-full'
-        value={formData.sealData}
+        value={formData?.sealData}
         onChange={(event,value) =>
             setFormData({ ...formData, sealData: event.target.value })
          }      
     />
 
-      {((formData.sealData==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Seal number here!</p>}   
+      {((formData?.sealData==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Seal number here!</p>}   
         </div>
     </div>
     )

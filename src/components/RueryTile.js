@@ -24,6 +24,7 @@ import clock from '../assets/clock.png'
 import AddCutOff from './Addings/AddCutOff';
 import { Badge, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel, FormGroup, Switch, TextField } from '@mui/material';
 import ChatBox from './TextUI/ChatBox';
+import AlertCutoff from './DialogBoxes/AlertCutoff';
 // import { BasicDatePicker } from './TextUI/BasicDatePicker';
 
 var keyDoc = '';
@@ -44,6 +45,7 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
 
     const[addCutOff, setaddCutOff] = useState(false)
     const[editCutOff, seteditCutOff] = useState(false)
+    const[viewCF, setviewCF] = useState(false)
 
     const [getbl,setgetbl] = useState([])
     const [cutof,setcutof] = useState({})
@@ -212,33 +214,35 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
 
   }, [http,id]);
 
-    useEffect(() => {
-        const getCutoff = ()=>{
-            axios
-            .get(`${http}/api/fclquery/getCutOffData/${id}`)
-            .then((res) => {
-              //console.log(res.data);
-              setcutof(res.data.fclquery.cutoff)
-            })
-            .catch(err=> {
-              console.log(err);
-            })     
-          }
-          getCutoff();  
-          
-          const getBL = ()=>{
-            axios
-            .get(`${http}/api/fclquery/blFCLData/${id}`)
-            .then((res) => {
-              //console.log(res.data);
-              setgetbl(res.data.fclquery.blData)
-            })
-            .catch(err=> {
-              console.log(err);
-            })     
-          }
-          getBL(); 
+    // useEffect(() => {
+    //     const getCutoff = ()=>{
+    //         axios
+    //         .get(`${http}/api/fclquery/getCutOffData/${id}`)
+    //         .then((res) => {
+    //           console.log(res.data);
+    //           setcutof(res.data.fclquery.cutoff)
+    //         })
+    //         .catch(err=> {
+    //           console.log(err);
+    //         })     
+    //       }
+    //       getCutoff();
 
+    // }, [http,id]);
+
+    useEffect(() => {
+    const getBL = ()=>{
+        axios
+        .get(`${http}/api/fclquery/blFCLData/${id}`)
+        .then((res) => {
+          //console.log(res.data);
+          setgetbl(res.data.fclquery.blData)
+        })
+        .catch(err=> {
+          console.log(err);
+        })     
+      }
+      getBL(); 
     }, [http,id]);
 
     useEffect(() => {
@@ -1221,8 +1225,11 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
                             </div>
                             <div className='w-full flex justify-center items-center my-3 text-gray-400'>
                                     <p className='font-semibold text-xs mb-2 px-4'>Cut-Offs :</p>
-                                    {arrCutOff.includes(status) && <ValuesBox item='cutoff' c1={cutof?.BLCLO} c2={cutof?.FCLCLO} c3={cutof?.VGMCLO} c4={cutof?.ETDCOL}/>}
-                                                
+                                    {/* {arrCutOff.includes(status) && <ValuesBox item='cutoff' c1={cutof?.BLCLO} c2={cutof?.FCLCLO} c3={cutof?.VGMCLO} c4={cutof?.ETDCOL}/>} */}
+                                    <button onClick={()=>setviewCF(true)} className= {` text-[13px] bg-red-500 px-2 py-2 w-[100px] flex justify-center items-center gap-2 text-white rounded-lg active`}><svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-5 h-5 mr-2' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>View</button>
                             </div>
                             <div className='w-full flex justify-end items-center gap-2 mr-5'>
                                     <button onClick={()=>seteditCutOff(true)} className='p-2 text-[14px] font-semibold border-2 border-green-600 bg-white rounded-md text-green-600 hover:bg-green-600 hover:text-white hover:border-white hover:scale-110 animate-bounce'>Edit CutOffs</button>
@@ -1281,10 +1288,11 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
             {status==='b/l added' && <ViewBL show={showBL} close={()=>setShowBL(false)} blData={getbl[0]} vessel={selVessel} voyage={selVoyage} shipline={selShipLine}
              origin={OportName} destination={DportName} freight={freight} id={id} />}
 
-             <AddCutOff show={addCutOff} close={()=>setaddCutOff(false)} title='Add Cut-Off' id={id} data={''} />
-             <AddCutOff show={editCutOff} close={()=>seteditCutOff(false)} title='Edit Cut-Off' id={id} data={cutof}/>
+             <AddCutOff show={addCutOff} close={()=>setaddCutOff(false)} title='Add Cut-Off' id={id} data='no values' />
+             <AddCutOff show={editCutOff} close={()=>seteditCutOff(false)} title='Edit Cut-Off' id={id} data={cutoff}/>
 
              <ChatBox person={user} userID={loggedID} containerType={containerMode} loggedName={loggedNM} role={role} status={status} show={showChat} close={()=>setShowChat(false)} title='Chat Box' id={id}/>
+             <AlertCutoff cutof={cutoff} show={viewCF} title='View Cut-Offs' id={id} close={()=>setviewCF(false)}/>
 
         </div>
        

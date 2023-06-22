@@ -177,7 +177,7 @@ const Requests = () => {
                         releaseOrder = {obj.releaseOrder}
                         selVessel = {obj.selVessel}
                         selShipLine = {obj.selShipLine}
-                        //blData = {obj.blData[0]}
+                        cutoff = {obj?.cutoff}
                         selVoyage = {obj.selVoyage}
                         loggedID = {ID}
                         loggedNM = {name}

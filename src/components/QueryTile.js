@@ -87,6 +87,22 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
           }
         getLRemarks();
 
+        const getRateReply = ()=>{
+            axios
+            .get(`${http}/api/lclquery/getRateReply/${id}`)
+            .then((res) => {
+              //console.log(res.data);
+              setrateReply(res.data.lclquery.rateReply)
+            })
+            .catch(err=> {
+              console.log(err);
+            })     
+        }
+        getRateReply(); 
+
+    }, [http,id]);
+
+    useEffect(() => {  
         const getBLData = ()=>{
             axios
             .get(`${http}/api/fclquery/blFCLData/${id}`)
@@ -100,8 +116,10 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
             })     
           }
           getBLData();
+    }, [http,id]);
 
-          const getCutoff = ()=>{
+    useEffect(() => {  
+        const getCutoff = ()=>{
             axios
             .get(`${http}/api/fclquery/getCutOffData/${id}`)
             .then((res) => {
@@ -114,20 +132,10 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
           }
           getCutoff();  
           
-          const getRateReply = ()=>{
-            axios
-            .get(`${http}/api/lclquery/getRateReply/${id}`)
-            .then((res) => {
-              //console.log(res.data);
-              setrateReply(res.data.lclquery.rateReply)
-            })
-            .catch(err=> {
-              console.log(err);
-            })     
-          }
-          getRateReply(); 
+    }, [http,id]);
 
-          const getLShipperLastSeen = ()=>{
+    useEffect(() => {  
+        const getLShipperLastSeen = ()=>{
             axios
             .get(`${http}/api/lclquery/getShipperLastSeen/${id}`)
             .then((res) => {
@@ -152,8 +160,11 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
             })     
           }
           getFShipperLastSeen();  
+        
+    }, [http,id]);
 
-          const getLNumAlerts = ()=>{
+    useEffect(() => {  
+        const getLNumAlerts = ()=>{
             setlNum(lre?.filter(e=> (((new Date(e.dDate)).getTime() - (new Date(LlastSeen)).getTime())/(1000))>0).length)
           }
 
@@ -164,8 +175,7 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
           }
 
           getFNumAlerts()
-        
-    }, [http,id,consoles,lre,FlastSeen,LlastSeen,fre]);
+    }, [FlastSeen,LlastSeen,fre,lre]);
 
     console.log(lnum)
   

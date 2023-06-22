@@ -5,7 +5,10 @@ const AlertCutoff = ({cutof,show,close,id,title}) => {
     if(!show){
         return null
     }
-    
+
+    console.log(cutof)
+
+   
   return (
     <div className={`${show? "fixed inset-0" : "hidden"}  bg-gray-900 bg-opacity-50  w-full flex justify-center items-center md:ml-20`}>
             <div className={`flex flex-col bg-white w-[40%] gap-4 rounded-lg shadow-lg`}>
@@ -18,19 +21,26 @@ const AlertCutoff = ({cutof,show,close,id,title}) => {
             <div className='w-full flex flex-col justify-center items-center mb-3 overflow-y-auto max-h-[400px]'>
             {/* {arrCutOff.includes(status) && <ValuesBox item='cutoff' c1={cutof?.BLCLO} c2={cutof?.FCLCLO} c3={cutof?.VGMCLO} c4={cutof?.ETDCOL}/>} */}
 
-                <LineRow topic='ETA COLOMBO' dateC={cutof?.ETACOL.split(" ")[0]} timeC={cutof?.ETACOL.split(" ")[1]}/>
-                <LineRow topic='FCL OPENING' dateC={cutof?.FCLOPN.split(" ")[0]} timeC={cutof?.FCLOPN.split(" ")[1]}/>
-                <LineRow topic='FCL CLOSING' dateC={cutof?.FCLCLO.split(" ")[0]} timeC={cutof?.FCLCLO.split(" ")[1]}/>
-                <LineRow topic='BL CUT OFF' dateC={cutof?.BLCLO.split(" ")[0]} timeC={cutof?.BLCLO.split(" ")[1]}/>
-                <LineRow topic='VGM CLOSING' dateC={cutof?.VGMCLO.split(" ")[0]} timeC={cutof?.VGMCLO.split(" ")[1]}/>
-                <LineRow topic='CNTR PICK UP CUT OFF' dateC={cutof?.RFOPN.split(" ")[0]} timeC={cutof?.RFOPN.split(" ")[1]}/>
-                <LineRow topic='REEFER OPENING' dateC={cutof?.VGMCLO.split(" ")[0]} timeC={cutof?.BLCLO.split(" ")[1]}/>
-                {/* <LineRow topic='BERTHING' dateC={cutof?.VGMCLO} timeC={cutof?.BLCLO.split(" ")[1]}/>
-                <LineRow topic='VESSEL OPERATOR' dateC={cutof?.ETDCOL.split(" ")[0]} timeC={cutof?.BLCLO.split(" ")[1]}/>
-                <LineRow topic='CONTAINER OPERATOR' dateC={cutof?.ETDCOL.split(" ")[0]} timeC={cutof?.BLCLO.split(" ")[1]}/> */}
+                <LineRow topic='ETA COLOMBO' dateC={cutof?.ETACOLD} timeC={cutof?.ETACOLT}/>
+                <LineRow topic='FCL OPENING' dateC={cutof?.FCLOPND} timeC={cutof?.FCLOPNT}/>
+                <LineRow topic='FCL CLOSING' dateC={cutof?.FCLCLOD} timeC={cutof?.FCLCLOT}/>
+                <LineRow topic='BL CUT OFF' dateC={cutof?.BLCLOD} timeC={cutof?.BLCLOT}/>
+                <LineRow topic='VGM CLOSING' dateC={cutof?.VGMCLOD} timeC={cutof?.VGMCLOT}/>
+                <LineRow topic='REEFER OPENING' dateC={cutof?.VGMCLOD} timeC={cutof?.BLCLOT}/>
+
+                {/* <LineRow topic='BERTHING' dateC={cutof?.VGMCLO} timeC={cutof?.BLCLO}/>
+                <LineRow topic='VESSEL OPERATOR' dateC={cutof?.ETDCOL} timeC={cutof?.BLCLO}/>
+                <LineRow topic='CONTAINER OPERATOR' dateC={cutof?.ETDCOL} timeC={cutof?.BLCLO}/> */}
                 <TextLine term='BERTHING' pla={cutof?.TERMIN}/>
                 <TextLine term='VESSEL OPERATOR' pla={cutof?.VESOP}/>
                 <TextLine term='CONTAINER OPERATOR' pla={cutof?.CONOP}/>
+
+                <div className='h-0.5 bg-gray-300 w-full my-4 px-4'></div>
+                <p className='w-full text-[11px] text-red-600 flex justify-center'>*Optional</p>
+
+                <LineRow topic='CNTR PICK UP CUT OFF' dateC={cutof?.CPUCD} timeC={cutof?.CPUCT}/>
+
+
 
 
             </div>

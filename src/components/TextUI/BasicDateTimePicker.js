@@ -1,3 +1,4 @@
+import { Box, TextField } from "@mui/material";
 import React, { useRef, useState } from "react";
 
 export const BasicDateTimePicker = ({label1,label2,setDate,setTime}) => {
@@ -67,6 +68,75 @@ export const BasicDateTimePicker = ({label1,label2,setDate,setTime}) => {
     
   );
 };
+
+export const EditBasicDateTimePicker = ({label1,label2,fetchDate,handleDate,fetchTime,handleTime}) => {
+  const ref1 = useRef();
+  const ref2 = useRef();
+
+  let objectDate = new Date();
+
+  let day = objectDate.getDate();
+
+  let month = objectDate.getMonth();
+
+  let year = objectDate.getFullYear();
+
+  let format3 = `${year}-${month+1}-${day}`
+  let Imonth = month>9? (month+1) : `0${(month+1)}`
+
+  let format4 = `${year}-${Imonth}-${day}`
+
+  return (
+    <div className="w-full flex justify-center items-center gap-2 mt-2">
+          <p className="min-w-[100px] text-[13.5px] font-semibold">{`${label1.split(" ")[0]} ${label1.split(" ")[1]}`}</p>
+          <div className="w-full flex justify-center items-center gap-2">
+
+            <input className="z-20 p-3 border rounded-md flex"
+                type="text"
+                onFocus={() => (ref1.current.type = "date")}
+                onBlur={() => (ref1.current.type = "text")}      
+                min={format4}
+                ref={ref1}
+                inputFormat="DD/MM/YYYY"
+                value={fetchDate}
+                placeholder={label1}
+                onChange={handleDate} 
+            />
+            <input type="text" className="z-20 p-3 border rounded-md flex"
+                required
+                value={fetchTime}
+                ref={ref2}
+                onFocus={() => (ref2.current.type = "time")}
+                onBlur={() => (ref2.current.type = "text")}   
+                onChange={handleTime} 
+                placeholder={label2}
+
+            />
+          </div>  
+    </div>
+    
+  );
+};
+
+export const EditTextInput = ({label,placeholder,fetchValue,type,handleValue}) =>{
+return (
+  <Box
+    component="form"
+    sx={{width: '100%'}}
+    noValidate
+    autoComplete="off"
+  >
+    <TextField 
+      id="outlined-basic" 
+      label={label} variant="outlined" 
+      placeholder={placeholder}   
+      value={fetchValue}
+      type={type}
+      className='w-full'
+      onChange={handleValue}/>
+  </Box>
+);
+}
 
 
 

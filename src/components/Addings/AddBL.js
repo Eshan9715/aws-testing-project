@@ -6,10 +6,9 @@ import { CargoDesc, CargoQuantity, ConsigneeDetails, ContainerDetails, MarkNvalu
 import { DialogBox } from '../DialogBoxes/DialogBox'
 
 const AddBL = ({show,title,close,id, blData}) => {
-    const isURL = useSelector((state)=> state.url.isURL);
+    var http = process.env.REACT_APP_BASE_URL;
     const loggedUser = useSelector(state=> state.auth.value);
     var userID = loggedUser.userID
-    var http = isURL;  
   
     const [shipper, setshipper] = useState([])
     const [consignee, setconsignee] = useState([])
@@ -28,7 +27,7 @@ const AddBL = ({show,title,close,id, blData}) => {
           .get(`${http}/api/user/shipperData/${userID}`)
           .then((res) => {
             console.log(res.data);
-            setshipper(res.data.user.shipperDetails)
+            setshipper(res.data.user?.shipperDetails)
           })
           .catch(err=> {
             console.log(err);
@@ -41,7 +40,7 @@ const AddBL = ({show,title,close,id, blData}) => {
           .get(`${http}/api/user/consigneeData/${userID}`)
           .then((res) => {
             console.log(res.data);
-            setconsignee(res.data.user.consigneeDetails)
+            setconsignee(res.data.user?.consigneeDetails)
           })
           .catch(err=> {
             console.log(err);
@@ -54,7 +53,7 @@ const AddBL = ({show,title,close,id, blData}) => {
           .get(`${http}/api/user/notifyData/${userID}`)
           .then((res) => {
             console.log(res.data);
-            setnotify(res.data.user.notifyDetails)
+            setnotify(res.data.user?.notifyDetails)
           })
           .catch(err=> {
             console.log(err);
@@ -70,7 +69,7 @@ const AddBL = ({show,title,close,id, blData}) => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);            
     }
 
-    console.log(bl)
+    // console.log(bl)
 
     const handleValidNext = () => {
         console.log(activeStep)
@@ -127,8 +126,8 @@ const AddBL = ({show,title,close,id, blData}) => {
       setFormData(blData[0])
     }, [blData]);
 
-    console.log(blData[0])
-    console.log(formData)
+    // console.log(blData[0])
+    // console.log(formData)
 
     const steps = [
         {
@@ -370,7 +369,7 @@ const AddBL = ({show,title,close,id, blData}) => {
     <div className={`${show? "fixed inset-0" : "hidden"} bg-gray-900 bg-opacity-50 z-20 mt-16 w-full flex justify-center items-center md:ml-20`}>
       <DialogBox open={openDialog} close={()=>setopenDialog(false)} send={()=>finalAdding()}/>
 
-        <div className='flex flex-col justify-center items-center bg-white w-[70%] rounded-lg shadow-lg'>
+        <div className='flex flex-col justify-center items-center bg-white w-[50%] rounded-lg shadow-lg'>
             <div className='w-full flex justify-center items-center bg-sky-700'>
                 <h3 className='w-full text-lg font-semibold text-center p-2.5  text-white'>{title}</h3>
                 <svg fill="none" onClick={close} className='w-8 h-8 mr-2 text-white font-semibold cursor-pointer bg-red-500 rounded-full p-1' stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -423,7 +422,8 @@ const AddBL = ({show,title,close,id, blData}) => {
                        
                           <div className='w-full justify-start items-center gap-2 flex mb-2 mt-2'>
 
-                          {((!isCheckValid) || (!donesave)) && <button className='text-[13px] px-2 py-2 w-[130px] flex justify-center items-center gap-2 mx-4 text-blue-700 bg-white border-2 border-blue-700 rounded-lg active' onClick={handleReset}>Re-check</button>}
+                          {((!isCheckValid) || (!donesave)) && 
+                          <button className='text-[13px] px-2 py-2 w-[130px] flex justify-center items-center gap-2 mx-4 text-blue-700 bg-white border-2 border-blue-700 rounded-lg active' onClick={handleReset}>Re-check</button>}
                           {!isCheckValid && <button onClick={handleSave} disabled={donesave}  className= {` ${donesave? 'bg-green-500': 'bg-red-500'} text-[13px] px-2 py-2 w-[130px] flex justify-center items-center gap-2 mx-4 text-white rounded-lg active`} >
                             {(saving && !donesave) && <svg aria-hidden="true" className="w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -440,6 +440,7 @@ const AddBL = ({show,title,close,id, blData}) => {
 
                             {saving? 'saving...': donesave? 'saved': 'Save as draft'}
                           </button>}
+                          
                           {!isCheckValid && <button className='text-[14px] px-2 py-2 w-[130px] flex justify-center items-center gap-2 mx-4 text-blue-700 bg-white border-2 border-blue-700 rounded-lg active' onClick={handleUpload}>Upload to system</button>}
                           {isCheckValid && <button className='text-[14px] font-bold px-2 py-2 w-[130px] flex justify-center items-center gap-2 mx-4 text-red-500 bg-white border-[3px] border-red-500 rounded-lg active' onClick={setUpload}>Upload</button>}
 
