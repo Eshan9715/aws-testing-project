@@ -74,7 +74,7 @@ const SalesDashBD = () => {
     
     <div className='w-full flex justify-center items-center'>
         <div className='w-[90%]'>
-            <div className='grid grid-cols-4 h-[100px] gap-4'>
+            <div className='grid grid-cols-4 h-[100px] gap-4 mt-2'>
             {gridParts.map((part)=>(
                 <div className='p-5 border-2 w-full flex justify-between items-center bg-white rounded-lg'>
                     {part.icon}

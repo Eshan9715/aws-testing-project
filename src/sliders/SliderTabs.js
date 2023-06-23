@@ -4,13 +4,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Badge } from "@mui/material";
 
-const SliderTabs = ({Data,SData,chooseTab})=>  {
+const SliderTabs = ({Data,SData,chooseTab,role})=>  {
     const [tabbmode, setTabbmode] = useState('rates pending')
+    const [ctabbmode, setcTabbmode] = useState('schedule pending')
 
-    const pressTab = (type)=>{
+    const pressTab = (type,)=>{
         setTabbmode(type)
         chooseTab(type)
+        console.log(type)
     }
+
+    const presscTab = (type)=>{
+      setcTabbmode(type)
+      chooseTab(type)
+      console.log(type)
+  }
 
     const SampleNextArrow = (props) =>{
         const { className, style, onClick } = props;
@@ -88,7 +96,8 @@ const SliderTabs = ({Data,SData,chooseTab})=>  {
             {Data.map(e=>(
                 <li className="mr-1 py-1.5" role="presentation">
                     <Badge color='error' badgeContent={SData?.filter(er=> er.status===e.fact).length}  >
-                        <button onClick={()=>pressTab(e.fact)}  className={`inline-block ${tabbmode===e.fact? "bg-orange-500 text-white": (SData?.filter(er=> er.status===e.fact).length)!==0? 'bg-white text-black  border border-black': 'bg-gray-500 text-white'} px-6 py-3 rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{e.topic}</button>
+                        {((role==='salesman') || (role==='user')) && <button onClick={()=>pressTab(e.fact)}  className={`inline-block ${tabbmode===e.fact? "bg-orange-500 text-white": (SData?.filter(er=> er.status===e.fact).length)!==0? 'bg-white text-black  border border-black': 'bg-gray-500 text-white'} px-6 py-3 rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{e.topic}</button>}
+                        {role==='crd' && <button onClick={()=>presscTab(e.fact)}  className={`inline-block ${ctabbmode===e.fact? "bg-orange-500 text-white": (SData?.filter(er=> er.status===e.fact).length)!==0? 'bg-white text-black  border border-black': 'bg-gray-500 text-white'} px-6 py-3 rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{e.topic}</button>}
                     </Badge>
                 </li>
             ))}
@@ -97,4 +106,4 @@ const SliderTabs = ({Data,SData,chooseTab})=>  {
     );
   }
 
-  export default SliderTabs;
+export default SliderTabs;

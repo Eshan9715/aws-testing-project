@@ -135,6 +135,7 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
     }, [http,id]);
 
     useEffect(() => {  
+
         const getLShipperLastSeen = ()=>{
             axios
             .get(`${http}/api/lclquery/getShipperLastSeen/${id}`)
@@ -160,10 +161,6 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
             })     
           }
           getFShipperLastSeen();  
-        
-    }, [http,id]);
-
-    useEffect(() => {  
         const getLNumAlerts = ()=>{
             setlNum(lre?.filter(e=> (((new Date(e.dDate)).getTime() - (new Date(LlastSeen)).getTime())/(1000))>0).length)
           }
@@ -175,11 +172,10 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
           }
 
           getFNumAlerts()
-    }, [FlastSeen,LlastSeen,fre,lre]);
+    }, [FlastSeen,LlastSeen,fre,lre,http,id]);
 
     console.log(lnum)
   
-
     const [shipremarks, setShipremarks] = useState({
         status:'', remark:'', timeVal:'', userID: loggedID, adder: loggedNM,refID: '',}
     )
@@ -365,7 +361,8 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
     //console.log(cutoff.BLClosing)
 
     const countDays = ()=>{
-    var x = new Date(cutof?.BLCLO);
+    let ddd = `${cutof?.BLCLOD} ${cutof?.BLCLOT}`
+    var x = new Date(ddd);
     var y = new Date();
     var  xceed = 0
 

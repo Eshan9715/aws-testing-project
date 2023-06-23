@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, useLocation} from 'react-router-dom'
 import {useSelector} from 'react-redux';
 import {useState,useEffect} from 'react'
 import { lazy, Suspense } from 'react';
@@ -12,6 +12,7 @@ import Sidenavbar from './components/Default/Sidenavbar';
 
 import NotFound from './pages/Common/NotFound';
 import Login from './pages/Common/Login';
+import Register from './pages/Common/Register';
 // import Register from './pages/Register';
 
 const Dashboard = lazy(() => import('./pages/Common/Dashboard'));
@@ -25,14 +26,18 @@ const ViewRates = lazy(() => import('./pages/SalesManager/ViewRates'));
 const AddRates = lazy(() => import('./pages/SalesManager/AddRates'));
 const Staff = lazy(() => import('./pages/Admin/Staff'));
 
-
-
 function App() {
   const loggedUser = useSelector(state=> state.auth.value);
+  const location = useLocation();
+  console.log(location.pathname)
+
 
    //creating IP state
    const [ip,setIP] = useState('');
-    
+   const [assign,setAssign] = useState('')
+   const [path,setpath] = useState('')
+
+
    //creating function to load ip address from the API
    const getData = async()=>{
        const res = await axios.get('https://geolocation-db.com/json/')
@@ -43,7 +48,10 @@ function App() {
    useEffect(()=>{
        //passing getData method to the lifecycle method
        getData()
-   },[])
+       setAssign(loggedUser.assignedTo)
+       setpath(location.pathname)
+
+   },[loggedUser,location])
 
    const PrivateRoutes  = ()=>{
     return(
@@ -76,7 +84,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>} />
-          {/* <Route path='/register' element={<Register />} /> */}
+          <Route path='/register' element={<Register/>} />
           <Route path='*' element={<NotFound/>} />
 
         </Routes>
@@ -88,14 +96,23 @@ function App() {
 
   return (
     <>
+    {path==='/'?
+    <>
+    <Navbar/>
+    <Home/>
+    </>:
+    <>  
     <Navbar/>
     {loggedUser.isLoggedIn && <Sidenavbar/>}
     {!(loggedUser.isLoggedIn) && <PublicRoutes/>}
-    {loggedUser.isLoggedIn && <PrivateRoutes/>}
+    { loggedUser.isLoggedIn && <PrivateRoutes/>}
     {loggedUser.isLoggedIn && <BottomNav/>}
-    {/* ngnghnghmnghmghj */}
 
     </>
+    }
+    </>
+    
+   
   );
   
 }

@@ -70,6 +70,44 @@ export const tabData = [
     },
 ]
 
+export const ctabData = [
+    {
+        id:1,
+        fact: "schedule pending",
+        topic: "Pending Schedules"
+    },
+    {
+        id:2,
+        fact: "vessel pending",
+        topic: "Vessel Pending"
+    },
+    {
+        id:3,
+        fact: "booking",
+        topic: "Booking & Release"
+    },
+    {
+        id:4,
+        fact: "pending cut-off",
+        topic: "Pending Cut-Off"
+    },
+    {
+        id:5,
+        fact: "b/l pending",
+        topic: "Cutoff | Pending B/L"
+    },
+    {
+        id:6,
+        fact: "b/l added",
+        topic: "Check | Confirm B/L"
+    },
+    {
+        id:7,
+        fact: "complete",
+        topic: "Completed Queries"
+    },
+]
+
 export const tabShiprData = [
     {
         id:1,

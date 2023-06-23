@@ -55,7 +55,7 @@ const Navbar = ({childern}) => {
     let [open,setOpen]=useState(false);
 
   return (
-    <div className={`shadow-md w-[100%] fixed ${role==='user'? 'bg-red-400': role==='salesman'?'bg-green-400':'bg-slate-100'} z-50`}>
+    <div className={`shadow-md w-[100%] fixed ${role==='user'? 'bg-red-400': role==='salesman'?'bg-green-400': role==='crd'?'bg-purple-400':'bg-slate-100'} z-50`}>
       <div className='w-full flex items-center justify-between py-1 px-2'>
         <div className='font-bold md:text-xl text-base cursor-pointer flex items-center font-Monserrat 
         text-black'>

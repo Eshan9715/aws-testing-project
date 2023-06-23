@@ -4,7 +4,7 @@ import { Badge } from '@mui/material'
 import RueryTile from '../../components/RueryTile'
 import noData from '../../assets/noData.png'
 import { useSelector } from 'react-redux'
-import { tabData } from '../../Data'
+import { ctabData, tabData } from '../../Data'
 import SliderTabs from '../../sliders/SliderTabs'
 
 var sRfinalizedFullCargo = []
@@ -32,20 +32,18 @@ const Requests = () => {
       }
       const [screenSize, setScreenSize] = useState(getCurrentDimension());
     
-      useEffect(() => {
-        const updateDimension = () => {
-            setScreenSize(getCurrentDimension())
-        }
-        window.addEventListener('resize', updateDimension);
+    useEffect(() => {
+      const updateDimension = () => {
+          setScreenSize(getCurrentDimension())
+      }
+      window.addEventListener('resize', updateDimension);
+  
+  
+      return(() => {
+          window.removeEventListener('resize', updateDimension);
+      })
+    }, [screenSize])
     
-    
-        return(() => {
-            window.removeEventListener('resize', updateDimension);
-        })
-      }, [screenSize])
-    
-    
-
     useEffect(() => {
         setRole(loggedUser.role)
         setName(loggedUser.userName)
@@ -105,12 +103,17 @@ const Requests = () => {
     }, [http, role, name, loggedUser]);
 
     const [tabmode, setTabmode] = useState('rates pending')
+    const [ctabmode, setcTabmode] = useState('schedule pending')
+
+    console.log(tabmode)
     
     cRfinalizedFullCargo = [...cfrueryData, ...clrueryData]
     sRfinalizedFullCargo = [...sfrueryData, ...slrueryData]
 
     const chooseTab = (type) => {
-        setTabmode(type);
+        role==='salesman' && setTabmode(type);
+        role==='crd' && setcTabmode(type);
+
       };
 
   return (
@@ -133,10 +136,10 @@ const Requests = () => {
 
                     {(role==='crd' || role==='lcl-crd') && <ul className="flex w-full text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                         
-                        {tabData.slice(2).map(e=>(
+                        {ctabData.map(e=>(
                         <li className="mr-2 py-1.5" role="presentation" key={e.id}>
                         <Badge color='error' badgeContent={sRfinalizedFullCargo?.filter(er=> (er.status===e.fact)).length}  >
-                            <button onClick={()=>setTabmode(e.fact)}  className={`inline-block ${tabmode===e.fact? "bg-orange-500 text-white": (sRfinalizedFullCargo?.filter(er=> er.status===e.fact).length)!==0? 'bg-white text-black shadow-lg': 'bg-gray-500 text-white'} px-3 py-3  rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{e.topic}</button>
+                            <button onClick={()=>setcTabmode(e.fact)}  className={`inline-block ${ctabmode===e.fact? "bg-orange-500 text-white": (sRfinalizedFullCargo?.filter(er=> er.status===e.fact).length)!==0? 'bg-white text-black shadow-lg': 'bg-gray-500 text-white'} px-3 py-3  rounded-lg active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">{e.topic}</button>
                         </Badge>
                         </li> 
                         ))}
@@ -147,7 +150,9 @@ const Requests = () => {
 
                 {screenSize.width < 1610 && 
                     <div className="flex w-[90%] lg:mt-[65px] mt-[45px] md:mt-[50px] justify-center fixed items-start">
-                        <SliderTabs SData={sRfinalizedFullCargo} Data={tabData} chooseTab={chooseTab} />
+                    {role==='salesman' && <SliderTabs SData={sRfinalizedFullCargo} Data={tabData} chooseTab={chooseTab} role={role} />}
+                    {role==='crd' && <SliderTabs SData={cRfinalizedFullCargo} Data={ctabData} chooseTab={chooseTab} role={role} />}
+
                     </div>                   
                 }
 
@@ -194,9 +199,9 @@ const Requests = () => {
                     </>
                     }
 
-                    {(role==='crd' || role==='lcl-crd') && cRfinalizedFullCargo?.filter(e=> e.status===tabmode).length!==0?
+                    {(role==='crd' || role==='lcl-crd') && cRfinalizedFullCargo?.filter(e=> e.status===ctabmode).length!==0?
 
-                        cRfinalizedFullCargo?.filter(e=> e.status===tabmode).sort((a,b)=> new Date(b.updatedAt) - new Date(a.updatedAt)).map((obj,index)=>(
+                        cRfinalizedFullCargo?.filter(e=> e.status===ctabmode).sort((a,b)=> new Date(b.updatedAt) - new Date(a.updatedAt)).map((obj,index)=>(
                         <RueryTile key={index}
                             OportName={obj.origin} 
                             DportName={obj.destination} 
@@ -227,7 +232,7 @@ const Requests = () => {
                             // show = {}                             
 
                         />
-                        )): (role==='crd' || role==='lcl-crd') && cRfinalizedFullCargo?.filter(e=> e.status===tabmode).length===0 &&
+                        )): (role==='crd' || role==='lcl-crd') && cRfinalizedFullCargo?.filter(e=> e.status===ctabmode).length===0 &&
                         <>
                             <div className='w-full mt-3 flex justify-center flex-col items-center h-screen border-2 rounded-md bg-gray-100 text-lg'>
                                 <img src={noData} alt='' className='w-[300px]' />

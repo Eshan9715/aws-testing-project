@@ -1,14 +1,17 @@
 import React from 'react'
 import ntf from '../../assets/not_found.gif';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const NotFound = () => {
     const navigate = useNavigate();
+    const loggedUser = useSelector(state=> state.auth.value);
+
 
   return (
     <div className={`w-full h-screen flex overflow-hidden justify-end items-center text-black bg-white`}>                  
-      <div className='w-[100%] mdd:w-[90%] flex justify-center items-center h-full flex-col p-4 gap-3'>      
+      <div className={`${loggedUser.isLoggedIn? 'w-[100%] mdd:w-[90%]':'w-[100%]'} flex justify-center items-center h-full flex-col p-4 gap-3`}>      
         <img src={ntf} alt='' className='w-[300px] h-[300px]' />
         <div className="flex flex-col items-center justify-center">
           <p className="text-2xl md:text-3xl lg:text-4xl text-gray-800 mt-6">Page Not Found</p>

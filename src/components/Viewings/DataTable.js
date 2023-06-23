@@ -5,16 +5,19 @@ import AddAssigner from '../Addings/AddAssigner';
 import Nodata from '../Default/Nodata';
 import SeeCRDData from './SeeCRDData';
 import ValuesBox from './ValuesBox';
+import ChangeRole from '../Addings/ChangeRole';
 
 const DataTable = ({data, role,tabmode,term,name}) => {
     const [addAsg, setAddAsg] = useState(false)
     const [addSal, setAddSal] = useState(false)
+    const [alterRole, setalterRole] = useState(false)
+
 
     const [addCRD, setAddCRD] = useState(false)
 
     const [seeAsg, setSeeAsg] = useState(false)
     const [alterAsg, setAlterAsg] = useState(false)
-    console.log(data)
+    //console.log(data)
 
     const [id,setId] = useState('');
     const [sman,setSman] = useState('');
@@ -27,12 +30,21 @@ const DataTable = ({data, role,tabmode,term,name}) => {
     const [cname,setCname] = useState('');
     const [crname,setCrname] = useState('');
     const [doer,setDoer] = useState('');
+    const [rolez,setrolez] = useState('');
+
 
     const addAssigner = (x,y,z)=>{
         setAddAsg(true)
         setId(x)
         setYname(y)
         setCrdList(z)
+    }
+
+    const changeRole = (x,y,z)=>{
+        setalterRole(true)
+        setId(x)
+        setYname(y)
+        setrolez(z)
     }
 
     const alterAssigner = (x,y,z)=>{
@@ -87,6 +99,7 @@ const DataTable = ({data, role,tabmode,term,name}) => {
                     {role==='ratesmanager' && <th className='py-3 w-[10%] text-center'>Action</th>}
                     {role==='salesman' && <th className='py-3 w-[15%] text-center'>Action</th>}
                     {((role==='admin') && (tabmode==='pending')) && <th className='py-3 w-[10%] text-center'>Action</th>}
+                    {((role==='admin') && ((tabmode==='Salesman')||(tabmode==='CRD') )) && <th className='py-3 w-[10%] text-center'>Action</th>}
 
                 </tr>
             </thead>
@@ -220,6 +233,16 @@ const DataTable = ({data, role,tabmode,term,name}) => {
 
                                             
                                         </div>                                    
+                                    </td>} 
+
+                                    {((role==='admin') && ((tabmode==='Salesman')||(tabmode==='CRD') )) && 
+                                    <td className='p-3 w-[10%] gap-3'>
+                                        <div className='w-full flex justify-center items-center gap-3'>                                              
+                                            {(data.filter(e=>e.role!=='user')).length!==0 &&  <svg fill="none" onClick={()=>changeRole(sdetail._id,sdetail.name,sdetail.role )} stroke="currentColor" stroke-width="1.5" className='w-7 h-7 cursor-pointer p-1.5 bg-blue-500 rounded-md text-white font-bold' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                                            </svg>}
+                                            
+                                        </div>                                    
                                     </td>}     
 
                                     {(role==='salesman') &&  
@@ -240,6 +263,7 @@ const DataTable = ({data, role,tabmode,term,name}) => {
             </tbody> 
                             
         </table>
+        <ChangeRole show={alterRole} id={id} name={yname} role={rolez}  title='Change Role' close={()=>setalterRole(false)} />
 
         <AddAssigner show={addAsg} id={id} name={yname} arr={crdList} title='Assign CRDs' role={role} track='addCRD' close={()=>setAddAsg(false)} />
         <SeeCRDData show={seeAsg} id={id} name={cname} arr={salesList} title='View CRD Data' role={role} close={()=>setSeeAsg(false)} />

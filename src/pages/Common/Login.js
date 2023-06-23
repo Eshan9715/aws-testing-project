@@ -19,6 +19,7 @@ const Login = () => {
   const[loading, setLoading] = useState(false)
   const[error, seterror] = useState('')
 
+
   const [details, setDetails] = useState([])
 
   const sendRequest = async(values) =>{
@@ -32,12 +33,6 @@ const Login = () => {
     .post(`${http}/api/auth/login`,exisitngUser)
     .then((res) => {
       console.log(res.data);
-      // localStorage.setItem("userID",(res.data.user._id || res.data.member._id))
-      // localStorage.setItem("userName",(res.data.user.name || res.data.member.name))
-      // localStorage.setItem("userImage",(res.data.user.image || res.data.member.image))
-      // localStorage.setItem("userEmail",(res.data.user.email || res.data.member.email))
-      // localStorage.setItem("role",(res.data.user.role || res.data.member.role))
-      // localStorage.setItem("assignedTo",(res.data.user.assignedTo))
       dispatch(
         login({userID:(res.data.user._id || res.data.member._id), userName:(res.data.user.name || res.data.member.name), 
           userEmail:(res.data.user.email || res.data.member.email) , role: (res.data.user.role || res.data.member.role),
@@ -46,10 +41,11 @@ const Login = () => {
 
     setDetails(res.data)
     setLoading(false)
-    navigate('/dashboard')
+    navigate('/')  
+
 
   }).catch(err=> {
-    seterror(err.response.data.message);
+    seterror(err.response.data?.message);
     setLoading(false)
   });
 

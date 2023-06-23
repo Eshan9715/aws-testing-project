@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Autocomplete, Stack, TextField } from '@mui/material';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
 
 export const ShipperDetails = ({formData, setFormData,ischeck,data}) => {
 

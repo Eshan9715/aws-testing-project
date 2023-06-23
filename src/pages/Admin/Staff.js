@@ -33,7 +33,7 @@ const Staff = () => {
           axios
           .get(`${http}/api/member`)
           .then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
             setsDetails(res.data.member)
             setcrdDetails(sdetails.filter((e)=>e.role==="crd"))
             setspDetails(sdetails.filter((e)=>e.role==="salesman"))

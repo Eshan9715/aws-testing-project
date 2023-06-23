@@ -105,7 +105,7 @@ const QueryList = () => {
                     {/* disabled={(frueryData?.filter(p=>p.receiver===name).filter(e=> e.status==="complete").length)===0} */}
 
 
-                    <div className='w-[95%] mt-[160px] max-h-[510px] overflow-y-auto overflow-x-hidden mb-2'>
+                    <div className='w-[95%] mt-[140px] max-h-[510px] overflow-y-auto overflow-x-hidden mb-2'>
                     {rlfinalizedFullCargo.length!==0?
 
                         rlfinalizedFullCargo.sort((a,b)=> new Date(b.updatedAt) - new Date(a.updatedAt)).map((obj)=>(
