@@ -55,7 +55,7 @@ const ChatBox = ({show,title,close,id,role,userID,loggedName,status,containerTyp
             axios
             .get(`${http}/api/fclquery/getRemarks/${id}`)
             .then((res) => {
-              console.log(res.data);
+              //console.log(res.data);
               setfRe(res.data.fclquery.remarks)
               setfshRe(res.data.fclquery.shremarks)
 

@@ -25,34 +25,8 @@ const ReqList = () => {
 
    
     useEffect(() => {
-        // setRole(localStorage.getItem("role"))
-        // setName(localStorage.getItem("userName"))
         setRole(loggedUser.role)
         setName(loggedUser.userName)
-
-        const getcrdRueries = ()=>{
-          axios
-          .get(`${http}/api/fclquery?crd=${name}`)
-          .then((res) => {
-            console.log(res.data);
-            setcFRueryData(res.data.fclqueries)
-          })
-          .catch(err=> {
-            console.log(err);
-          })     
-
-          axios
-          .get(`${http}/api/lclquery?crd=${name}`)
-          .then((res) => {
-            console.log(res.data);
-            setcLRueryData(res.data.lclqueries)
-          })
-          .catch(err=> {
-            console.log(err);
-          })     
-
-        }
-        (role==='crd' || 'lcl-crd') && getcrdRueries();
 
         const getsalesRueries = ()=>{
            axios
@@ -79,11 +53,37 @@ const ReqList = () => {
 
     }, [http, role, name, loggedUser]);
 
+    useEffect(() => {
+      const getcrdRueries = ()=>{
+        axios
+        .get(`${http}/api/fclquery?crd=${name}`)
+        .then((res) => {
+          //console.log(res.data);
+          setcFRueryData(res.data.fclqueries)
+        })
+        .catch(err=> {
+          console.log(err);
+        })     
+
+        axios
+        .get(`${http}/api/lclquery?crd=${name}`)
+        .then((res) => {
+          //console.log(res.data);
+          setcLRueryData(res.data.lclqueries)
+        })
+        .catch(err=> {
+          console.log(err);
+        })     
+
+      }
+      (role==='crd' || 'lcl-crd') && getcrdRueries();
+    }, [http, role, name, loggedUser]);
+
     cRfinalizedFullCargo = [...cfrueryData, ...clrueryData]
     sRfinalizedFullCargo = [...sfrueryData, ...slrueryData]
 
-    console.log(sRfinalizedFullCargo)
-    console.log(cRfinalizedFullCargo)
+    //console.log(sRfinalizedFullCargo)
+    //console.log(cRfinalizedFullCargo)
 
   return (
     

@@ -6,7 +6,7 @@ const AlertCutoff = ({cutof,show,close,id,title}) => {
         return null
     }
 
-    console.log(cutof)
+    //console.log(cutof)
 
    
   return (
@@ -19,7 +19,6 @@ const AlertCutoff = ({cutof,show,close,id,title}) => {
                 </svg>
             </div>
             <div className='w-full flex flex-col justify-center items-center mb-3 overflow-y-auto max-h-[400px]'>
-            {/* {arrCutOff.includes(status) && <ValuesBox item='cutoff' c1={cutof?.BLCLO} c2={cutof?.FCLCLO} c3={cutof?.VGMCLO} c4={cutof?.ETDCOL}/>} */}
 
                 <LineRow topic='ETA COLOMBO' dateC={cutof?.ETACOLD} timeC={cutof?.ETACOLT}/>
                 <LineRow topic='FCL OPENING' dateC={cutof?.FCLOPND} timeC={cutof?.FCLOPNT}/>
@@ -28,9 +27,7 @@ const AlertCutoff = ({cutof,show,close,id,title}) => {
                 <LineRow topic='VGM CLOSING' dateC={cutof?.VGMCLOD} timeC={cutof?.VGMCLOT}/>
                 <LineRow topic='REEFER OPENING' dateC={cutof?.VGMCLOD} timeC={cutof?.BLCLOT}/>
 
-                {/* <LineRow topic='BERTHING' dateC={cutof?.VGMCLO} timeC={cutof?.BLCLO}/>
-                <LineRow topic='VESSEL OPERATOR' dateC={cutof?.ETDCOL} timeC={cutof?.BLCLO}/>
-                <LineRow topic='CONTAINER OPERATOR' dateC={cutof?.ETDCOL} timeC={cutof?.BLCLO}/> */}
+             
                 <TextLine term='BERTHING' pla={cutof?.TERMIN}/>
                 <TextLine term='VESSEL OPERATOR' pla={cutof?.VESOP}/>
                 <TextLine term='CONTAINER OPERATOR' pla={cutof?.CONOP}/>
@@ -39,9 +36,6 @@ const AlertCutoff = ({cutof,show,close,id,title}) => {
                 <p className='w-full text-[11px] text-red-600 flex justify-center'>*Optional</p>
 
                 <LineRow topic='CNTR PICK UP CUT OFF' dateC={cutof?.CPUCD} timeC={cutof?.CPUCT}/>
-
-
-
 
             </div>
             </div>

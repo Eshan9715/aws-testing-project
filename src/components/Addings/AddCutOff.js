@@ -3,12 +3,10 @@ import axios from 'axios'
 import { BasicDateTimePicker, EditBasicDateTimePicker, EditTextInput } from '../TextUI/BasicDateTimePicker'
 import { useNavigate } from 'react-router-dom';
 import { TextInput } from '../TextUI/TextInput';
-import { object } from 'yup';
-import { ConstructionOutlined } from '@mui/icons-material';
 
 const AddCutOff = ({show,close,title,id,data}) => {
   var http = process.env.REACT_APP_BASE_URL;
-  console.log(data)
+  //console.log(data)
   
     const navigate = useNavigate();
     const [etaCol, setetaCol] = useState(null)
@@ -61,7 +59,7 @@ const AddCutOff = ({show,close,title,id,data}) => {
     const [Data, setData] = useState({});
     let ctf = []
     ctf.push(data)
-    console.log(ctf)
+   // console.log(ctf)
 
     useEffect(() => {
       setData(data)
@@ -69,17 +67,17 @@ const AddCutOff = ({show,close,title,id,data}) => {
         axios
         .get(`${http}/api/line`)
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           setlDetails(res.data.lines)
         })
         .catch(err=> {
-          console.log(err);
+          //console.log(err);
         })     
       }
       getLines();
     }, [data, http,cutof]);
 
-    console.log(Data?.ETACOL)
+   // console.log(Data?.ETACOL)
     //console.log(Data?.ETACOL.split(" ")[0])
 
     const sendRequest = async() =>{
@@ -133,11 +131,11 @@ const AddCutOff = ({show,close,title,id,data}) => {
         id: id,
         status: 'b/l pending'
     }     
-    console.log(CUTOFF)   
+    //console.log(CUTOFF)   
     axios
     .put(`${http}/api/fclquery/addCutOff/${id}`,addCUTOFF)
     .then((res) => {
-      console.log(Data);
+      //console.log(Data);
 
     //setlDetails(res.data.lines)
     navigate('/dashboard')
