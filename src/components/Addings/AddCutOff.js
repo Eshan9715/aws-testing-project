@@ -185,7 +185,7 @@ const AddCutOff = ({show,close,title,id,data}) => {
                 <div className='h-0.5 bg-gray-300 w-full my-4 px-4'></div>
 
                 <div className='w-full flex-col justify-center items-center mt-4 space-y-4'>
-                  <TextInput  label='Terminal Name' placeholder='Add terminal name' setValue={settermin}/>
+                  <TextInput label='Terminal Name' placeholder='Add terminal name' setValue={settermin}/>
                   <TextInput label='Vessel Operator' placeholder='Add Vessel Operator' setValue={setvopr}/>
                   <TextInput label='Container Operator' placeholder='Add Container Operator' setValue={setconopr}/>
 

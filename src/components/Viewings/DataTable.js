@@ -80,7 +80,7 @@ const DataTable = ({data, role,tabmode,term,name}) => {
 
   return (
     <div className='w-[95%]'>
-        <table className="text-center w-full mt-2 border-2">
+        <table className="text-center w-full border-2">
             <thead className="bg-slate-200 flex text-black w-full">
                 <tr className='text-center flex w-full mb-1 border-2'>
                        
@@ -92,12 +92,12 @@ const DataTable = ({data, role,tabmode,term,name}) => {
                     {term==="clients" && <th className='py-3 w-[10%] text-center'>Live Queries</th>}
                     {term!=="clients" && <th className='py-3 w-[15%] text-center justify-center flex'>Bookings </th>}
                     {tabmode==='Salesman' && <th className='py-3 w-[15%] text-center justify-center flex'>Assigned CRDs </th>} {tabmode==='CRD' && <th className='py-3 w-[15%] text-center justify-center flex'>Assigned Salesmans </th>}
-                    {((term==='clients') && (role!=='salesman')) && <th className='py-3 w-[15%] text-center'>Assinged</th>}
+                    {((term==='clients') && (role!=='salesman')) && <th className={`p-3 ${tabmode==='pending'? 'w-[15%]': 'w-[25%]'}`}>Assinged</th>}
                     {((term==='clients') && (role==='salesman')) && <th className='py-3 w-[15%] text-center'>AssingedCRD</th>}
 
 
                     {role==='ratesmanager' && <th className='py-3 w-[10%] text-center'>Action</th>}
-                    {role==='salesman' && <th className='py-3 w-[15%] text-center'>Action</th>}
+                    {role==='salesman' && <th className='py-3 w-[10%] text-center'>Action</th>}
                     {((role==='admin') && (tabmode==='pending')) && <th className='py-3 w-[10%] text-center'>Action</th>}
                     {((role==='admin') && ((tabmode==='Salesman')||(tabmode==='CRD') )) && <th className='py-3 w-[10%] text-center'>Action</th>}
 
@@ -190,9 +190,9 @@ const DataTable = ({data, role,tabmode,term,name}) => {
                                     {term!=="clients" && <td className='p-3 w-[15%]'>0</td>}
                                     {term!=="clients" && <td className='p-3 w-[15%]'>0</td>}
                                     {term==="clients" && 
-                                    <td className='p-3 w-[15%]'>
+                                    <td className={`p-3 ${tabmode==='pending'? 'w-[15%]': 'w-[25%]'}`}>
                                         <div className='flex flex-col gap-1'>
-                                            <p className='ml-2'>Sal: <span className='font-bold'>{sdetail.assignedTo}</span></p>
+                                            <p className='ml-2 text-[13.5px]'>Sal: <span className='font-bold'>{sdetail.assignedTo}</span></p>
                                             <p className='ml-2 text-[13.5px]'>CRD: <span className='font-bold'>{sdetail.assignedCRD}</span></p>
                                         </div>                                        
                                     </td>}
@@ -227,7 +227,7 @@ const DataTable = ({data, role,tabmode,term,name}) => {
                                     {((role==='admin') && (tabmode==='pending')) && 
                                     <td className='p-3 w-[10%] gap-3'>
                                         <div className='w-full flex justify-center items-center gap-3'>                                              
-                                            {(data.filter(e=>e.role==='user')).length!==0 &&  <svg fill="none" onClick={()=>addAssigner(sdetail._id,sdetail.name, sdetail.assigned)} stroke="currentColor" stroke-width="1.5" className='w-7 h-7 cursor-pointer p-1.5 bg-blue-500 rounded-md text-white font-bold' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            {(data.filter(e=>e.role==='user')).length!==0 &&  <svg fill="none" onClick={()=>addSalesman(sdetail._id,sdetail.name, sdetail.assignedTo)} stroke="currentColor" stroke-width="1.5" className='w-7 h-7 cursor-pointer p-1.5 bg-blue-500 rounded-md text-white font-bold' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
                                             </svg>}
 
@@ -265,7 +265,7 @@ const DataTable = ({data, role,tabmode,term,name}) => {
         </table>
         <ChangeRole show={alterRole} id={id} name={yname} role={rolez}  title='Change Role' close={()=>setalterRole(false)} />
 
-        <AddAssigner show={addAsg} id={id} name={yname} arr={crdList} title='Assign CRDs' role={role} track='addCRD' close={()=>setAddAsg(false)} />
+        <AddAssigner show={addAsg} id={id} name={yname} arrz={crdList} title='Assign CRDs' role={role} track='addCRD' close={()=>setAddAsg(false)} />
         <SeeCRDData show={seeAsg} id={id} name={cname} arr={salesList} title='View CRD Data' role={role} close={()=>setSeeAsg(false)} />
         <AddAssigner show={alterAsg} id={id} name={yname} sal={sman} title='Alter Salesman' role={role} track='alterSal' close={()=>setAlterAsg(false)} />
         <AddAssigner show={addCRD} id={id} doer={doer} name={crname} sal={crman} title='Add or edit CRD' role={role} track='addOrEditCRD' close={()=>setAddCRD(false)} />

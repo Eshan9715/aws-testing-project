@@ -9,10 +9,10 @@ const AdminDataTable = ({data, role, xFact}) => {
     const [yname,setYname] = useState('');
 
   return (
-    <div className='w-full'>
-        <table className="text-center w-full mt-2">
-            <thead className="bg-gray-600 flex text-white w-full">
-                <tr className='text-center flex w-full mb-4'>
+    <div className='w-[95%]'>
+        <table className="text-center w-full border-2">
+            <thead className="bg-slate-200 flex text-black w-full">
+                <tr className='text-center flex w-full mb-2'>
                        
                         <th className='py-3 w-[30%]  text-center'>Profile</th>
 

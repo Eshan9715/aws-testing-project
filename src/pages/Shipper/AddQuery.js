@@ -348,7 +348,7 @@ const AddQuery = () => {
         sendLCLRequest();
         lcl.pop();
       }
-      navigate("/dashboard")
+      navigate("/BQuering")
     }else{
 
     }

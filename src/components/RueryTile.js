@@ -98,7 +98,11 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
     const [fshre, setfshRe] = useState([])
 
     const [frates, setfrates] = useState([])
+    const [lrates, setlrates] = useState([])
+
     const [fschedules, setfschedules] = useState([])
+    const [lschedules, setlschedules] = useState([])
+
 
     const [lnum, setlNum] = useState(0)
     const [fnum, setfNum] = useState(0)
@@ -108,11 +112,13 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
 
     const [progresspercent, setProgresspercent] = useState(0);
 
+    //***********************************************************FILE UPLOADING SESSION***********************************************************
+    //********************************************************************************************************************************************
     const handleChange = (event) => {
         setFile(event.target.files[0]);
-      }
+    }
   
-      const handleUpload = async() => {
+    const handleUpload = async() => {
         if (!file) {
           alert("Please upload an file first!");
         }
@@ -140,7 +146,7 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
               setDoneUpload(true)
               setUploading(false)
               sendRelease();
-              navigate('/dashboard')
+              navigate('/BQuering')
 
             }
           });
@@ -165,18 +171,18 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
     }
 
     useEffect(() => {
-        //   const getRateReply = ()=>{
-        //     axios
-        //     .get(`${http}/api/lclquery/getRateReply/${id}`)
-        //     .then((res) => {
-        //       //console.log(res.data);
-        //       setrateReply(res.data.lclquery.rateReply)
-        //     })
-        //     .catch(err=> {
-        //       console.log(err);
-        //     })     
-        //   }
-        //   getRateReply();    
+          const getRateReply = ()=>{
+            axios
+            .get(`${http}/api/lclquery/getRateReply/${id}`)
+            .then((res) => {
+              //console.log(res.data);
+              //setrateReply(res.data.lclquery.rateReply)
+            })
+            .catch(err=> {
+              console.log(err);
+            })     
+          }
+          getRateReply();    
         
           const getFRates = ()=>{
             setLoading(true)
@@ -192,6 +198,21 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
             })     
           }
           getFRates();
+
+          const getLRates = ()=>{
+            setLoading(true)
+            axios
+            .get(`${http}/api/lclquery/rates/${id}`)
+            .then((res) => {
+              console.log(res.data);
+              setlrates(res.data.lclquery.rates)
+              setLoading(false)
+            })
+            .catch(err=> {
+              console.log(err);
+            })     
+          }
+          getLRates();
 
     }, [http,id]);
 
@@ -212,23 +233,22 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
         }
         getFSchedules();
 
+        const getLSchedules = ()=>{
+            setLSoading(true)
+            axios
+            .get(`${http}/api/lclquery/schedules/${id}`)
+            .then((res) => {
+              //console.log(res.data);
+              setlschedules(res.data.lclquery?.schedules)
+              setLSoading(false)
+            })
+            .catch(err=> {
+              console.log(err);
+            })     
+          }
+          getLSchedules();
+
   }, [http,id]);
-
-    // useEffect(() => {
-    //     const getCutoff = ()=>{
-    //         axios
-    //         .get(`${http}/api/fclquery/getCutOffData/${id}`)
-    //         .then((res) => {
-    //           console.log(res.data);
-    //           setcutof(res.data.fclquery.cutoff)
-    //         })
-    //         .catch(err=> {
-    //           console.log(err);
-    //         })     
-    //       }
-    //       getCutoff();
-
-    // }, [http,id]);
 
     useEffect(() => {
     const getBL = ()=>{
@@ -246,18 +266,18 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
     }, [http,id]);
 
     useEffect(() => {
-        // const getLMemberLastSeen = ()=>{
-        //     axios
-        //     .get(`${http}/api/lclquery/getMemberLastSeen/${id}`)
-        //     .then((res) => {
-        //       //console.log(res.data);
-        //       setLlastSeen(res.data.lclquery.lastMemberSeenBtn)
-        //     })
-        //     .catch(err=> {
-        //       console.log(err);
-        //     })     
-        //   }
-        //   getLMemberLastSeen();    
+        const getLMemberLastSeen = ()=>{
+            axios
+            .get(`${http}/api/lclquery/getMemberLastSeen/${id}`)
+            .then((res) => {
+              //console.log(res.data);
+              setLlastSeen(res.data.lclquery.lastMemberSeenBtn)
+            })
+            .catch(err=> {
+              console.log(err);
+            })     
+          }
+          getLMemberLastSeen();    
 
           const getFMemberLastSeen = ()=>{
             axios
@@ -273,11 +293,11 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
           }
           getFMemberLastSeen();    
 
-        //   const getLNumAlerts = ()=>{
-        //     setlNum(lshre.filter(e=> (((new Date(e.dDate)).getTime() - (new Date(LlastSeen)).getTime())/(1000))>0).length)
-        //   }
+          const getLNumAlerts = ()=>{
+            setlNum(lshre.filter(e=> (((new Date(e.dDate)).getTime() - (new Date(LlastSeen)).getTime())/(1000))>0).length)
+          }
 
-        //   getLNumAlerts()
+          getLNumAlerts()
 
           const getFNumAlerts = ()=>{
             setfNum(fshre.filter(e=> (((new Date(e.dDate)).getTime() - (new Date(FlastSeen)).getTime())/(1000))>0).length)
@@ -288,20 +308,20 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
     }, [lshre,LlastSeen,FlastSeen,http,id,fshre]);
 
     useEffect(() => {
-        // const getLRemarks = ()=>{
-        //     axios
-        //     .get(`${http}/api/lclquery/getRemarks/${id}`)
-        //     .then((res) => {
-        //       //console.log(res.data);
-        //       setlRe(res.data.lclquery.remarks)
-        //       setlshRe(res.data.lclquery.shremarks)
+        const getLRemarks = ()=>{
+            axios
+            .get(`${http}/api/lclquery/getRemarks/${id}`)
+            .then((res) => {
+              //console.log(res.data);
+              //setlRe(res.data.lclquery.remarks)
+              setlshRe(res.data.lclquery.shremarks)
 
-        //     })
-        //     .catch(err=> {
-        //       console.log(err);
-        //     })     
-        //   }
-        //   getLRemarks();
+            })
+            .catch(err=> {
+              console.log(err);
+            })     
+          }
+          getLRemarks();
 
           const getFRemarks = ()=>{
             axios
@@ -320,17 +340,19 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
 
     }, [http,id]);
 
-    var CUTOFF = {
-        ETDCOL:'',
-        FCLCLO:'',
-        BLCLO:'',
-        VGMCLO:'',
-    }
+    // var CUTOFF = {
+    //     ETDCOL:'',
+    //     FCLCLO:'',
+    //     BLCLO:'',
+    //     VGMCLO:'',
+    // }
 
     var arrCutOff = ['b/l pending', 'b/l added']
     var arrVessel = ["rates pending", "rates confirmation", "schedule pending", "vessel pending"]
 
     //var lastFinal = cFinal;
+
+    //***********************************************************DIALOG BOX RESPONSES***********************************************************
 
     const handleClose = () => {
         setOpen(false);
@@ -338,7 +360,28 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
     const handleClosel = () => {
         setOpenl(false);
     };
-  
+
+    const openLog = (key, finalIS) =>{
+        setShowDial(true);
+        setkeyID(key)
+        setCFinal(finalIS)
+        console.log(key)
+        console.log('cFinal1 =>'+ cFinal)
+        //console.log('lastFinal1 =>' +  lastFinal)
+
+    }
+
+    const openLogSch = (key,finalIS) =>{
+        setOpenSch(true);
+        setkeyID2(key)
+        setCFinal2(finalIS)
+        console.log(key)
+        console.log('cSchFinal1 =>'+ cFinal2)
+        //console.log('lastschFinal1 =>' +  lastFinal)
+    }
+
+    //***********************************************************CHATING SESSION***********************************************************
+
     const lastUpdateBtn = () => {
         setShowChat(true)
         const saveLastSeen= { 
@@ -363,53 +406,7 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
           });
     }
 
-    const sendLSRequest = async() =>{
-       newVal.rate = nRate
-       newVal.validDate = nDate
-       newVal.isFinal = checked
-
-        const addNewRate = { 
-        rates: newVal,
-        }        
-        axios
-        .put(`${http}/api/lclquery/addNewRate/${id}`,addNewRate)
-        .then((res) => {
-          //console.log(res.data);
-        });
-        //sendLSStatus();
-    }
-
-    const sendLSStatus = async() =>{
-        const alterStatus = { 
-        status:'rates confirmation',
-        }        
-        axios
-        .put(`${http}/api/lclquery/alterStatus/${id}`,alterStatus)
-        .then((res) => {
-          //console.log(res.data);
-        });
-        setOpen(false);
-        navigate('/lclboard')
-    }
-
-    const openLog = (key, finalIS) =>{
-        setShowDial(true);
-        setkeyID(key)
-        setCFinal(finalIS)
-        console.log(key)
-        console.log('cFinal1 =>'+ cFinal)
-        //console.log('lastFinal1 =>' +  lastFinal)
-
-    }
-
-    const openLogSch = (key,finalIS) =>{
-        setOpenSch(true);
-        setkeyID2(key)
-        setCFinal2(finalIS)
-        console.log(key)
-        console.log('cSchFinal1 =>'+ cFinal2)
-        //console.log('lastschFinal1 =>' +  lastFinal)
-    }
+    //***********************************************************RATES/SCHEDULES CONFIRMING SESSION***********************************************************
 
     const settleFinalRates = async() =>{
         //lastFinal = !lastFinal;
@@ -464,10 +461,9 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
         });
         setLoading(false) 
         setOpen(false);
-        //navigate('/req')
+        navigate('/BQuering')
         //setre.isFinal===true(!re.isFinal===true)
-        window.location.reload(false)
-    }
+        }
 
     const settleFinalSchedules = async() =>{
         const alterSFinal = { 
@@ -497,11 +493,42 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
         // setfschedules([...arr, updatedObjj])
         // console.log(fschedules)
    
-        //navigate('/req')
+        navigate('/BQuering')
         //setre.isFinal===trueSch(!re.isFinal===trueSch)
         //window.location.reload(false)
     }
-    //console.log(fnum)
+
+    const sendLSRequest = async() =>{
+       newVal.rate = nRate
+       newVal.validDate = nDate
+       newVal.isFinal = checked
+
+        const addNewRate = { 
+        rates: newVal,
+        }        
+        axios
+        .put(`${http}/api/lclquery/addNewRate/${id}`,addNewRate)
+        .then((res) => {
+          //console.log(res.data);
+        });
+        //sendLSStatus();
+    }
+
+    const sendLSStatus = async() =>{
+        const alterStatus = { 
+        status:'rates confirmation',
+        }        
+        axios
+        .put(`${http}/api/lclquery/alterStatus/${id}`,alterStatus)
+        .then((res) => {
+          //console.log(res.data);
+        });
+        setOpen(false);
+        navigate('/lclboard')
+    }
+
+    //*********************************************************************************************************************************************
+    //*********************************************************************************************************************************************
 
   return (
         <div className='w-full flex flex-col p-0.5 bg-slate-50 border-2 hover:shodow-lg rounded-md mt-3 mb-2'>
@@ -788,7 +815,7 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
 
                                     <div className='w-full flex justify-start items-center gap-x-10 gap-y-2'>
 
-                                    {frates.filter(r=>r.isFinal===false).length>0 && frates.filter(r=>r.isFinal===false).map((re,index)=>(
+                                    {lrates.filter(r=>r.isFinal===false).length>0 && lrates.filter(r=>r.isFinal===false).map((re,index)=>(
 
                                     <div className='w-3/4 flex justify-between items-center gap-x-12 gap-y-2' key={index}>
                                         <div className='flex justify-start items-center gap-2'>
@@ -799,10 +826,10 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
                                         <div className='flex justify-start items-center'>
                                             <p className='text-black'>$ {re.rate}</p>
                                         </div>
-                                        {/* <div className='flex justify-start items-center'>
+                                        <div className='flex justify-start items-center'>
                                             <p>valid till :</p>
                                             <p className='text-black'>{re.validDate}</p>
-                                        </div>   */}
+                                        </div>  
                                         {role==='salesman' && <div className='flex justify-start items-center'>                        
                                            <svg fill="none" stroke="currentColor" onClick={()=>openLog(re._id, re.isFinal)} stroke-width="1.5" className={`w-7 h-7 ${loading && 'animate-spin'} text-red-500 border-2 border-red-500 rounded-full p-0.5 cursor-pointer`} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384"></path>
@@ -815,9 +842,9 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
                                     </div>                                
                                 </div>
                                     
-                                    {frates.filter(r=>r.isFinal===true).length>0 && <p className='text-green-600 font-semibold text-[12.5px] py-1'>Finalized rate/s:</p>}
+                                    {lrates.filter(r=>r.isFinal===true).length>0 && <p className='text-green-600 font-semibold text-[12.5px] py-1'>Finalized rate/s:</p>}
 
-                                    {frates.filter(r=>r.isFinal===true).length>0 && frates.filter(r=>r.isFinal===true).map((re,index)=>(
+                                    {lrates.filter(r=>r.isFinal===true).length>0 && lrates.filter(r=>r.isFinal===true).map((re,index)=>(
                                     
                                     <div className='w-3/4 flex justify-between items-center gap-x-12 gap-y-2 mt-0.5 border-green-600 rounded-md border-2 p-1' key={index}>
                                         <div className='flex justify-start items-center gap-2'>
@@ -929,7 +956,7 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
                                 aria-describedby="alert-dialog-description"
                             >
                                 <DialogTitle id="alert-dialog-title">
-                                {"Settle the final frates!"}
+                                {"Settle the final lrates!"}
                                 </DialogTitle>
                                 <DialogContent>
                                 <DialogContentText id="alert-dialog-description">
@@ -1045,7 +1072,7 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
 
                                             <div className='w-full flex justify-start items-center gap-x-10 gap-y-2'>
 
-                                            {fschedules.filter(r=>r.isFinal===false).length>0 && fschedules.filter(r=>r.isFinal===false).map((re,index)=>(
+                                            {lschedules.filter(r=>r.isFinal===false).length>0 && lschedules.filter(r=>r.isFinal===false).map((re,index)=>(
 
                                             <>
                                             <div className='flex justify-start items-center gap-2'>
@@ -1075,9 +1102,9 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
                                             </div>                               
                                         </div>
                                             
-                                            {fschedules.filter(r=>r.isFinal===true).length>0 && <p className='text-green-600 font-semibold text-[12.5px] py-1'>Finalized schedule/s:</p>}
+                                            {lschedules.filter(r=>r.isFinal===true).length>0 && <p className='text-green-600 font-semibold text-[12.5px] py-1'>Finalized schedule/s:</p>}
 
-                                            {fschedules.filter(r=>r.isFinal===true).length>0 && fschedules.filter(r=>r.isFinal===true).map((re,index)=>(
+                                            {lschedules.filter(r=>r.isFinal===true).length>0 && lschedules.filter(r=>r.isFinal===true).map((re,index)=>(
                                             
                                             <>
                                             <div className='flex justify-start items-center gap-2 border-green-600 rounded-md border-2 p-1'>

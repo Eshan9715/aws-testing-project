@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AlertCutoff = ({cutof,show,close,id,title}) => {
+const AlertCutoff = ({cutof,show,close,id,title,containerMode}) => {
 
     if(!show){
         return null
@@ -18,6 +18,7 @@ const AlertCutoff = ({cutof,show,close,id,title}) => {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </div>
+            {containerMode==='FCL' && 
             <div className='w-full flex flex-col justify-center items-center mb-3 overflow-y-auto max-h-[400px]'>
 
                 <LineRow topic='ETA COLOMBO' dateC={cutof?.ETACOLD} timeC={cutof?.ETACOLT}/>
@@ -37,7 +38,29 @@ const AlertCutoff = ({cutof,show,close,id,title}) => {
 
                 <LineRow topic='CNTR PICK UP CUT OFF' dateC={cutof?.CPUCD} timeC={cutof?.CPUCT}/>
 
-            </div>
+            </div>}
+
+            {containerMode==='LCL' && 
+            <div className='w-full flex flex-col justify-center items-center mb-3 overflow-y-auto max-h-[400px]'>
+
+                <LineRow topic='ETA COLOMBO' dateC={cutof?.ETACOLD} timeC={cutof?.ETACOLT}/>
+                <LineRow topic='FCL OPENING' dateC={cutof?.FCLOPND} timeC={cutof?.FCLOPNT}/>
+                <LineRow topic='FCL CLOSING' dateC={cutof?.FCLCLOD} timeC={cutof?.FCLCLOT}/>
+                <LineRow topic='BL CUT OFF' dateC={cutof?.BLCLOD} timeC={cutof?.BLCLOT}/>
+                <LineRow topic='VGM CLOSING' dateC={cutof?.VGMCLOD} timeC={cutof?.VGMCLOT}/>
+                <LineRow topic='REEFER OPENING' dateC={cutof?.VGMCLOD} timeC={cutof?.BLCLOT}/>
+
+             
+                <TextLine term='BERTHING' pla={cutof?.TERMIN}/>
+                <TextLine term='VESSEL OPERATOR' pla={cutof?.VESOP}/>
+                <TextLine term='CONTAINER OPERATOR' pla={cutof?.CONOP}/>
+
+                <div className='h-0.5 bg-gray-300 w-full my-4 px-4'></div>
+                <p className='w-full text-[11px] text-red-600 flex justify-center'>*Optional</p>
+
+                <LineRow topic='CNTR PICK UP CUT OFF' dateC={cutof?.CPUCD} timeC={cutof?.CPUCT}/>
+
+            </div>}
             </div>
     </div>
     

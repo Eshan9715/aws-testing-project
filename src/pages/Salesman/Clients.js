@@ -19,6 +19,8 @@ const Clients = () => {
     const [pencdetails, setpencDetails] = useState([])
     const [pubcdetails, setpubcDetails] = useState([])
     const [oldcdetails, setoldcDetails] = useState([])
+    const [alldetails, setallDetails] = useState([])
+    const [rattadetails, setrattaDetails] = useState([])
 
     var http = process.env.REACT_APP_BASE_URL;
 
@@ -32,7 +34,7 @@ const Clients = () => {
         setRole(loggedUser.role)
         setName(loggedUser.userName)
 
-        const getClients = ()=>{
+        const getSalesClients = ()=>{
           axios
           .get(`${http}/api/user?assignedTo=${name}`)
           .then((res) => {
@@ -41,7 +43,12 @@ const Clients = () => {
           })
           .catch(err=> {
             console.log(err);
-          })     
+          })  
+        }
+
+        role==='salesman' && getSalesClients();
+        
+        const getCRDClients = ()=>{
 
           axios
           .get(`${http}/api/user?assignedCRD=${name}`)
@@ -51,42 +58,48 @@ const Clients = () => {
           })
           .catch(err=> {
             console.log(err);
-          })     
+          })   
+        }  
 
-          axios
-          .get(`${http}/api/user?assignedTo=pending`)
-          .then((res) => {
-            console.log(res.data);
-            setpencDetails(res.data.users)
-          })
-          .catch(err=> {
-            console.log(err);
-          })     
+        role==='crd' &&  getCRDClients();
+        //   axios
+        //   .get(`${http}/api/user?assignedTo=pending`)
+        //   .then((res) => {
+        //     console.log(res.data);
+        //     setpencDetails(res.data.users)
+        //   })
+        //   .catch(err=> {
+        //     console.log(err);
+        //   })     
 
-          axios
-          .get(`${http}/api/user?assignedTo=Public`)
-          .then((res) => {
-            console.log(res.data);
-            setpubcDetails(res.data.users)
-          })
-          .catch(err=> {
-            console.log(err);
-          })    
-          
+        //   axios
+        //   .get(`${http}/api/user?assignedTo=Public`)
+        //   .then((res) => {
+        //     console.log(res.data);
+        //     setpubcDetails(res.data.users)
+        //   })
+        //   .catch(err=> {
+        //     console.log(err);
+        //   })    
+        const getSUMClients = ()=>{
           axios
           .get(`${http}/api/user`)
           .then((res) => {
             console.log(res.data);
             setoldcDetails(res.data.users)
+            setallDetails(oldcdetails.filter(e=> (e.assignedTo!=="pending")))
+            setpubcDetails(oldcdetails.filter(e=> (e.assignedTo==="Public")))
+            setpencDetails(oldcdetails.filter(e=> (e.assignedTo==="pending")))
+            setrattaDetails(oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")))
           })
           .catch(err=> {
             console.log(err);
           })     
 
         }
-        getClients();
+        ((role==='admin') || (role==='ratesmanager')) && getSUMClients();
         
-    }, [http, name,loggedUser]);
+    }, [http,name,loggedUser,oldcdetails,role]);
 
     // console.log(salescdetails)
     // console.log(crdcdetails)
@@ -125,21 +138,37 @@ const Clients = () => {
             }else{
                 return <DataTable role={role} tabmode={tabmode} term='clients'  data={pubcdetails} />;
             }
-       }else if(tabmode==='all' && ((role==='ratesmanager') || (role==='admin'))){
+       }else if(tabmode==='all' && ((role==='ratesmanager'))){
             if(catomode==='Name') {
-                return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")).filter((cdetail)=> search.toLowerCase()===''? cdetail :cdetail.name.toLowerCase().includes(search.toLowerCase()))} />;
+                return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={rattadetails.filter((cdetail)=> search.toLowerCase()===''? cdetail :cdetail.name.toLowerCase().includes(search.toLowerCase()))} />;
             }else if(catomode==='CompanyName'){
-                return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")).filter((cdetail)=> search.toLowerCase()===''? cdetail :cdetail.companyName.toLowerCase().includes(search.toLowerCase()))} />;
+                return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={rattadetails.filter((cdetail)=> search.toLowerCase()===''? cdetail :cdetail.companyName.toLowerCase().includes(search.toLowerCase()))} />;
             }else if(catomode==='Assigned'){
-                return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")).filter((cdetail)=> search.toLowerCase()===''? cdetail :cdetail.assignedTo.toLowerCase().includes(search.toLowerCase()))} />;
+                return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={rattadetails.filter((cdetail)=> search.toLowerCase()===''? cdetail :cdetail.assignedTo.toLowerCase().includes(search.toLowerCase()))} />;
             // }else if(satomode==="Assigned"){
-            //     return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")).filter((crddetail)=> crddetail.name).sort().reverse()} />; 
+            //     return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={rattadetails.filter((crddetail)=> crddetail.name).sort().reverse()} />; 
             // }else if(satomode==="Max: Bookings"){
-            //     return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")).filter((crddetail)=> crddetail.bookings.length!==0? crddetail.bookings.length.sort().reverse(): crddetail)} />;
+            //     return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={rattadetails.filter((crddetail)=> crddetail.bookings.length!==0? crddetail.bookings.length.sort().reverse(): crddetail)} />;
             // }else if(satomode==="Max: Clients"){
-            //     return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")).filter((crddetail)=> crddetail.clients.length!==0? crddetail.clients.length.sort().reverse(): crddetail)} />;
+            //     return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={rattadetails.filter((crddetail)=> crddetail.clients.length!==0? crddetail.clients.length.sort().reverse(): crddetail)} />;
             }else{
-                 return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public"))} />;
+                 return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={rattadetails} />;
+            }
+        }else if(tabmode==='all' && (role==='admin')){
+            if(catomode==='Name') {
+                return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={alldetails.filter((cdetail)=> search.toLowerCase()===''? cdetail :cdetail.name.toLowerCase().includes(search.toLowerCase()))} />;
+            }else if(catomode==='CompanyName'){
+                return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={alldetails.filter((cdetail)=> search.toLowerCase()===''? cdetail :cdetail.companyName.toLowerCase().includes(search.toLowerCase()))} />;
+            }else if(catomode==='Assigned'){
+                return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={alldetails.filter((cdetail)=> search.toLowerCase()===''? cdetail :cdetail.assignedTo.toLowerCase().includes(search.toLowerCase()))} />;
+            // }else if(satomode==="Assigned"){
+            //     return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={alldetails.filter((crddetail)=> crddetail.name).sort().reverse()} />; 
+            // }else if(satomode==="Max: Bookings"){
+            //     return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={alldetails.filter((crddetail)=> crddetail.bookings.length!==0? crddetail.bookings.length.sort().reverse(): crddetail)} />;
+            // }else if(satomode==="Max: Clients"){
+            //     return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={alldetails.filter((crddetail)=> crddetail.clients.length!==0? crddetail.clients.length.sort().reverse(): crddetail)} />;
+            }else{
+                 return <DataTable role={role} tabmode={tabmode} name={name} term='clients'  data={alldetails} />;
             }
         }
 
@@ -176,13 +205,14 @@ const Clients = () => {
             <div className='w-[95%]'>
                 <div className='w-full flex justify-between items-center'>
                     <div className="flex min-w-[320px]">
-                    {((role==='salesman') || (role==='crd')) && <h2 className='text-black font-bold text-3xl ml-1'>Clients</h2>}
-                    {/* Tabs */}
+                        {((role==='salesman') || (role==='crd')) && <h2 className='text-black font-bold text-3xl ml-1'>Clients</h2>}
+
+                        {/* Tabs */}
                         {role==='admin' && 
                         <ul className="w-full flex -mb-px text-sm font-medium text-center gap-3" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                             
                             <li className="mr-2 py-1.5" role="presentation">
-                            <Badge color='error' badgeContent={oldcdetails?.filter(e=> e.assignedTo!=="pending").length}>
+                            <Badge color='error' badgeContent={oldcdetails?.filter(e=> (e.assignedTo!=="pending")).length}>
                                 <button onClick={()=>setTabmode("all")}  className={`inline-block ${tabmode==="all"? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">All</button>
                             </Badge>
                             </li>    
@@ -200,7 +230,7 @@ const Clients = () => {
                             
                             
                             <li className="mr-2 py-1.5" role="presentation">            
-                            <button onClick={()=>setTabmode("all")}  className={`inline-block ${tabmode==='all'? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Assigned<span className='ml-2 px-2 py-0.5 bg-white text-black font-semibold rounded-full w-10 h-8'>{oldcdetails.filter(e=> (e.assignedTo!=="pending") && (e.assignedTo!=="Public")).length}</span></button>                           
+                            <button onClick={()=>setTabmode("all")}  className={`inline-block ${tabmode==='all'? "bg-orange-500 text-white": 'bg-gray-500 text-white'} px-6 py-3 text-white rounded-md active`}id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Assigned<span className='ml-2 px-2 py-0.5 bg-white text-black font-semibold rounded-full w-10 h-8'>{rattadetails.length}</span></button>                           
                             </li>
 
                             <li className="mr-2 py-1.5" role="presentation">

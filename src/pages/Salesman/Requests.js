@@ -217,6 +217,7 @@ const Requests = () => {
                             freight = {obj.freight}
                             assigned = {obj.receiver}
                             crd= {obj.crd}
+                            cutoff = {obj?.cutoff}
                             role={role}
                             rates = {obj.rates}
                             schedules = {obj.schedules}

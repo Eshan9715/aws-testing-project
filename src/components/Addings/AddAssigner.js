@@ -1,65 +1,75 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Automan from '../TextUI/Automan'
 import { MultipleInputs } from '../TextUI/MultipleInputs'
 import user from '../../assets/user.png'
+import { CropDinOutlined } from '@mui/icons-material'
 // import { useSelector } from 'react-redux'
 
-const arr=[]
+var arr=[]
+var arr1=[]
+
 var addSalestoCRD = {} 
 
-const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
+const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) => {
     var http = process.env.REACT_APP_BASE_URL;
+    const navigate = useNavigate();
 
     const [cName, setcName] = useState('')
-
     const [error, setError] = useState('')
     const [salesmans, setSalesmans] = useState([])
     const [crds, setCrds] = useState([])
 
     const [users, setUsers] = useState([])
+    const [members, setmembers] = useState([])
+    const [delArr, setdelArr] = useState([])
+
+
+    //salesmans.filter(t=>t._id===id)[0].assigned
 
     const [asdetails, setasDetails] = useState([])
     const [crlist, setcrList] = useState([]);
 
     const [staate, setstaate] = useState('')
+    const [okDel, setokDel] = useState(false)
+
 
     //console.log(cName)
 
     useEffect(() => {
-        const getSalesmans = ()=>{
-            axios
-            .get(`${http}/api/member?role=salesman`)
-            .then((res) => {
-              console.log(res.data);
-              setSalesmans(res.data.member)
-            })
-            .catch(err=> {
-              console.log(err);
-            })     
-          }
-          getSalesmans();
+        // const getSalesmans = ()=>{
+        //     axios
+        //     .get(`${http}/api/member?role=salesman`)
+        //     .then((res) => {
+        //       console.log(res.data);
+        //       setSalesmans(res.data.member)
+        //     })
+        //     .catch(err=> {
+        //       console.log(err);
+        //     })     
+        //   }
+        //   getSalesmans();
 
-          const getCrds = ()=>{
-            axios
-            .get(`${http}/api/member?role=crd`)
-            .then((res) => {
-              console.log(res.data);
-              setCrds(res.data.member)
-            })
-            .catch(err=> {
-              console.log(err);
-            })     
-          }
-          getCrds();
+        //   const getCrds = ()=>{
+        //     axios
+        //     .get(`${http}/api/member?role=crd`)
+        //     .then((res) => {
+        //       console.log(res.data);
+        //       setCrds(res.data.member)
+        //     })
+        //     .catch(err=> {
+        //       console.log(err);
+        //     })     
+        //   }
+        //   getCrds();
 
           const getUsers = ()=>{
             axios
             .get(`${http}/api/user`)
             .then((res) => {
-              console.log(res.data);
+              //console.log(res.data);
               setUsers(res.data.users)
             })
             .catch(err=> {
@@ -67,8 +77,28 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
             })     
           }
           getUsers();
+
+          const getMembers = ()=>{
+            axios
+            .get(`${http}/api/member`)
+            .then((res) => {
+              //console.log(res.data);
+              setmembers(res.data.member)
+              setSalesmans(members?.filter(e=> e.role==='salesman'))
+              setCrds(members?.filter(er=> er.role==='crd'))
+
+            })
+            .catch(err=> {
+              console.log(err);
+            })     
+          }
+          getMembers();
     
-    }, [http]);
+    }, [http,members]);    
+
+  
+    //delArr = salesmans?.filter(t=>t._id===id)[0]?.assigned;
+
 
     const send = ()=>{
       if(role==='admin' && staate==='YES'){
@@ -89,7 +119,7 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
           sendRequest2();
           close();
         }
-      }else if(role==='ratesmanager' && track==='addCRD'){
+      }else if(role==='ratesmanager' && track==='addCRD' && okDel===false){
         console.log(crlist)
         crlist.map(e=>(
           arr.push(e.name)
@@ -98,7 +128,12 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
         sendRequest3(arr);
         close();
         
-      } else if(role==='ratesmanager' && track==='alterSal' && staate==='YES'){
+      } else if(role==='ratesmanager' && track==='addCRD' && okDel===true){
+        console.log(arrz);
+        deleteCRD(arrz);
+        close();
+        
+        }else if(role==='ratesmanager' && track==='alterSal' && staate==='YES'){
         if(cName===''){
           setError('Please fill the required details !!')
         }else{
@@ -120,6 +155,7 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
           setError('Please fill the required details !!')
         }else{
           sendRequest4();
+          navigate('/clients')
           close();
         }
      
@@ -128,11 +164,11 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
 
     const sendRequest = async() =>{
         const addSalesman = { 
-          assignedTo: cName,
+          assignedTo: cName!==''? cName: 'Public',
           id: id,
         }        
         axios
-        .put(`/api/user/assignTo/${id}`,addSalesman)
+        .put(`${http}/api/user/assignTo/${id}`,addSalesman)
         .then((res) => {
           console.log(res.data);
     
@@ -198,7 +234,7 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
 
   const sendRequest4 = async() =>{
     const addCrd1 = { 
-      assignedCRD: cName, 
+      assignedCRD: cName===''? 'pending': cName, 
       id: id,
     }        
     axios
@@ -217,30 +253,17 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
       return null
   }
 
-    const getCRDData = (p) =>{
-      var arr = salesmans.filter(t=>t._id===id)[0].assigned;
-      for( var i = 0; i < arr.length; i++){ 
+    const getCRDData = (p,ar) =>{
+      //setdelArr(salesmans.filter(t=>t._id===id)[0].assigned)
+      for( var i = 0; i < ar.length; i++){ 
     
-        if ( arr[i] === p) { 
+        if ( ar[i] === p) { 
     
-            arr.splice(i, 1); 
+            ar.splice(i, 1); 
         }    
-    }
-
-    console.log(arr)
-    const delCRDman = { 
-      assigned: arr,
-      id: id,
-    }        
-
-    axios
-      .put(`${http}/api/member/assignCRD/${id}`,delCRDman)
-      .then((res) => {
-        console.log(res.data);
-    });
-
-    var arr1 = crds.filter(t=>t.name===p)[0].assigned;
-    for( var j = 0; j < arr1.length; j++){ 
+      }
+      var arr1 = crds.filter(t=>t.name===p)[0].assigned;
+      for( var j = 0; j < arr1.length; j++){ 
     
       if ( arr1[j] === name) { 
   
@@ -248,6 +271,24 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
       }    
     }
     console.log(arr1)
+    deleteSales(arr1,p);
+    console.log(ar)
+    setokDel(true)
+    }
+
+    const deleteCRD = (arr) => {
+      const delCRDman = { 
+        assigned: arr,       
+      }
+  
+      axios
+        .put(`${http}/api/member/assignCRD/${id}`,delCRDman)
+        .then((res) => {
+          console.log(res.data);
+      });
+    }
+
+    const deleteSales = (arr1,p) => {
     const delSalman = { 
       assigned: arr1,
       id: crds.filter(t=>t.name===p)[0]._id,
@@ -258,8 +299,10 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
       .then((res) => {
         console.log(res.data);
     });
+  }
+  
 
-    }
+    
 
   return (
     <div className={`${show? "fixed inset-0" : "hidden"}  bg-gray-900 z-20 bg-opacity-50 w-full flex justify-center items-center md:ml-20`}>
@@ -270,123 +313,130 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
                 <div className='w-[90%] flex flex-col justify-center items-center gap-2'>
                     <div className='flex justify-center items-center gap-2'>
 
-                    {role==='admin' && 
-                    <>
-                    <p>Is <span className='font-semibold'>{name}</span> regular shipper with Freight links ?</p>
-                    <FormControl sx={{ m: 1, width:'140px',borderRadius:2 }}>
-                            <InputLabel id="demo-select-small">status</InputLabel>
-                                <Select
-                                    value={staate}
-                                    label="status"
-                                    onChange={(e)=>setstaate(e.target.value)}
-                                    className='py-0.5'
-                                    size='small'
-                                >
-                                    <MenuItem value={"YES"}>YES</MenuItem>
-                                    <MenuItem value={"NO"}>NO</MenuItem>
-                                </Select>
-                    </FormControl>
-                    </>
-                    }
+                    {/* addsalesman - By ratesmanager or admin to shipper */}
+                      {role==='admin' && 
+                      <div className='flex flex-col'>
+                      <div className='flex justify-center items-center'>
+                      <p>Is <span className='font-semibold'>{name}</span> regular shipper with Freight links ?</p>
+                      <FormControl sx={{ m: 1, width:'140px',borderRadius:2 }}>
+                              <InputLabel id="demo-select-small">status</InputLabel>
+                                  <Select
+                                      value={staate}
+                                      label="status"
+                                      onChange={(e)=>setstaate(e.target.value)}
+                                      className='py-0.5'
+                                      size='small'
+                                  >
+                                      <MenuItem value={"YES"}>YES</MenuItem>
+                                      <MenuItem value={"NO"}>NO</MenuItem>
+                                  </Select>
+                      </FormControl>
+                      </div>
+                      {((staate==='YES') && (track==='addSal')) && <div className='w-[96%]'><Automan options={salesmans} title="Salesman name"  setSlData={setcName}/></div>}
+                      </div>
+
+                      }
                     </div>
 
-                    {/* show trade term of shipper to ratesmanager */}
-                    {((track==='addSal') && (role==='ratesmanager')) && <p className='mb-2'>Shipper <span className='font-semibold'>{name}</span> normally do <span className='font-semibold'>{term==='Both'? 'Both Imports & Exports': term==="Imports only"? "Imports only": "Exports only"}</span></p>}
+                    {/* add salesman to shipper by rates manager*/}
+                     {((track==='addSal') && (role==='ratesmanager')) && 
+                      <>
+                        <p className='mb-2 text-center'>Shipper <span className='font-semibold'>{name}</span> has <span className=' text-red-500 font-bold px-2'>not assigned</span> to Salesman!</p>
+                        
+                        {/* show trade term of shipper to ratesmanager */}
+                        {((track==='addSal') && (role==='ratesmanager')) && <p className='mb-2'>Shipper <span className='font-semibold'>{name}</span> normally do <span className='font-semibold'>{term==='Both'? 'Both Imports & Exports': term==="Imports only"? "Imports only": "Exports only"}</span></p>}
 
-                    {/* showCRD - CRD Count with salesman */}
-                    {((track==='addCRD') && (role==='ratesmanager') && 
-                    ((salesmans.filter(t=>t._id===id)[0].assigned).length===0)) &&
-                    <p className='mb-2'>Salesman <span className='font-semibold'>{name}</span> has no CRDs!</p>}
+                        {/* addsalesman - By ratesmanager or admin to shipper */}
+                        {((role==='ratesmanager') && (track==='addSal')) && <div className='w-[96%]'><Automan options={salesmans} title="Salesman name"  setSlData={setcName}/></div>}
 
-                    {((track==='addCRD') && (role==='ratesmanager') && 
-                    ((salesmans.filter(t=>t._id===id)[0].assigned).length!==0)) &&
-                    <p className='mb-2'>Salesman <span className='font-semibold'>{name}</span> has  <span className=' bg-red-500 text-white font-bold px-2 py-0.5 pb-1 mx-1 w-10 h-5 rounded-full'>{(salesmans.filter(t=>t._id===id)[0].assigned).length}</span> CRDs already!</p>}
+                        {/* <div className='w-[96%]'><Automan options={salesmans.filter(h=>!(users.filter(t=>t._id===id)[0].assignedTo===h.name))} title="Salesman name"  setSlData={setcName}/></div>                     */}
+                      </>
+                    }
 
-                    {/* Change salesman if ratesmanager want remove in clients table*/}
-                    {((track==='alterSal') && (role==='ratesmanager')) && 
-                    <>
-                    <p className='mb-2 text-center'>Shipper <span className='font-semibold'>{name}</span> has dealed with Salesman <span className=' text-red-500 font-bold px-2'>{sal}</span> already!</p>
 
-                    <p>If you want to change <span className='font-semibold'>{name}'s</span> salesman?</p>
-                    <FormControl sx={{ m: 1, width:'140px',borderRadius:2 }}>
-                            <InputLabel id="demo-select-small">status</InputLabel>
-                                <Select
-                                    value={staate}
-                                    label="status"
-                                    onChange={(e)=>setstaate(e.target.value)}
-                                    className='py-0.5'
-                                    size='small'
-                                >
-                                    <MenuItem value={"YES"}>YES</MenuItem>
-                                    <MenuItem value={"NO"}>NO</MenuItem>
-                                </Select>
-                    </FormControl>
+                   
+                    {/* For rates manager --- showCRD - CRD Count with salesman */}
+                      {((track==='addCRD') && (role==='ratesmanager') && 
+                      ((salesmans.filter(t=>t._id===id)[0].assigned).length===0)) &&
+                      <p className='mb-2'>Salesman <span className='font-semibold'>{name}</span> has no CRDs!</p>}
+                   
+                      {/* Change salesman if ratesmanager want remove in clients table*/}
+                      {((track==='alterSal') && (role==='ratesmanager')) && 
+                      <>
+                      <p className='mb-2 text-center'>Shipper <span className='font-semibold'>{name}</span> has dealed with Salesman <span className=' text-red-500 font-bold px-2'>{sal}</span> already!</p>
 
-                      {/* addsalesman - By ratesmanager or admin to shipper */}
+                      <p>If you want to change <span className='font-semibold'>{name}'s</span> salesman?</p>
+                      <FormControl sx={{ m: 1, width:'140px',borderRadius:2 }}>
+                              <InputLabel id="demo-select-small">status</InputLabel>
+                                  <Select
+                                      value={staate}
+                                      label="status"
+                                      onChange={(e)=>setstaate(e.target.value)}
+                                      className='py-0.5'
+                                      size='small'
+                                  >
+                                      <MenuItem value={"YES"}>YES</MenuItem>
+                                      <MenuItem value={"NO"}>NO</MenuItem>
+                                  </Select>
+                      </FormControl>
+
+                    {/* Editsalesman - By ratesmanager to shipper */}
 
                       {((staate==='YES') && (track==='alterSal') && (role==='ratesmanager')) && <div className='w-[96%]'><Automan options={salesmans.filter(h=>!(users.filter(t=>t._id===id)[0].assignedTo===h.name))} title="Salesman name"  setSlData={setcName}/></div>}
 
-                    {/* set new shipper as public by admin - pass to ratesmanager */}
+                    {/* no change with salesman */}
 
                     {((staate==='NO') && (track==='alterSal') && (role==='ratesmanager')) && <p>Then Shipper will continue with Salesman <span className=' text-red-500 font-bold px-2'>{sal}</span>. </p>}
                     
                     </>}
 
-                     {/* add salesman to shipper by rates manager*/}
-                     {((track==='addSal') && (role==='ratesmanager')) && 
-                    <>
-                    <p className='mb-2 text-center'>Shipper <span className='font-semibold'>{name}</span> has <span className=' text-red-500 font-bold px-2'>not assigned</span> to Salesman!</p>
-
-                      {/* addsalesman - By ratesmanager or admin to shipper */}
-
-                      <div className='w-[96%]'><Automan options={salesmans.filter(h=>!(users.filter(t=>t._id===id)[0].assignedTo===h.name))} title="Salesman name"  setSlData={setcName}/></div>                    
-                    </>}
-
                     {/* Add or change CRD of shipper by salesman*/}
                     {((track==='addOrEditCRD') && (role==='salesman')) && 
+                      <>
+                      {
+                        sal==='pending'? <p className='mb-2 text-center'>Shipper <span className='font-semibold'>{name}</span> <span className=' text-red-500 font-bold px-1'>doesn't have CRD</span> currently!</p>
+                        : 
+                        <p className='mb-2 text-center'>Shipper <span className='font-semibold'>{name}</span> has dealed with CRD <span className=' text-red-500 font-bold px-2'>{sal}</span> already!</p>
+                      }
+
+                    {sal!=='pending' && 
                     <>
-                    {sal==='pending'? <p className='mb-2 text-center'>Shipper <span className='font-semibold'>{name}</span> <span className=' text-red-500 font-bold px-1'>doesn't have CRD</span> currenrly!</p>
-                    : 
-                    <p className='mb-2 text-center'>Shipper <span className='font-semibold'>{name}</span> has dealed with CRD <span className=' text-red-500 font-bold px-2'>{sal}</span> already!</p>
+                      <p>If you want to add or change <span className='font-semibold'>{name}'s</span> CRD?</p>
+                      <FormControl sx={{ m: 1, width:'140px',borderRadius:2 }}>
+                              <InputLabel id="demo-select-small">status</InputLabel>
+                                  <Select
+                                      value={staate}
+                                      label="status"
+                                      onChange={(e)=>setstaate(e.target.value)}
+                                      className='py-0.5'
+                                      size='small'
+                                  >
+                                      <MenuItem value={"YES"}>YES</MenuItem>
+                                      <MenuItem value={"NO"}>NO</MenuItem>
+                                  </Select>
+                      </FormControl>
+                    </>
                     }
 
-                    {sal!=='pending' && <>
-                    <p>If you want to add or change <span className='font-semibold'>{name}'s</span> CRD?</p>
-                    <FormControl sx={{ m: 1, width:'140px',borderRadius:2 }}>
-                            <InputLabel id="demo-select-small">status</InputLabel>
-                                <Select
-                                    value={staate}
-                                    label="status"
-                                    onChange={(e)=>setstaate(e.target.value)}
-                                    className='py-0.5'
-                                    size='small'
-                                >
-                                    <MenuItem value={"YES"}>YES</MenuItem>
-                                    <MenuItem value={"NO"}>NO</MenuItem>
-                                </Select>
-                    </FormControl>
-                    </>}
-
-                      {/* addsalesman - By ratesmanager or admin to shipper */}
-
                       {((staate==='YES') && (track==='addOrEditCRD') && (role==='salesman')) && 
-                      <FormControl sx={{ m: 1, width:'98%',borderRadius:2 }}>
-                            <InputLabel id="demo-select-small">CRD Name</InputLabel>
-                                <Select
-                                    value={cName}
-                                    label="CRD Name"
-                                    onChange={(e)=>setcName(e.target.value)}
-                                    className='py-0.5'
-                                    size='small'
-                                >
-                                {(salesmans.filter(f=>f.name===doer)[0].assigned).map((r,index)=>
-                                    <MenuItem value={r} key={index}>{r}</MenuItem>
-                                 )}
-                                </Select>
-                      </FormControl>}
+                        <FormControl sx={{ m: 1, width:'98%',borderRadius:2 }}>
+                              <InputLabel id="demo-select-small">CRD Name</InputLabel>
+                                  <Select
+                                      value={cName}
+                                      label="CRD Name"
+                                      onChange={(e)=>setcName(e.target.value)}
+                                      className='py-0.5'
+                                      size='small'
+                                  >
+                                  {(salesmans.filter(f=>f.name===doer)[0].assigned).map((r,index)=>
+                                      <MenuItem value={r} key={index}>{r}</MenuItem>
+                                  )}
+                                  </Select>
+                        </FormControl>
+                      }
 
                       {((sal==='pending') && (track==='addOrEditCRD') && (role==='salesman')) && 
-                      <FormControl sx={{ m: 1, width:'98%',borderRadius:2 }}>
+                        <FormControl sx={{ m: 1, width:'98%',borderRadius:2 }}>
                             <InputLabel id="demo-select-small">CRD Name</InputLabel>
                                 <Select
                                     value={cName}
@@ -399,25 +449,30 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
                                     <MenuItem value={r} key={index}>{r}</MenuItem>
                                  )}
                                 </Select>
-                      </FormControl>}
+                        </FormControl>
+                      }
 
                       {/* <Automan options={salesmans.filter(e=>e.role==='salesman').filter(f=>f.name===doer)[0].assigned} title="CRD name"  setSlData={setcName}/></div>} */}
 
                     {/* set new shipper as public by admin - pass to salesman */}
 
-                    {((staate==='NO') && (track==='addOrEditCRD') && (role==='salesman') && (sal!=='pending')) && <p>Then Shipper will continue with CRD <span className=' text-red-500 font-bold px-2'>{sal}</span>. </p>}
-                    {((staate==='NO') && (track==='addOrEditCRD') && (role==='salesman') && (sal==='pending')) && <p>Then Shipper doesn't have CRD yet. </p>}
+                      {((staate==='NO') && (track==='addOrEditCRD') && (role==='salesman') && (sal!=='pending')) && <p>Then Shipper will continue with CRD <span className=' text-red-500 font-bold px-2'>{sal}</span>. </p>}
+                      {((staate==='NO') && (track==='addOrEditCRD') && (role==='salesman') && (sal==='pending')) && <p>Then Shipper doesn't have CRD yet. </p>}
 
                     </>}
 
                     {/* showCRD - already with salesman*/}
-                    {((role==='ratesmanager') && (track==='addCRD')) && salesmans.filter(t=>t._id===id)[0].assigned.map(p=>(
-                      <div className='w-[95%] flex justify-between items-center'>
+                    {((track==='addCRD') && (role==='ratesmanager') && 
+                      ((salesmans.filter(t=>t._id===id)[0].assigned).length!==0)) &&
+                      <p className='mb-2'>Salesman <span className='font-semibold'>{name}</span> has  <span className=' bg-red-500 text-white font-bold px-2 py-0.5 pb-1 mx-1 w-10 h-5 rounded-full'>{arrz?.length}</span> CRDs already!</p>}
+
+                    {((role==='ratesmanager') && (track==='addCRD')) && arrz?.map((p,index)=>(
+                      <div className='w-[95%] flex justify-between items-center' key={index}>
                         <div className='flex justify-start gap-2'>
                           <img src={user} alt='' className='w-8 h-8 bg-slate-600 rounded-full -p-4'/>
                           <p>{p}</p>
                         </div>
-                        <svg fill="none" stroke="currentColor" onClick={()=>getCRDData(p)} className='w-7 h-7 cursor-pointer' stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <svg fill="none" stroke="currentColor" onClick={()=>getCRDData(p,arrz)} className='w-7 h-7 cursor-pointer' stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path>
                         </svg>
                       </div>
@@ -426,10 +481,9 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer}) => {
                     {/* addCRD - By ratesmanager to salesman  ********************* */}
                     {((track==='addCRD') && (role==='ratesmanager')) && <div className='w-[96%] mt-4'><MultipleInputs data={(crds.filter(h=>!(salesmans.filter(t=>t._id===id)[0].assigned).includes(h.name)))} title="CRD name"  setData={setcrList} placeholder='Add CRDs here...'/></div> }
 
-                    {/* addsalesman - By ratesmanager or admin to shipper */}
+                    {/* addsalesman - By ratesmanager to shipper */}
 
                     {((staate==='YES') && (role==='ratesmanager') && (track==='addSalesman')) && <div className='w-[96%]'><Automan options={salesmans} title="Salesman name"  setSlData={setcName}/></div> }
-                    {((staate==='YES') && (role==='admin')) && <div className='w-[96%]'><Automan options={salesmans} title="Salesman name"  setSlData={setcName}/></div> }
 
                     {/* set new shipper as public by admin - pass to ratesmanager */}
 

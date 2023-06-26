@@ -6,8 +6,13 @@ import user from '../../assets/user.png'
 //var http = "http://localhost:5000";  
 //var http =  "https://cute-plum-caterpillar-tie.cyclic.app" 
 
-const SeeCRDData = ({show,title,close,id,name}) => {
+const SeeCRDData = ({show,title,close,id,name,arr}) => {
+    console.log(arr)
     const [salesmans, setSalesmans] = useState([])
+    const [vcrds, setvcrds] = useState([])
+    //console.log((vcrds.filter(t=>t._id===id)[0].assigned))
+
+
     var http = process.env.REACT_APP_BASE_URL;
  
     useEffect(() => {
@@ -15,8 +20,9 @@ const SeeCRDData = ({show,title,close,id,name}) => {
             axios
             .get(`${http}/api/member`)
             .then((res) => {
-              console.log(res.data);
+              //console.log(res.data);
               setSalesmans(res.data.member)
+              setvcrds(salesmans.filter(e=>e.role==='crd'))
             })
             .catch(err=> {
               console.log(err);
@@ -24,7 +30,7 @@ const SeeCRDData = ({show,title,close,id,name}) => {
           }
           getSalesmans();
     
-    }, [http]);
+    }, [http,salesmans]);
 
     if(!show){
         return null
@@ -38,14 +44,14 @@ const SeeCRDData = ({show,title,close,id,name}) => {
 
                 <div className='w-[90%] flex flex-col justify-center items-center gap-2'>                  
                     {/* showCRD - CRD Count with salesman */}
-                    {((salesmans.filter(e=>e.role==='crd').filter(t=>t._id===id)[0].assigned).length===0) &&
+                    {((vcrds.filter(t=>t._id===id)[0].assigned).length===0) &&
                     <p className='mb-2'>CRD <span className='font-semibold'>{name}</span> has no salesman yet!</p>}
 
-                    {((salesmans.filter(e=>e.role==='crd').filter(t=>t._id===id)[0].assigned).length!==0) &&
-                    <p className='mb-2'>CRD <span className='font-semibold'>{name}</span> work with <span className=' bg-red-500 text-white font-bold px-2 py-0.5 pb-1 mx-1 w-10 h-8 rounded-full'>{(salesmans.filter(e=>e.role==='crd').filter(t=>t._id===id)[0].assigned).length}</span> Salesman/s already!</p>}
+                    {((vcrds.filter(t=>t._id===id)[0].assigned).length!==0) &&
+                    <p className='mb-2'>CRD <span className='font-semibold'>{name}</span> work with <span className=' bg-red-500 text-white font-bold px-2 py-0.5 pb-1 mx-1 w-10 h-8 rounded-full'>{(vcrds.filter(t=>t._id===id)[0].assigned).length}</span> Salesman/s already!</p>}
 
                     {/* showCRD - already with salesman*/}
-                    {salesmans.filter(e=>e.role==='crd').filter(t=>t._id===id)[0].assigned.map(p=>(
+                    {arr?.map(p=>(
                       <div className='w-[95%] flex justify-between items-center'>
                         <div className='w-full flex justify-center gap-2'>
                           <img src={user} alt='' className='w-8 h-8 bg-slate-600 rounded-full -p-4'/>

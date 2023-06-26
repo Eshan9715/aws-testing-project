@@ -180,27 +180,36 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
         status:'', remark:'', timeVal:'', userID: loggedID, adder: loggedNM,refID: '',}
     )
 
-    const removeDuplicateLine = (arr) => {
-        let unique = [];
-        arr.forEach(element => {
-            if (!unique.includes(element.shipLine)) {
-                unique.push(element.shipLine);
-            }
+    //**************************************************shipper has to confirm the rates(rates.length===1)*********************************************************
+    //*******************************************************************************************************************************************
+    const addShipIdea = ()=>{
+        const alterIsFinal = {
+            isFinal : true,
+        }
+        axios
+        .put(`${http}/api/fclquery/alterIsFinalRat/${id}`,alterIsFinal)
+        .then((res) => {
+          console.log(res.data);
         });
-        //console.log(unique)
-        return unique;
+        sendFStatus('schedule pending');
+        addRemarksFCL();
     }
 
-    const removeDuplicateVessel = (arr) => {
-        let unique = [];
-        arr.forEach(element => {
-            if (!unique.includes(element.vessel)) {
-                unique.push(element.vessel);
+    const addShipLIdea = ()=>{
+            const alterIsFinal = {
+                isFinal : true
             }
-        });
-        //console.log(unique)
-        return unique;
+            axios
+            .put(`${http}/api/lclquery/alterIsFinalRat/${id}`,alterIsFinal)
+            .then((res) => {
+              console.log(res.data);
+            });
+            sendLStatus('schedule pending');
+            navigate('/BQuering')
+
     }
+
+    //**************************************************shipper has to confirm the rates(add remarks here)*********************************************************
 
     const addRemarksFCL = ()=>{
         shipremarks.status = selectedLine!=='Disagree'? "schedule pending": "asking for changes"
@@ -218,54 +227,149 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
                 adder: item.adder,
                 refID:''
             })),
-            } 
-                   
+            }     
             axios
             .put(`${http}/api/fclquery/addShipperIdea/${id}`,addRemarksFCL)
             .then((res) => {            
         
             setsDetails(res.data)
-            navigate('/dashboard')
+            navigate('/BQuering')
           });
           shipremarks.status=''
           shipremarks.remark=''
           shipremarks.timeVal=''
-
           re.length=0;
     }
 
-    const addRemarksLCL = ()=>{
-        shipremarks.status = selectedLine==='Agree'? "schedule pending": "asking for changes"
-        shipremarks.timeVal = new Date()
+    // const addRemarksLCL = ()=>{
+    //     shipremarks.status = selectedLine==='Agree'? "schedule pending": "asking for changes"
+    //     shipremarks.timeVal = new Date()
 
-        console.log(shipremarks)
-        re.push(shipremarks)
-        const addRemarksFCL= { 
-            id: id,
-            shremarks:re.map((item) => ({
-                status: item.status,
-                remark: item.remark,
-                dDate: item.timeVal,
-                userID: item.userID,
-                adder: item.adder,
-                refID:''
+    //     console.log(shipremarks)
+    //     re.push(shipremarks)
+    //     const addRemarksFCL= { 
+    //         id: id,
+    //         shremarks:re.map((item) => ({
+    //             status: item.status,
+    //             remark: item.remark,
+    //             dDate: item.timeVal,
+    //             userID: item.userID,
+    //             adder: item.adder,
+    //             refID:''
 
-            })),
-            } 
+    //         })),
+    //         } 
                    
-            axios
-            .put(`${http}/api/fclquery/addShipIdea/${id}`,addRemarksFCL)
-            .then((res) => {
-              //console.log(res.data);
+    //         axios
+    //         .put(`${http}/api/fclquery/addShipIdea/${id}`,addRemarksFCL)
+    //         .then((res) => {
+    //           //console.log(res.data);
         
-            setsDetails(res.data)
-          });
-          shipremarks.status=''
-          shipremarks.remark=''
-          shipremarks.timeVal=''
+    //         setsDetails(res.data)
+    //         navigate('/BQuering')
+    //       });
+    //       shipremarks.status=''
+    //       shipremarks.remark=''
+    //       shipremarks.timeVal=''
 
-          re.length=0;
+    //       re.length=0;
+    // }
+
+    //**************************************************shipper has to confirm the rates(rates.length>>1)*********************************************************
+
+    const sendFSStatus = async() =>{
+        const alterRStatus = { 
+        status:'schedule pending',
+        selShipLine: 'Agree'
+        }        
+        axios
+        .put(`${http}/api/fclquery/alterStatusRateReply/${id}`,alterRStatus)
+        .then((res) => {
+          console.log(res.data);
+        });
+        //setOpen(false);
+        navigate('/dashboard')
+    }  
+
+    const sendLSStatus = async() =>{
+        const alterStatus = { 
+        status:'schedule pending',
+        rateReply: 'Agree'
+        }        
+        axios
+        .put(`${http}/api/lclquery/alterStatusRateReply/${id}`,alterStatus)
+        .then((res) => {
+          console.log(res.data);
+        });
+        navigate('/dashboard')
     }
+
+    //**************************************************shipper has to confirm the vessel schedules(rates.length===1)*********************************************************
+    //*******************************************************************************************************************************************
+
+    const AddShipVessel = ()=>{
+
+        const alterIsFinal = {
+            isFinal : true,
+            selVessel: selectedVessel
+        }
+        axios
+        .put(`${http}/api/fclquery/addVessel/${id}`,alterIsFinal)
+        .then((res) => {
+          console.log(res.data);
+        });
+        sendFStatus('booking');
+        // addRemarksFCL();
+
+        window.location.reload(false)
+
+    }
+
+    const AddShipLVessel = ()=>{
+        const alterIsFinal = {
+            isFinal : true,
+            selVessel: selectedVessel
+        }
+        axios
+        .put(`${http}/api/lclquery/addVessel/${id}`,alterIsFinal)
+        .then((res) => {
+          console.log(res.data);
+        });
+        sendLStatus('booking');
+        //addRemarksLCL();
+
+        window.location.reload(false)
+    }
+
+    //**************************************************shipper has to confirm the vessel schedules(schedules.length>>1)*********************************************************
+
+    const sendFSSStatus = async() =>{
+        const alterStatus = { 
+        status:'booking',
+        }        
+        axios
+        .put(`${http}/api/fclquery/alterStatus/${id}`,alterStatus)
+        .then((res) => {
+          console.log(res.data);
+        });
+        //setOpen(false);
+        navigate('/dashboard')
+    }
+    
+    const sendLSSStatus = async() =>{
+        const alterStatus = { 
+        status:'b/l pending',
+        }        
+        axios
+        .put(`${http}/api/lclquery/alterStatus/${id}`,alterStatus)
+        .then((res) => {
+          console.log(res.data);
+        });
+        //setOpen(false);
+        navigate('/dashboard')
+    }
+
+    //**************************************************Commonly status changes if you want**************************************************************************************
 
     const sendFStatus = async(state) =>{
         const alterStatus = { 
@@ -291,74 +395,32 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
         //setOpen(false);
     }
 
-    const addShipIdea = ()=>{
-        // if(selectedLine!=='Disagree'){
-        const alterIsFinal = {
-            isFinal : true,
-        }
-        axios
-        .put(`${http}/api/fclquery/alterIsFinalRat/${id}`,alterIsFinal)
-        .then((res) => {
-          console.log(res.data);
-        });
-        sendFStatus('schedule pending');
-        addRemarksFCL();
-    }
+    //**************************************************************************Other tasks**************************************************************************************
 
-    const addShipLIdea = ()=>{
-        // if(selectedLine==='Agree'){
-            const alterIsFinal = {
-                isFinal : true,
+    const removeDuplicateLine = (arr) => {
+        let unique = [];
+        arr.forEach(element => {
+            if (!unique.includes(element.shipLine)) {
+                unique.push(element.shipLine);
             }
-            axios
-            .put(`${http}/api/lclquery/alterIsFinalRat/${id}`,alterIsFinal)
-            .then((res) => {
-              console.log(res.data);
-            });
-            sendLStatus('schedule pending');
-            addRemarksLCL();
-    
-            window.location.reload(false)
+        });
+        //console.log(unique)
+        return unique;
     }
 
-    const AddShipVessel = ()=>{
-
-        const alterIsFinal = {
-            isFinal : true,
-            selVessel: selectedVessel
-        }
-        axios
-        .put(`${http}/api/fclquery/addVessel/${id}`,alterIsFinal)
-        .then((res) => {
-          console.log(res.data);
+    const removeDuplicateVessel = (arr) => {
+        let unique = [];
+        arr.forEach(element => {
+            if (!unique.includes(element.vessel)) {
+                unique.push(element.vessel);
+            }
         });
-        sendFStatus('booking');
-        // addRemarksFCL();
-
-        window.location.reload(false)
-
-        }
-
-    const AddShipLVessel = ()=>{
-        const alterIsFinal = {
-            isFinal : true,
-            selVessel: selectedVessel
-        }
-        axios
-        .put(`${http}/api/lclquery/addVessel/${id}`,alterIsFinal)
-        .then((res) => {
-          console.log(res.data);
-        });
-        sendLStatus('booking');
-        //addRemarksLCL();
-
-        window.location.reload(false)
+        //console.log(unique)
+        return unique;
     }
 
     var arrVessel = ["rates pending", "rates confirmation", "schedule pending", "vessel pending"]
 
-
-    //console.log(cutoff.BLClosing)
 
     const countDays = ()=>{
     let ddd = `${cutof?.BLCLOD} ${cutof?.BLCLOT}`
@@ -394,95 +456,46 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
     }
 }
 
-const lastUpdateBtn = () => {
-    setShowQChat(true)
-    const saveLastSeen= { 
-        lastShipperSeenBtn: new Date(),
-        }        
-        axios
-        .put(`${http}/api/lclquery/saveShipperLastSeen/${id}`,saveLastSeen)
-        .then((res) => {
-          console.log(res.data);    
-      });
-}
-
-const lastFUpdateBtn = () => {
-    setShowQChat(true)
-    const saveFLastSeen= { 
-        lastShipperSeenBtn: new Date(),
-        }        
-        axios
-        .put(`${http}/api/fclquery/saveShipperLastSeen/${id}`,saveFLastSeen)
-        .then((res) => {
-          console.log(res.data);    
-      });
-}
-
-const buttonName = ()=>{
-    var x = new Date(cutof?.BLClosing);
-    var y = new Date();
-    var exceed = (x.getTime() - y.getTime())/(1000*60*60);
-    if(exceed<0){
-        return 'Request for Amendment'
-    }else if(exceed>0 && bla.length>0){
-        return 'Edit'
-    }else{
-        return 'Add'
+    const lastUpdateBtn = () => {
+        setShowQChat(true)
+        const saveLastSeen= { 
+            lastShipperSeenBtn: new Date(),
+            }        
+            axios
+            .put(`${http}/api/lclquery/saveShipperLastSeen/${id}`,saveLastSeen)
+            .then((res) => {
+            console.log(res.data);    
+        });
     }
-}
 
-const sendLSStatus = async() =>{
-    const alterStatus = { 
-    status:'schedule pending',
-    rateReply: 'Agree'
-    }        
-    axios
-    .put(`${http}/api/lclquery/alterStatusRateReply/${id}`,alterStatus)
-    .then((res) => {
-      console.log(res.data);
-    });
-    navigate('/dashboard')
-}
+    const lastFUpdateBtn = () => {
+        setShowQChat(true)
+        const saveFLastSeen= { 
+            lastShipperSeenBtn: new Date(),
+            }        
+            axios
+            .put(`${http}/api/fclquery/saveShipperLastSeen/${id}`,saveFLastSeen)
+            .then((res) => {
+            console.log(res.data);    
+        });
+    }
 
-const sendFSSStatus = async() =>{
-    const alterStatus = { 
-    status:'booking',
-    }        
-    axios
-    .put(`${http}/api/fclquery/alterStatus/${id}`,alterStatus)
-    .then((res) => {
-      console.log(res.data);
-    });
-    //setOpen(false);
-    navigate('/dashboard')
-}
+    const buttonName = ()=>{
+        var x = new Date(cutof?.BLClosing);
+        var y = new Date();
+        var exceed = (x.getTime() - y.getTime())/(1000*60*60);
+        if(exceed<0){
+            return 'Request for Amendment'
+        }else if(exceed>0 && bla.length>0){
+            return 'Edit'
+        }else{
+            return 'Add'
+        }
+    }
 
-const sendLSSStatus = async() =>{
-    const alterStatus = { 
-    status:'b/l pending',
-    }        
-    axios
-    .put(`${http}/api/lclquery/alterStatus/${id}`,alterStatus)
-    .then((res) => {
-      console.log(res.data);
-    });
-    //setOpen(false);
-    navigate('/dashboard')
-}
+    //********************************************************************E N D******************************************************************
+    //*******************************************************************************************************************************************
 
-const sendFSStatus = async() =>{
-    const alterRStatus = { 
-    status:'schedule pending',
-    selShipLine: 'Agree'
-    }        
-    axios
-    .put(`${http}/api/fclquery/alterStatusRateReply/${id}`,alterRStatus)
-    .then((res) => {
-      console.log(res.data);
-    });
-    //setOpen(false);
-    navigate('/dashboard')
-}     
 
   return (
         <div className={`w-full flex flex-col bg-slate-50 shadow-md  hover:shodow-lg rounded-md mb-3 border-2`}>
@@ -1087,8 +1100,7 @@ const sendFSStatus = async() =>{
                 }
 
                 <AddBL show={showBL} title='Add B/L Instructions' id={id} close={()=>setShowBL(false)} blData={bla}/>
-                <AlertCutoff cutof={cutof} show={viewCF} title='View Cut-Offs' id={id} close={()=>setviewCF(false)}/>
-
+                <AlertCutoff cutof={cutof} show={viewCF} containerMode={containerMode} title='View Cut-Offs' id={id} close={()=>setviewCF(false)}/>
                 <ChatBox  person={assigned} containerType={containerMode} status={status}  role={role} show={showQChat} close={()=>setShowQChat(false)} loggedName={loggedNM} userID={loggedID} title='Chat Box' id={id}/>
 
 

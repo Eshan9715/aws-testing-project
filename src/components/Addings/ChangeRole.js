@@ -47,8 +47,10 @@ const ChangeRole = ({show,close,title,name,id,role}) => {
                             className='py-0.5'
                             size='small'
                         >
-                            <MenuItem value={"salesman"}>salesman</MenuItem>
-                            <MenuItem value={"crd"}>crd</MenuItem>
+                            <MenuItem value={"salesman"}>Salesman</MenuItem>
+                            <MenuItem value={"crd"}>CRD</MenuItem>
+                            <MenuItem value={"ratesmanager"}>Sales manager</MenuItem>
+
                         </Select>
             </FormControl>
             </div>
