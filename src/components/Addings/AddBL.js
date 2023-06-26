@@ -26,7 +26,7 @@ const AddBL = ({show,title,close,id, blData}) => {
           axios
           .get(`${http}/api/user/shipperData/${userID}`)
           .then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
             setshipper(res.data.user?.shipperDetails)
           })
           .catch(err=> {
@@ -39,7 +39,7 @@ const AddBL = ({show,title,close,id, blData}) => {
           axios
           .get(`${http}/api/user/consigneeData/${userID}`)
           .then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
             setconsignee(res.data.user?.consigneeDetails)
           })
           .catch(err=> {
@@ -52,7 +52,7 @@ const AddBL = ({show,title,close,id, blData}) => {
           axios
           .get(`${http}/api/user/notifyData/${userID}`)
           .then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
             setnotify(res.data.user?.notifyDetails)
           })
           .catch(err=> {
@@ -181,8 +181,8 @@ const AddBL = ({show,title,close,id, blData}) => {
 
     const sendRequest = async() =>{
         BLData.push(formData)
-        console.log(BLData)
-        console.log(BLData.length)
+        //console.log(BLData)
+        //console.log(BLData.length)
 
         const AddBL = { 
         id: id,
@@ -218,21 +218,21 @@ const AddBL = ({show,title,close,id, blData}) => {
         axios
         .put(`${http}/api/fclquery/addBLData/${id}`,AddBL)
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
     
         setrDetails(res.data)
       });
 
       if(shipper?.filter(e=>e.shipperName).length===0 || (shipper?.filter(e=>!e.shipperName.includes(formData.shipperName)))){
-        console.log('shipppppppppppppp1')
+        //console.log('shipppppppppppppp1')
         ship1();
       }
       if(consignee?.filter(e=>e.consigneeName).length===0 || (consignee?.filter(e=>!e.consigneeName.includes(formData.consigneeName)))){
-        console.log('shikkkkkkkkkkkkkkkkk1')
+        //console.log('shikkkkkkkkkkkkkkkkk1')
         ship2();
       }
       if(notify?.filter(e=>e.notifyName).length===0 || (notify?.filter(e=>!e.notifyName.includes(formData.notifyName)))){
-        console.log('shigggggggggggggggg1')
+        //console.log('shigggggggggggggggg1')
         ship3();
       }
 

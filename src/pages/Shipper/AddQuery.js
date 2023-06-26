@@ -75,7 +75,7 @@ const AddQuery = () => {
   const [error, setError] = useState('')
 
   const [rdate, serRdate] = useState(null)
-  console.log(rdate)
+  //console.log(rdate)
 
 
   // const navigate = useNavigate();
@@ -205,11 +205,11 @@ const AddQuery = () => {
      
  }, [id,http,loggedUser,role]);
 
-  console.log(lConqueryData)
-  console.log(userData)
-  console.log(memData)
+  //console.log(lConqueryData)
+  //console.log(userData)
+  //console.log(memData)
 
- console.log(mngr)
+ //console.log(mngr)
 
 
  const handleChange = (event) => {
@@ -236,7 +236,7 @@ const AddQuery = () => {
       console.log("done")
       if(mode==='LCL'){
         lcl.push(lclCargo)
-        console.log('addeddddddd!!!!')
+        //console.log('addeddddddd!!!!')
         
       }
       finalizedCargo = [...fclCargo]

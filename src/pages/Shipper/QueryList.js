@@ -31,7 +31,7 @@ const QueryList = () => {
           axios
           .get(`${http}/api/fclquery/user/${id}`)
           .then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
             setFRueryData(res.data.user.fclqueries)
           })
           .catch(err=> {
@@ -41,7 +41,7 @@ const QueryList = () => {
           axios
           .get(`${http}/api/lclquery/user/${id}`)
           .then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
             setLRueryData(res.data.user.lclqueries)
           })
           .catch(err=> {
@@ -54,9 +54,9 @@ const QueryList = () => {
 
     rlfinalizedFullCargo = [...frueryData, ...lrueryData];
 
-    console.log(rlfinalizedFullCargo);
+    //console.log(rlfinalizedFullCargo);
     // console.log(typeof(rlfinalizedFullCargo));
-    console.log(typeof rlfinalizedFullCargo);
+    //console.log(typeof rlfinalizedFullCargo);
 
 
     

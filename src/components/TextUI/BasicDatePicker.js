@@ -45,30 +45,30 @@ export const BasicDatePicker = ({label,setDate}) => {
   let objectDate = new Date();
 
   let day = objectDate.getDate();
-  console.log(day); 
+  //console.log(day); 
 
   let month = objectDate.getMonth();
-  console.log(month + 1); 
+  //console.log(month + 1); 
 
   let year = objectDate.getFullYear();
-  console.log(year); 
+  //console.log(year); 
 
   let format3 = `${year}-${month+1}-${day}`
-  console.log(format3); 
+  //console.log(format3); 
   let Imonth = month>9? (month+1) : `0${(month+1)}`
 
   let format4 = `${year}-${Imonth}-${day}`
-  console.log(format4); 
+  //console.log(format4); 
 
   const handleChange = (event) => {
     setValue(event.target.value);
     setDate(event.target.value);
 
-    console.log(Value)
+    //console.log(Value)
     //setDate(moment(Value).format('dddd, MMM Do YYYY'))
   };
 
-  console.log(Value)
+  //console.log(Value)
   //console.log(setDate(moment(Value).format('dddd, MMM Do YYYY')))
 
   return (

@@ -58,7 +58,7 @@ const BQuering = () => {
         axios
         .get(`${http}/api/member?role=consolemanager`)
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           setmngr(res.data.member[0].name)
         })
         .catch(err=> {
@@ -71,7 +71,7 @@ const BQuering = () => {
         axios
         .get(`${http}/api/fclquery/user/${id}`)
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           setFQueryData(res.data.user.fclqueries)
         })
         .catch(err=> {
@@ -84,7 +84,7 @@ const BQuering = () => {
         axios
         .get(`${http}/api/lclquery/user/${id}`)
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           setLQueryData(res.data.user.lclqueries)
         })
         .catch(err=> {
@@ -97,7 +97,7 @@ const BQuering = () => {
         axios
         .get(`${http}/api/lclquery?ID=${id}`)
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           setLConQueryData(res.data.lclqueries)
         })
         .catch(err=> {
@@ -136,7 +136,7 @@ const BQuering = () => {
         axios
         .get(`${http}/api/user/${id}`)
         .then((res) => {
-          console.log(res.data.user);
+          //console.log(res.data.user);
           res.data.user!==undefined && setUserData(res.data.user)
           // setFQueryData(res.data.fclqueries)
         })
@@ -151,7 +151,7 @@ const BQuering = () => {
         axios
         .get(`${http}/api/member/${id}`)
         .then((res) => {
-          console.log(res.data.member);
+          //console.log(res.data.member);
           res.data.member!==undefined && setmemData(res.data.member)
           // setFQueryData(res.data.fclqueries)
         })
@@ -165,14 +165,14 @@ const BQuering = () => {
 
   finalizedFullCargo = [...fqueryData, ...lqueryData]
 
-   console.log(lConqueryData)
-   console.log(userData)
-   console.log(memData)
+   //console.log(lConqueryData)
+   //console.log(userData)
+   //console.log(memData)
 
-  console.log(mngr)
+  //console.log(mngr)
 
   const [rdate, serRdate] = useState(null)
-  console.log(rdate)
+  //console.log(rdate)
 
   const [tabmode, setTabmode] = useState('rates pending')
 
