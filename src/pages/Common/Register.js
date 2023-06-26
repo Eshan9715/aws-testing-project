@@ -37,7 +37,7 @@ const Register = () => {
           axios
           .post(`${http}/api/auth/signup`,newUser)
           .then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
         
         setDetails(res.data)
       }).catch(err=> {
@@ -55,7 +55,7 @@ const Register = () => {
 
       const oneLast = (values)=>{
         // handleUpload()
-        console.log(values)
+        //console.log(values)
         sendRequest(values)
         .then(()=>navigate('/login'))
         .then(()=>console.log("Registration Successfull!"))

@@ -15,7 +15,7 @@ const Login = () => {
   const dispatch = useDispatch();
   //const isURL = useSelector((state)=> state.url.isURL);
   var http = process.env.REACT_APP_BASE_URL;
-  console.log(http);
+  //console.log(http);
   const[loading, setLoading] = useState(false)
   const[error, seterror] = useState('')
 
@@ -32,7 +32,7 @@ const Login = () => {
     axios
     .post(`${http}/api/auth/login`,exisitngUser)
     .then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       dispatch(
         login({userID:(res.data.user._id || res.data.member._id), userName:(res.data.user.name || res.data.member.name), 
           userEmail:(res.data.user.email || res.data.member.email) , role: (res.data.user.role || res.data.member.role),
@@ -51,7 +51,7 @@ const Login = () => {
 
 }
 
-  console.log(details)
+  //console.log(details)
 
   return (
     <>

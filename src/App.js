@@ -29,7 +29,7 @@ const Staff = lazy(() => import('./pages/Admin/Staff'));
 function App() {
   const loggedUser = useSelector(state=> state.auth.value);
   const location = useLocation();
-  console.log(location.pathname)
+  //console.log(location.pathname)
 
 
    //creating IP state
@@ -41,7 +41,7 @@ function App() {
    //creating function to load ip address from the API
    const getData = async()=>{
        const res = await axios.get('https://geolocation-db.com/json/')
-       console.log(res.data);
+       //console.log(res.data);
        setIP(res.data.IPv4)
    }
    
@@ -92,7 +92,7 @@ function App() {
     )
    }
 
-   console.log('your IP Address is:' + ip)
+   //console.log('your IP Address is:' + ip)
 
   return (
     <>
