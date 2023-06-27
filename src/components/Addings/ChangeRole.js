@@ -1,13 +1,10 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 const ChangeRole = ({show,close,title,name,id,role}) => {
     const [staste, setstaste] = useState('')
     var http = process.env.REACT_APP_BASE_URL;
-    const navigate = useNavigate();
-
 
     const sendRequestR = async() =>{
         const changerole = { 

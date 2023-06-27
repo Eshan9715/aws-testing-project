@@ -17,7 +17,6 @@ import ValuesBox from '.././components/Viewings/ValuesBox';
 import ves from '../assets/ship.png'
 import clock from '../assets/clock.png'
 import pend from '../assets/pend.gif'
-import { useSelector } from 'react-redux';
 import ChatBox from '.././components/TextUI/ChatBox';
 import AlertCutoff from './DialogBoxes/AlertCutoff';
 
@@ -33,23 +32,21 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
     const[more, setMore] = useState(false)
     const[selectedLine, setSelelctedLine] = useState('')
     const[selectedVessel, setSelelctedVessel] = useState('')
-    const[sdetails, setsDetails] = useState('')
 
-    const [re, setRe] = useState([])
     const[viewCF, setviewCF] = useState(false)
 
     const [fre, setfRe] = useState([])
-    const [fshre, setfshRe] = useState([])
+    //const [fshre, setfshRe] = useState([])
     const[showQChat, setShowQChat] = useState(false)
 
 
     const[showBL, setShowBL] = useState(false)
     const [bla,setbla] = useState([])
     const [cutof,setcutof] = useState(null)
-    const [rateReply, setrateReply] = useState('');
+    //const [rateReply, setrateReply] = useState('');
 
     const [lre, setlRe] = useState([])
-    const [lshre, setlshRe] = useState([])
+    //const [lshre, setlshRe] = useState([])
     const [lnum, setlNum] = useState(0)
     const [fnum, setfNum] = useState(0)
 
@@ -65,7 +62,8 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
           .then((res) => {
             //console.log(res.data);
             setfRe(res.data.fclquery.remarks)
-            setfshRe(res.data.fclquery.shremarks)          })
+            //setfshRe(res.data.fclquery.shremarks)          
+        })
           .catch(err=> {
             console.log(err);
           })     
@@ -78,7 +76,7 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
             .then((res) => {
               //console.log(res.data);
               setlRe(res.data.lclquery.remarks)
-              setlshRe(res.data.lclquery.shremarks)
+              //setlshRe(res.data.lclquery.shremarks)
 
             })
             .catch(err=> {
@@ -92,7 +90,7 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
             .get(`${http}/api/lclquery/getRateReply/${id}`)
             .then((res) => {
               //console.log(res.data);
-              setrateReply(res.data.lclquery.rateReply)
+              //setrateReply(res.data.lclquery.rateReply)
             })
             .catch(err=> {
               console.log(err);
@@ -161,24 +159,25 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
             })     
           }
           getFShipperLastSeen();  
-        const getLNumAlerts = ()=>{
-            setlNum(lre?.filter(e=> (((new Date(e.dDate)).getTime() - (new Date(LlastSeen)).getTime())/(1000))>0).length)
-          }
+
+            const getLNumAlerts = ()=>{
+                setlNum(lre?.filter(e=> (((new Date(e.dDate)).getTime() - (new Date(LlastSeen)).getTime())/(1000))>0).length)
+            }
 
           getLNumAlerts()
 
-          const getFNumAlerts = ()=>{
-            setfNum(fre?.filter(e=> (((new Date(e.dDate)).getTime() - (new Date(FlastSeen)).getTime())/(1000))>0).length)
+            const getFNumAlerts = ()=>{
+                setfNum(fre?.filter(e=> (((new Date(e.dDate)).getTime() - (new Date(FlastSeen)).getTime())/(1000))>0).length)
           }
 
           getFNumAlerts()
+
     }, [FlastSeen,LlastSeen,fre,lre,http,id]);
 
     console.log(lnum)
   
-    const [shipremarks, setShipremarks] = useState({
-        status:'', remark:'', timeVal:'', userID: loggedID, adder: loggedNM,refID: '',}
-    )
+    // const shipremarks = {
+    //     status:'', remark:'', timeVal:'', userID: loggedID, adder: loggedNM,refID: '',}
 
     //**************************************************shipper has to confirm the rates(rates.length===1)*********************************************************
     //*******************************************************************************************************************************************
@@ -192,7 +191,7 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
           console.log(res.data);
         });
         sendFStatus('schedule pending');
-        addRemarksFCL();
+        navigate('/BQuering')
     }
 
     const addShipLIdea = ()=>{
@@ -208,72 +207,6 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
             navigate('/BQuering')
 
     }
-
-    //**************************************************shipper has to confirm the rates(add remarks here)*********************************************************
-
-    const addRemarksFCL = ()=>{
-        shipremarks.status = selectedLine!=='Disagree'? "schedule pending": "asking for changes"
-        shipremarks.timeVal = new Date()
-
-        console.log(shipremarks)
-        re.push(shipremarks)
-        const addRemarksFCL= { 
-            id: id,
-            shremarks:re.map((item) => ({
-                status: item.status,
-                remark: item.remark,
-                dDate: item.timeVal,
-                userID: item.userID,
-                adder: item.adder,
-                refID:''
-            })),
-            }     
-            axios
-            .put(`${http}/api/fclquery/addShipperIdea/${id}`,addRemarksFCL)
-            .then((res) => {            
-        
-            setsDetails(res.data)
-            navigate('/BQuering')
-          });
-          shipremarks.status=''
-          shipremarks.remark=''
-          shipremarks.timeVal=''
-          re.length=0;
-    }
-
-    // const addRemarksLCL = ()=>{
-    //     shipremarks.status = selectedLine==='Agree'? "schedule pending": "asking for changes"
-    //     shipremarks.timeVal = new Date()
-
-    //     console.log(shipremarks)
-    //     re.push(shipremarks)
-    //     const addRemarksFCL= { 
-    //         id: id,
-    //         shremarks:re.map((item) => ({
-    //             status: item.status,
-    //             remark: item.remark,
-    //             dDate: item.timeVal,
-    //             userID: item.userID,
-    //             adder: item.adder,
-    //             refID:''
-
-    //         })),
-    //         } 
-                   
-    //         axios
-    //         .put(`${http}/api/fclquery/addShipIdea/${id}`,addRemarksFCL)
-    //         .then((res) => {
-    //           //console.log(res.data);
-        
-    //         setsDetails(res.data)
-    //         navigate('/BQuering')
-    //       });
-    //       shipremarks.status=''
-    //       shipremarks.remark=''
-    //       shipremarks.timeVal=''
-
-    //       re.length=0;
-    // }
 
     //**************************************************shipper has to confirm the rates(rates.length>>1)*********************************************************
 
@@ -321,53 +254,52 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
         sendFStatus('booking');
         // addRemarksFCL();
 
-        window.location.reload(false)
-
+        navigate('/BQuering')
     }
 
     const AddShipLVessel = ()=>{
-        const alterIsFinal = {
+        const alterIsLFinal = {
             isFinal : true,
             selVessel: selectedVessel
         }
         axios
-        .put(`${http}/api/lclquery/addVessel/${id}`,alterIsFinal)
+        .put(`${http}/api/lclquery/addVessel/${id}`,alterIsLFinal)
         .then((res) => {
           console.log(res.data);
         });
-        sendLStatus('booking');
+        sendLStatus('b/l pending');
         //addRemarksLCL();
 
-        window.location.reload(false)
+        navigate('/BQuering')
     }
 
     //**************************************************shipper has to confirm the vessel schedules(schedules.length>>1)*********************************************************
 
-    const sendFSSStatus = async() =>{
-        const alterStatus = { 
-        status:'booking',
-        }        
-        axios
-        .put(`${http}/api/fclquery/alterStatus/${id}`,alterStatus)
-        .then((res) => {
-          console.log(res.data);
-        });
-        //setOpen(false);
-        navigate('/dashboard')
-    }
+    // const sendFSSStatus = async() =>{
+    //     const alterStatus = { 
+    //     status:'booking',
+    //     }        
+    //     axios
+    //     .put(`${http}/api/fclquery/alterStatus/${id}`,alterStatus)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //     });
+    //     //setOpen(false);
+    //     navigate('/BQuering')
+    // }
     
-    const sendLSSStatus = async() =>{
-        const alterStatus = { 
-        status:'b/l pending',
-        }        
-        axios
-        .put(`${http}/api/lclquery/alterStatus/${id}`,alterStatus)
-        .then((res) => {
-          console.log(res.data);
-        });
-        //setOpen(false);
-        navigate('/dashboard')
-    }
+    // const sendLSSStatus = async() =>{
+    //     const alterStatus = { 
+    //     status:'b/l pending',
+    //     }        
+    //     axios
+    //     .put(`${http}/api/lclquery/alterStatus/${id}`,alterStatus)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //     });
+    //     //setOpen(false);
+    //     navigate('/BQuering')
+    // }
 
     //**************************************************Commonly status changes if you want**************************************************************************************
 
@@ -443,13 +375,19 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
     if(h>24){
         if(h%24===0){
             var days1 = Math.floor(h/24);
-            return (days1 + 'days' + ' ' + bol)
+            return `${days1} days ${bol}`
+            //return (days1 + 'days' + ' ' + bol)
+
         }else {
             var days2 = Math.floor(h/24);
-            return (days2 + ' ' + 'days &' + ' ' +  hours + ' ' + 'hours' + ' ' + bol)
+            return `${days2} days ${hours} hours ${bol}`
+            //return (days2 + ' ' + 'days &' + ' ' +  hours + ' ' + 'hours' + ' ' + bol)
+
         }
     }else if(h<24 && hours!==0){
-        return (hours + ' ' + 'hours' + ' ' + bol)
+        return `${hours} hours ${bol}`
+        //return (hours + ' ' + 'hours' + ' ' + bol)
+
     }else if(h<24 && hours===0){
         return ('Time over !!!')
 
@@ -848,7 +786,7 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
                       
                     </div>}
 
-                    {((status==='vessel pending') || (status==='booking')|| (status==='pending cut-off')|| (status==='b/l pending') || (status==='b/l added')) && 
+                    {(status==='vessel pending') && 
                     <>
                         <div className='h-0.5 bg-gray-300 w-full my-1 px-4'></div>
                         <div className='w-full flex  flex-col px-4 justify-start items-start my-3 text-gray-400 ml-3'>
@@ -944,11 +882,7 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
                                     } 
                                             
                                     </div>
-                                    {/* {status!=='vessel pending' && <div className='w-[60%] flex justify-center items-center gap-3'>
-                                        <p className='flex font-semibold my-1 text-[13px] text-gray-400 px-4'>Shipper vessel:</p>
-                                        <p className='flex ml-2 text-black'>{selVessel}</p>
-                        
-                                    </div>} */}
+                                    
 
                                     {((status==='vessel pending') && (schedules?.filter(r=>r.isFinal===true).length===0)) &&
                                     <div className='w-[60%] flex justify-end items-center gap-3'>
@@ -990,13 +924,13 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
                         
                                         <div className='flex justify-center items-center'>
                                             {containerMode==='FCL' && 
-                                            <button onClick={sendFSSStatus} className= "bg-red-500  flex text-center justify-center px-4 py-1.5 w-[140px] mx-6 text-white rounded-lg active" >Continue  <svg fill="none" stroke="currentColor" className='w-7 h-7 ml-2' stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <button onClick={()=>sendFStatus('booking')} className= "bg-red-500  flex text-center justify-center px-4 py-1.5 w-[140px] mx-6 text-white rounded-lg active" >Continue  <svg fill="none" stroke="currentColor" className='w-7 h-7 ml-2' stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                                 </svg>
                                             </button>
                                             }
                                             {containerMode==='LCL' && 
-                                            <button onClick={sendLSSStatus}  className= "bg-red-500 flex text-center justify-center px-4 py-1.5 w-[140px] mx-6 text-white rounded-lg active" >Continue  <svg fill="none" stroke="currentColor" className='w-7 h-7 ml-2' stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <button onClick={()=>sendLStatus('b/l pending')}  className= "bg-red-500 flex text-center justify-center px-4 py-1.5 w-[140px] mx-6 text-white rounded-lg active" >Continue  <svg fill="none" stroke="currentColor" className='w-7 h-7 ml-2' stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                                 </svg>
                                             </button>
@@ -1005,6 +939,110 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
 
                                     </div>}
 
+                                </div>
+                        </div>
+                    </>
+                    }
+
+                    {((status==='booking')|| (status==='pending cut-off')|| (status==='b/l pending') || (status==='b/l added')) && 
+                    <>
+                        <div className='h-0.5 bg-gray-300 w-full my-1 px-4'></div>
+                        <div className='w-full flex  flex-col px-4 justify-start items-start my-3 text-gray-400 ml-3'>
+                            <p className=' font-semibold text-xs mb-2'>Schedules :</p>
+                                <div className='w-full flex justify-start items-center gap-x-5 gap-y-2' >
+                                    <div className={`${containerMode==='FCL'? 'w-[40%]': 'w-[50%]'} flex flex-col justify-center items-star`}>
+                                    {containerMode==='FCL'? 
+                                    <>
+                                    {schedules?.filter(r=>r.isFinal===false).map((re,index)=>(
+                                        <div className='w-full flex justify-between gap-1' key={index}>
+                                            <div className='flex justify-start items-center gap-2'>
+                                                <DirectionsBoatFilledIcon sx={{ color: 'blue' }}/>
+                                                <p className='text-black text-[13px]'>{re.vessel} / {re.voyage}</p>
+                                            </div>
+                                    
+                                            <div className='flex mt-1'>                                   
+                                                <ValuesBox item='schedulesF' f1={re.ETD} f2={re.transit} f3={re.ETA} f4={re.shipMode} f5={re.transhipments} />
+                                            </div>
+                                           
+                                        </div>
+                                    )) }  
+                                    
+                                    {schedules?.filter(r=>r.isFinal===true).length>0 && <p className='text-green-600 font-semibold text-[12.5px] py-1 text-start'>Finalized schedule/s:</p>}
+                                    
+                                    {schedules.filter(r=>r.isFinal===true).length>0 && schedules.filter(r=>r.isFinal===true).map((re,index)=>(
+                                    
+                                        <div className='w-full flex justify-between gap-1 border-green-600 rounded-md border-2 p-1' key={index}>
+                                            <div className='flex justify-start items-center gap-2'>
+                                                <DirectionsBoatFilledIcon sx={{ color: 'blue' }}/>
+                                                <p className='text-black text-[13px]'>{re.vessel} / {re.voyage}</p>
+                                            </div>
+                                    
+                                            <div className='flex mt-1'>                                   
+                                                <ValuesBox item='schedulesF' f1={re.ETD} f2={re.transit} f3={re.ETA} f4={re.shipMode} f5={re.transhipments} />
+                                            </div>
+                                           
+                                        </div>
+                                    ))
+                                    }
+                                    </>
+                                    
+                                    :
+
+                                    <div className='w-full flex flex-col'>
+                                    <div className='w-full flex justify-between'>
+
+                                        <div className='w-full flex justify-start items-center gap-x-10 gap-y-2'>
+
+                                        {schedules.filter(r=>r.isFinal===false).length>0 && schedules.filter(r=>r.isFinal===false).map((re,index)=>(
+
+                                        <>
+                                        <div className='flex justify-start items-center gap-2'>
+                                            <DirectionsBoatFilledIcon sx={{ color: 'blue' }}/>
+                                            <p className='text-black text-[13px]'>{re.vessel} / {re.voyage}</p>
+                                        </div>
+
+                                        <div className='flex justify-start items-center gap-2'>
+                                            <img src={crane} alt='calender' className='w-[26px] h-[26px]' />
+                                            <p className='text-black text-[13px] font-semibold'>Yard: <span className='ml-3 font-normal'>{yard}</span></p>
+                                        </div>
+
+                                        <div className='flex'>                                   
+                                        <ValuesBox item='schedules' t1={re.ETAC} t2={re.ETDC} t3={re.ETAD} t4={re.LCLClosingDate} t5={re.LCLClosingTime} />
+                                        </div>                                      
+                                    </>
+                                        ))
+                                        }
+                                        </div>                               
+                                    </div>
+                                        
+                                        {schedules.filter(r=>r.isFinal===true).length>0 && <p className='text-green-600 font-semibold text-[12.5px] py-1'>Finalized schedule/s:</p>}
+
+                                        {schedules.filter(r=>r.isFinal===true).length>0 && schedules.filter(r=>r.isFinal===true).map((re,index)=>(
+                                        
+                                        <>
+                                        <div className='w-full flex justify-between gap-1 border-green-600 rounded-md border-2 p-1'>
+                                            <div className='flex justify-start items-center gap-2'>
+                                                <DirectionsBoatFilledIcon sx={{ color: 'blue' }}/>
+                                                <p className='text-black text-[13px]'>{re.vessel} / {re.voyage}</p>
+                                            </div>
+
+                                            <div className='flex justify-start items-center gap-2'>
+                                                <img src={crane} alt='calender' className='w-[26px] h-[26px]' />
+                                                <p className='text-black text-[13px] font-semibold'>Yard: <span className='ml-3 font-normal'>{yard}</span></p>
+                                            </div>
+
+                                            <div className='flex justify-start items-center gap-2'>                                   
+                                            <ValuesBox item='schedules' t1={re.ETAC} t2={re.ETDC} t3={re.ETAD} t4={re.LCLClosingDate} t5={re.LCLClosingTime} />
+                                            </div> 
+                                        </div>                                                                         
+                                        </>
+                                        ))
+                                        }
+                                    </div>
+                                    } 
+                                            
+                                    </div>
+                                        
                                 </div>
                         </div>
                     </>

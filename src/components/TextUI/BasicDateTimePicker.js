@@ -18,7 +18,7 @@ export const BasicDateTimePicker = ({label1,label2,setDate,setTime}) => {
   let year = objectDate.getFullYear();
   //console.log(year); 
 
-  let format3 = `${year}-${month+1}-${day}`
+  //let format3 = `${year}-${month+1}-${day}`
   //console.log(format3); 
   let Imonth = month>9? (month+1) : `0${(month+1)}`
 
@@ -81,7 +81,7 @@ export const EditBasicDateTimePicker = ({label1,label2,fetchDate,handleDate,fetc
 
   let year = objectDate.getFullYear();
 
-  let format3 = `${year}-${month+1}-${day}`
+  //let format3 = `${year}-${month+1}-${day}`
   let Imonth = month>9? (month+1) : `0${(month+1)}`
 
   let format4 = `${year}-${Imonth}-${day}`

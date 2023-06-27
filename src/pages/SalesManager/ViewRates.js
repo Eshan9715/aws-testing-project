@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import dollar from '../../assets/dollar.png'
 import {FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import RateTile from '../../components/RateTile';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const ViewRates = () => {
@@ -13,14 +12,13 @@ const ViewRates = () => {
   const loggedUser = useSelector((state)=> state.auth.value);
 
     const [viewRates, setViewRates] = useState([])
-    const [ldetails, setlDetails] = useState([])
-    const [pdetails, setpDetails] = useState([])
+    //const [ldetails, setlDetails] = useState([])
+    //const [pdetails, setpDetails] = useState([])
 
-    const [id,setID] = useState("");
-    const navigate = useNavigate();
+    //const [id,setID] = useState("");
 
     useEffect(() => {
-      setID(loggedUser.userID)
+      //setID(loggedUser.userID)
 
       const getRates = ()=>{
         axios
@@ -35,35 +33,35 @@ const ViewRates = () => {
       }
       getRates();
 
-      const getPorts = ()=>{
-        axios
-        .get(`${http}/api/destination`)
-        .then((res) => {
-          console.log(res.data);
-          setpDetails(res.data.destinations)
-        })
-        .catch(err=> {
-          console.log(err);
-        })     
-      }
-      getPorts();
+      // const getPorts = ()=>{
+      //   axios
+      //   .get(`${http}/api/destination`)
+      //   .then((res) => {
+      //     console.log(res.data);
+      //     //setpDetails(res.data.destinations)
+      //   })
+      //   .catch(err=> {
+      //     console.log(err);
+      //   })     
+      // }
+      // getPorts();
 
-      const getLines = ()=>{
-        axios
-        .get(`${http}/api/line`)
-        .then((res) => {
-          console.log(res.data);
-          setlDetails(res.data.lines)
-        })
-        .catch(err=> {
-          console.log(err);
-        })     
-      }
-      getLines();
+      // const getLines = ()=>{
+      //   axios
+      //   .get(`${http}/api/line`)
+      //   .then((res) => {
+      //     console.log(res.data);
+      //     //setlDetails(res.data.lines)
+      //   })
+      //   .catch(err=> {
+      //     console.log(err);
+      //   })     
+      // }
+      // getLines();
       
   }, [http,loggedUser]);
 
-    const[validDate, setValidDate] = useState(null);
+    var validDate = null;
 
     const [search, setSearch] = useState('')
     const [catomode, setCatomode] = useState('Discharge')

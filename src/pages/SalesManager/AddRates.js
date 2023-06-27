@@ -11,7 +11,6 @@ import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { TextInput } from '../../components/TextUI/TextInput';
 import { BasicDatePicker } from '../../components/TextUI/BasicDatePicker';
 import { userSchema7 } from '../../components/Default/userValidation';
-import RateTile from '../../components/RateTile';
 import AlertRate from '../../components/DialogBoxes/AlertRate';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -31,7 +30,7 @@ const AddRates = () => {
     const [discharge, setDischarge] = useState('')
     const [zipcode, setZipcode] = useState('')
     const [showAlert, setShowAlert] = useState(false)
-    const [viewRates, setViewRates] = useState([])
+    //const [viewRates, setViewRates] = useState([])
     const [ldetails, setlDetails] = useState([])
     const [pdetails, setpDetails] = useState([])
 
@@ -42,18 +41,18 @@ const AddRates = () => {
     useEffect(() => {
       setID(loggedUser.userID)
 
-      const getRates = ()=>{
-        axios
-        .get(`${http}/api/rate`)
-        .then((res) => {
-          console.log(res.data);
-          setViewRates(res.data.rates)
-        })
-        .catch(err=> {
-          console.log(err);
-        })     
-      }
-      getRates();
+      // const getRates = ()=>{
+      //   axios
+      //   .get(`${http}/api/rate`)
+      //   .then((res) => {
+      //     console.log(res.data);
+      //     setViewRates(res.data.rates)
+      //   })
+      //   .catch(err=> {
+      //     console.log(err);
+      //   })     
+      // }
+      // getRates();
 
       const getPorts = ()=>{
         axios
@@ -89,9 +88,8 @@ const AddRates = () => {
     const[validDate, setValidDate] = useState(null);
     const [shmode, setShMode] = useState('')
     const [multiVal, setMultiVal] = useState('')
-    const [go,setGo] = useState(false)
+    var go = false;
 
-   
     const sendRRequest = async() =>{
         const newRate = {
           origin: origin,

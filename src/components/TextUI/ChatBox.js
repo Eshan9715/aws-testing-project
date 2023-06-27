@@ -1,8 +1,6 @@
 import { Fab } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import {Message, RepliedMessage, ReplyMessage } from './Message'
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 

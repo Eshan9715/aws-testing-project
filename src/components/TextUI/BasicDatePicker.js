@@ -53,7 +53,7 @@ export const BasicDatePicker = ({label,setDate}) => {
   let year = objectDate.getFullYear();
   //console.log(year); 
 
-  let format3 = `${year}-${month+1}-${day}`
+  //let format3 = `${year}-${month+1}-${day}`
   //console.log(format3); 
   let Imonth = month>9? (month+1) : `0${(month+1)}`
 

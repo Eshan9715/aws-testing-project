@@ -3,7 +3,6 @@ import axios from 'axios'
 import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { lclRates, userSchema8 } from '../Default/userValidation'
 import { TextFields } from '../TextUI/TextFields'
@@ -12,13 +11,14 @@ import Automan from '../TextUI/AutoText'
 var rates=[];
 var lRates = {}
 var lratesArr = []
+var lre=[];
+
 
 const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
   var http = process.env.REACT_APP_BASE_URL;
   
     const navigate = useNavigate();
     const [re, setRe] = useState([])
-    const [lre, setlRe] = useState([])
 
     const [ldetails, setlDetails] = useState([])
     const [memData, setmemData] = useState([])
@@ -28,7 +28,6 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
 
     const [cName, setcName] = useState('')
 
-    const [rdetails, setrDetails] = useState([])
     const [checked, setChecked] = useState(false);
 
     const [salremarks, setsalRemarks] = useState({
@@ -143,7 +142,6 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
         .then((res) => {
           //console.log(res.data);
     
-        setrDetails(res.data)
       });
       salremarks.status=''
       salremarks.remark=''
@@ -169,7 +167,6 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
       .then((res) => {
         //console.log(res.data);
   
-      setrDetails(res.data)
     });
     sendFSStatus();
   
@@ -190,7 +187,6 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
     .then((res) => {
       //console.log(res.data);
 
-    setrDetails(res.data)
   });
   sendFSStatus();
 
@@ -246,7 +242,6 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
         .then((res) => {
           //console.log(res.data);
     
-        setrDetails(res.data)
       });
       // salremarks.status=''
       // salremarks.remark=''
@@ -297,8 +292,6 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
     .put(`${http}/api/lclquery/addRates/${id}`,addRates)
     .then((res) => {
       //console.log(res.data);
-
-    setrDetails(res.data)
   });
 }
 

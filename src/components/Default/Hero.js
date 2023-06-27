@@ -8,18 +8,13 @@ import Adminapproval from './Adminapprovel';
 
 const Hero = () => {
     const loggedUser = useSelector(state=> state.auth.value);
-    const [user,setUser] = useState({})
-    const [id,setid] = useState('')
     const [assign,setAssign] = useState('')
 
     const [show, setShow] = useState(false)
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        setid(loggedUser.userID)
         setAssign(loggedUser.assignedTo)
-    
     }, [loggedUser]);
 
     //console.log(user)

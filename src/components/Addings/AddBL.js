@@ -5,6 +5,7 @@ import { Box, Button, Paper, Step, StepContent, StepLabel, Stepper, Typography }
 import { CargoDesc, CargoQuantity, ConsigneeDetails, ContainerDetails, MarkNvalues, NotifyDetails, ShipperDetails } from '../Viewings/FormTemplates'
 import { DialogBox } from '../DialogBoxes/DialogBox'
 
+var BLData = [];
 const AddBL = ({show,title,close,id, blData}) => {
     var http = process.env.REACT_APP_BASE_URL;
     const loggedUser = useSelector(state=> state.auth.value);
@@ -13,7 +14,6 @@ const AddBL = ({show,title,close,id, blData}) => {
     const [shipper, setshipper] = useState([])
     const [consignee, setconsignee] = useState([])
     const [notify, setnotify] = useState([])
-    const [bl, setbl] = useState([])
 
     const [isCheckValid, setisCheckValid] = useState(false)
     const [openDialog, setopenDialog] = useState(false)
@@ -117,8 +117,7 @@ const AddBL = ({show,title,close,id, blData}) => {
       close();
     }
 
-    const [rdetails, setrDetails] = useState([])
-    const [BLData, setBLData] = useState([])
+    //const [BLData, setBLData] = useState([])
 
     const [formData, setFormData] = useState({});
 
@@ -161,24 +160,6 @@ const AddBL = ({show,title,close,id, blData}) => {
         },
       ];
 
-    const [pdetails, setpDetails] = useState([])
-
-    useEffect(() => {
-        const getPorts = ()=>{
-            axios
-            .get(`${http}/api/destination`)
-            .then((res) => {
-              //console.log(res.data);
-              setpDetails(res.data.destinations)
-            })
-            .catch(err=> {
-              console.log(err);
-            })     
-          }
-          getPorts();
-        //validate(val1);
-    }, [http]);
-
     const sendRequest = async() =>{
         BLData.push(formData)
         //console.log(BLData)
@@ -220,7 +201,6 @@ const AddBL = ({show,title,close,id, blData}) => {
         .then((res) => {
           //console.log(res.data);
     
-        setrDetails(res.data)
       });
 
       if(shipper?.filter(e=>e.shipperName).length===0 || (shipper?.filter(e=>!e.shipperName.includes(formData.shipperName)))){
@@ -281,7 +261,6 @@ const AddBL = ({show,title,close,id, blData}) => {
         setDonesave(true)
         setsaving(false)
   
-      setrDetails(res.data)
     });
 
   }
@@ -321,7 +300,6 @@ const AddBL = ({show,title,close,id, blData}) => {
       .then((res) => {
         console.log(res.data);
   
-      setrDetails(res.data)
     });
   }
 
@@ -340,7 +318,6 @@ const AddBL = ({show,title,close,id, blData}) => {
     .then((res) => {
       console.log(res.data);
 
-    setrDetails(res.data)
   });
 }
 
@@ -359,7 +336,6 @@ const AddBL = ({show,title,close,id, blData}) => {
     .then((res) => {
       console.log(res.data);
 
-    setrDetails(res.data)
   });
 
   

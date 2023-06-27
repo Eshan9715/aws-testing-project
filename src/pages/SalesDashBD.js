@@ -4,8 +4,8 @@ import React from 'react'
 // import {recentAct} from '../Data'
 // import SliderMails from '../sliders/'
 import { useEffect } from 'react'
-import { useState } from 'react'
-import axios from 'axios'
+//import { useState } from 'react'
+//import axios from 'axios'
 // import { useSelector } from 'react-redux'
 
 //var http = "http://localhost:5000";  
@@ -14,23 +14,23 @@ import axios from 'axios'
 const SalesDashBD = () => {
     var http = process.env.REACT_APP_BASE_URL;
   
-    const [viewRates, setViewRates] = useState([])
+    //const [viewRates, setViewRates] = useState([])
 
     useEffect(() => {
         // setID(localStorage.getItem("userID"))
   
-        const getRates = ()=>{
-          axios
-          .get(`${http}/api/rate`)
-          .then((res) => {
-            console.log(res.data);
-            setViewRates(res.data.rates)
-          })
-          .catch(err=> {
-            console.log(err);
-          })     
-        }
-        getRates();
+        // const getRates = ()=>{
+        //   axios
+        //   .get(`${http}/api/rate`)
+        //   .then((res) => {
+        //     console.log(res.data);
+        //     setViewRates(res.data.rates)
+        //   })
+        //   .catch(err=> {
+        //     console.log(err);
+        //   })     
+        // }
+        // getRates();
         
     }, [http]);
     

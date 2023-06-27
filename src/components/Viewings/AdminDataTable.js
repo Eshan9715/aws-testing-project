@@ -4,9 +4,9 @@ import AddAssigner from '../Addings/AddAssigner';
 
 const AdminDataTable = ({data, role, xFact}) => {
     const [addAsg, setAddAsg] = useState(false)
-    const [id,setId] = useState('');
-    const [crdList, setCrdList] = useState([])
-    const [yname,setYname] = useState('');
+    var id = ''
+    var crdList = [];
+    var yname = '';
 
   return (
     <div className='w-[95%]'>

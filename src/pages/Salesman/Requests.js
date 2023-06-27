@@ -105,7 +105,7 @@ const Requests = () => {
     const [tabmode, setTabmode] = useState('rates pending')
     const [ctabmode, setcTabmode] = useState('schedule pending')
 
-    console.log(tabmode)
+    //console.log(tabmode)
     
     cRfinalizedFullCargo = [...cfrueryData, ...clrueryData]
     sRfinalizedFullCargo = [...sfrueryData, ...slrueryData]
@@ -187,6 +187,7 @@ const Requests = () => {
                         loggedID = {ID}
                         loggedNM = {name}
                         type={obj.type}
+                        yard={obj.yard}
                                                                             
                     />
                     )): role==='salesman' && sRfinalizedFullCargo?.filter(e=> e.status===tabmode).length===0 &&

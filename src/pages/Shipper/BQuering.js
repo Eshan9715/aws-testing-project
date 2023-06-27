@@ -24,9 +24,7 @@ const BQuering = () => {
   const [lqueryData, setLQueryData] = useState([])
   const [lConqueryData, setLConQueryData] = useState([])
 
-  const [pdetails, setpDetails] = useState([])
-  const [hsdetails, sethsDetails] = useState([])
-  const [mngr, setmngr] = useState('')
+  //const [mngr, setmngr] = useState('')
   const [name, setName] = useState('')
 
   const getCurrentDimension = () =>{
@@ -54,18 +52,18 @@ const BQuering = () => {
       setID(loggedUser.userID)
       setName(loggedUser.userName)
 
-      const getConsoleMngr = () =>{
-        axios
-        .get(`${http}/api/member?role=consolemanager`)
-        .then((res) => {
-          //console.log(res.data);
-          setmngr(res.data.member[0].name)
-        })
-        .catch(err=> {
-          console.log(err);
-        })  
-      }
-      getConsoleMngr()
+      // const getConsoleMngr = () =>{
+      //   axios
+      //   .get(`${http}/api/member?role=consolemanager`)
+      //   .then((res) => {
+      //     //console.log(res.data);
+      //     setmngr(res.data.member[0].name)
+      //   })
+      //   .catch(err=> {
+      //     console.log(err);
+      //   })  
+      // }
+      // getConsoleMngr()
 
       const getFCLQueries = ()=>{
         axios
@@ -105,32 +103,6 @@ const BQuering = () => {
         })  
       }
       getLCLs();
-      
-      const getPorts = ()=>{
-        axios
-        .get(`${http}/api/destination`)
-        .then((res) => {
-          //console.log(res.data);
-          setpDetails(res.data.destinations)
-        })
-        .catch(err=> {
-          console.log(err);
-        })     
-      }
-      getPorts();
-
-      const getHSCodes = ()=>{
-        axios
-        .get(`${http}/api/hsCodes`)
-        .then((res) => {
-          //console.log(res.data);
-          sethsDetails(res.data.hsCodes)
-        })
-        .catch(err=> {
-          console.log(err);
-        })     
-      }
-      getHSCodes();
 
       const getUser = ()=>{
         axios
@@ -171,7 +143,6 @@ const BQuering = () => {
 
   //console.log(mngr)
 
-  const [rdate, serRdate] = useState(null)
   //console.log(rdate)
 
   const [tabmode, setTabmode] = useState('rates pending')

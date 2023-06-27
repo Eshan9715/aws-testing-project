@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
 import React,{useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Default/Navbar';
 import { TextFields } from '../../components/TextUI/TextFields';
@@ -11,9 +10,7 @@ import Success from '../../components/Default/Success';
 import Selects from '../../components/TextUI/Selects';
 
 const Register = () => {
-    const [details, setDetails] = useState([])
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     var http = process.env.REACT_APP_BASE_URL;
     const tradeTerms = [{key:1, value:"Imports only"}, {key:2, value:"Exports only"}, {key:3, value:"Both"} ]
 
@@ -39,7 +36,6 @@ const Register = () => {
           .then((res) => {
             //console.log(res.data);
         
-        setDetails(res.data)
       }).catch(err=> {
         console.log(err);
       });

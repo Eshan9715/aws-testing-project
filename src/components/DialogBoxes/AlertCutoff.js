@@ -1,14 +1,13 @@
 import React from 'react'
 
-const AlertCutoff = ({cutof,show,close,id,title,containerMode}) => {
+const AlertCutoff = ({cutof,show,close,title,containerMode}) => {
+    console.log(containerMode)
 
     if(!show){
         return null
     }
-
     //console.log(cutof)
 
-   
   return (
     <div className={`${show? "fixed inset-0" : "hidden"}  bg-gray-900 bg-opacity-50  w-full flex justify-center items-center md:ml-20`}>
             <div className={`flex flex-col bg-white w-[40%] gap-4 rounded-lg shadow-lg`}>
@@ -28,19 +27,19 @@ const AlertCutoff = ({cutof,show,close,id,title,containerMode}) => {
                 <LineRow topic='VGM CLOSING' dateC={cutof?.VGMCLOD} timeC={cutof?.VGMCLOT}/>
                 <LineRow topic='REEFER OPENING' dateC={cutof?.VGMCLOD} timeC={cutof?.BLCLOT}/>
 
-             
+                <LineRow topic='CNTR PICK UP CUT OFF' dateC={cutof?.CPUCD} timeC={cutof?.CPUCT}/>
+                <div className='h-0.5 bg-gray-300 w-full my-2 px-4'></div>
+
                 <TextLine term='BERTHING' pla={cutof?.TERMIN}/>
                 <TextLine term='VESSEL OPERATOR' pla={cutof?.VESOP}/>
                 <TextLine term='CONTAINER OPERATOR' pla={cutof?.CONOP}/>
 
-                <div className='h-0.5 bg-gray-300 w-full my-4 px-4'></div>
-                <p className='w-full text-[11px] text-red-600 flex justify-center'>*Optional</p>
+                {/* <p className='w-full text-[11px] text-red-600 flex justify-center'>*Optional</p> */}
 
-                <LineRow topic='CNTR PICK UP CUT OFF' dateC={cutof?.CPUCD} timeC={cutof?.CPUCT}/>
 
             </div>}
 
-            {containerMode==='LCL' && 
+            {/* {containerMode==='LCL' && 
             <div className='w-full flex flex-col justify-center items-center mb-3 overflow-y-auto max-h-[400px]'>
 
                 <LineRow topic='ETA COLOMBO' dateC={cutof?.ETACOLD} timeC={cutof?.ETACOLT}/>
@@ -60,7 +59,7 @@ const AlertCutoff = ({cutof,show,close,id,title,containerMode}) => {
 
                 <LineRow topic='CNTR PICK UP CUT OFF' dateC={cutof?.CPUCD} timeC={cutof?.CPUCT}/>
 
-            </div>}
+            </div>} */}
             </div>
     </div>
     

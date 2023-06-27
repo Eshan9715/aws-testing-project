@@ -10,8 +10,8 @@ var rlfinalizedFullCargo = []
 //var http =  "https://cute-plum-caterpillar-tie.cyclic.app" 
 
 const QueryList = () => {
-    const [role, setRole] = useState('')
-    const [name, setName] = useState('')
+    //const [role, setRole] = useState('')
+    //const [name, setName] = useState('')
 
     const [frueryData, setFRueryData] = useState([])
     const [lrueryData, setLRueryData] = useState([])
@@ -23,8 +23,8 @@ const QueryList = () => {
     const loggedUser = useSelector((state)=> state.auth.value);
 
     useEffect(() => {
-        setRole(loggedUser.role)
-        setName(loggedUser.userName)
+        //etRole(loggedUser.role)
+        //setName(loggedUser.userName)
         setID(loggedUser.userID)
 
         const getRueries = ()=>{

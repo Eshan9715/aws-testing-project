@@ -16,7 +16,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import { userSchema5 } from '../../components/Default/userValidation';
 import moment from 'moment';
 
-
 var fclCargo = []
 var lcl = []
 
@@ -42,14 +41,9 @@ const AddQuery = () => {
  const [userData, setUserData] = useState([])
  const [showAlert, setShowAlert] = useState(false)
 
- const [fqueryData, setFQueryData] = useState([])
- const [lqueryData, setLQueryData] = useState([])
- const [lConqueryData, setLConQueryData] = useState([])
-
  const [pdetails, setpDetails] = useState([])
  const [hsdetails, sethsDetails] = useState([])
  const [mngr, setmngr] = useState('')
- const [name, setName] = useState('')
 
  const initialConValues = {
     Containers: [
@@ -72,11 +66,10 @@ const AddQuery = () => {
   const [mode, setMode] = useState('')
   const [shStatus, setshStatus] = useState('')
 
-  const [error, setError] = useState('')
+  const error = ''
 
   const [rdate, serRdate] = useState(null)
   //console.log(rdate)
-
 
   // const navigate = useNavigate();
 
@@ -89,12 +82,10 @@ const AddQuery = () => {
   const [noPkg, setNoPkg] = useState('')
   const [vol, setVol] = useState('')
   const [filteredData, setFilteredData] = useState([]);
-  const [code, setCode] = useState('')
 
  useEffect(() => {
      setRole(loggedUser.role)
      setID(loggedUser.userID)
-     setName(loggedUser.userName)
 
      const getConsoleMngr = () =>{
        axios
@@ -108,45 +99,6 @@ const AddQuery = () => {
        })  
      }
      getConsoleMngr()
-
-     const getFCLQueries = ()=>{
-       axios
-       .get(`${http}/api/fclquery/user/${id}`)
-       .then((res) => {
-         console.log(res.data);
-         setFQueryData(res.data.user.fclqueries)
-       })
-       .catch(err=> {
-         console.log(err);
-       })  
-     }
-     getFCLQueries();
-
-     const getLCLQueries = ()=>{
-       axios
-       .get(`${http}/api/lclquery/user/${id}`)
-       .then((res) => {
-         console.log(res.data);
-         setLQueryData(res.data.user.lclqueries)
-       })
-       .catch(err=> {
-         console.log(err);
-       })  
-     }
-     getLCLQueries();
-
-     const getLCLs = ()=>{
-       axios
-       .get(`${http}/api/lclquery?ID=${id}`)
-       .then((res) => {
-         console.log(res.data);
-         setLConQueryData(res.data.lclqueries)
-       })
-       .catch(err=> {
-         console.log(err);
-       })  
-     }
-     getLCLs();
      
      const getPorts = ()=>{
        axios
@@ -162,17 +114,17 @@ const AddQuery = () => {
      getPorts();
 
      const getHSCodes = ()=>{
-       axios
-       .get(`${http}/api/hsCodes`)
-       .then((res) => {
-         //console.log(res.data);
-         sethsDetails(res.data.hsCodes)
-       })
-       .catch(err=> {
-         console.log(err);
-       })     
-     }
-     getHSCodes();
+      axios
+      .get(`${http}/api/hsCodes`)
+      .then((res) => {
+        //console.log(res.data);
+        sethsDetails(res.data.hsCodes)
+      })
+      .catch(err=> {
+        console.log(err);
+      })     
+    }
+    getHSCodes();
 
      const getUser = ()=>{
        axios
@@ -332,7 +284,6 @@ const AddQuery = () => {
   const clearInput = () => {
     setFilteredData([]);
     setWordEntered("");
-    setCode('');
   };
 
   const optionClicked = (val) =>{

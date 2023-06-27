@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import fri from '../../assets/fri.png'
 import {useDispatch, useSelector} from 'react-redux';
 import { logout } from '../../redux/authRedux';
-import { local } from '../../redux/urlRedux';
 
 const Navbar = ({childern}) => {
   // const isLoggedIn = useSelector((state)=> state.auth.isLoggedIn);
@@ -43,16 +42,6 @@ const Navbar = ({childern}) => {
   const showWindow = ()=>{
     setShow(!show);
   }
-
-  // console.log(data.userName.slice(0,5))
-
-
-    let Links =[
-      {name:"Home",link:"/"},
-      // {name:"Booking",link:"/booking"},
-      // {name:"Process",link:"/process"},
-    ];
-    let [open,setOpen]=useState(false);
 
   return (
     <div className={`shadow-md w-[100%] fixed ${role==='user'? 'bg-red-400': role==='salesman'?'bg-green-400': role==='crd'?'bg-purple-400':'bg-slate-100'} z-50`}>

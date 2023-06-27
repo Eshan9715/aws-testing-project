@@ -19,9 +19,6 @@ const Login = () => {
   const[loading, setLoading] = useState(false)
   const[error, seterror] = useState('')
 
-
-  const [details, setDetails] = useState([])
-
   const sendRequest = async(values) =>{
     const exisitngUser = {
       email:values.email,
@@ -39,7 +36,7 @@ const Login = () => {
           assignedTo: res.data.user.assignedTo, userImage: (res.data.user.image || res.data.member.image),
            isLoggedIn: true }))
 
-    setDetails(res.data)
+    // setDetails(res.data)
     setLoading(false)
     navigate('/')  
 

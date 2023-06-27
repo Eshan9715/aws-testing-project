@@ -17,8 +17,6 @@ const AddCutOff = ({show,close,title,id,data}) => {
     const [rfOpen, setrfOpen] = useState(null)
     const [cpuc, setcpuc] = useState(null)
 
-
-
     const [etaColt, setetaColt] = useState(null)
     const [fclOpent, setfclOpent] = useState(null)
     const [fclClot, setfclClot] = useState(null)
@@ -27,13 +25,9 @@ const AddCutOff = ({show,close,title,id,data}) => {
     const [rfOpent, setrfOpent] = useState(null)
     const [cpuct, setcpuct] = useState(null)
 
-
-    const [ldetails, setlDetails] = useState([])
     const [vopr, setvopr] = useState('')
     const [conopr, setconopr] = useState('')
     const [termin, settermin] = useState('')
-    const [cutof,setcutof] = useState({})
-
 
     var CUTOFF = {
       ETACOLD:'',
@@ -63,19 +57,7 @@ const AddCutOff = ({show,close,title,id,data}) => {
 
     useEffect(() => {
       setData(data)
-      const getLines = ()=>{
-        axios
-        .get(`${http}/api/line`)
-        .then((res) => {
-          //console.log(res.data);
-          setlDetails(res.data.lines)
-        })
-        .catch(err=> {
-          //console.log(err);
-        })     
-      }
-      getLines();
-    }, [data, http,cutof]);
+    }, [data]);
 
    // console.log(Data?.ETACOL)
     //console.log(Data?.ETACOL.split(" ")[0])

@@ -13,7 +13,6 @@ import Sidenavbar from './components/Default/Sidenavbar';
 import NotFound from './pages/Common/NotFound';
 import Login from './pages/Common/Login';
 import Register from './pages/Common/Register';
-// import Register from './pages/Register';
 
 const Dashboard = lazy(() => import('./pages/Common/Dashboard'));
 const BQuering = lazy(() => import('./pages/Shipper/BQuering'));
@@ -34,7 +33,6 @@ function App() {
 
    //creating IP state
    const [ip,setIP] = useState('');
-   const [assign,setAssign] = useState('')
    const [path,setpath] = useState('')
 
 
@@ -44,11 +42,12 @@ function App() {
        //console.log(res.data);
        setIP(res.data.IPv4)
    }
+   console.log(ip)
+
    
    useEffect(()=>{
        //passing getData method to the lifecycle method
        getData()
-       setAssign(loggedUser.assignedTo)
        setpath(location.pathname)
 
    },[loggedUser,location])

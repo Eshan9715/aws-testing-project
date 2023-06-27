@@ -5,12 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import Automan from '../TextUI/Automan'
 import { MultipleInputs } from '../TextUI/MultipleInputs'
 import user from '../../assets/user.png'
-import { CropDinOutlined } from '@mui/icons-material'
 // import { useSelector } from 'react-redux'
 
 var arr=[]
-var arr1=[]
-
 var addSalestoCRD = {} 
 
 const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) => {
@@ -24,17 +21,13 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) =
 
     const [users, setUsers] = useState([])
     const [members, setmembers] = useState([])
-    const [delArr, setdelArr] = useState([])
-
 
     //salesmans.filter(t=>t._id===id)[0].assigned
 
-    const [asdetails, setasDetails] = useState([])
     const [crlist, setcrList] = useState([]);
 
     const [staate, setstaate] = useState('')
     const [okDel, setokDel] = useState(false)
-
 
     //console.log(cName)
 
@@ -96,9 +89,7 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) =
     
     }, [http,members]);    
 
-  
     //delArr = salesmans?.filter(t=>t._id===id)[0]?.assigned;
-
 
     const send = ()=>{
       if(role==='admin' && staate==='YES'){
@@ -172,7 +163,6 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) =
         .then((res) => {
           console.log(res.data);
     
-        setasDetails(res.data)
       });
       setstaate('');
       setcName('');
@@ -188,7 +178,6 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) =
       .then((res) => {
         console.log(res.data);
   
-      setasDetails(res.data)
     });
     setcName('');
 
@@ -211,7 +200,7 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) =
       .then((res) => {
         console.log(res.data);
 
-      //setasDetails(res.data)
+      //(res.data)
       })
     }
     arr.length=0
@@ -226,9 +215,7 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) =
     .put(`${http}/api/member/assignCRD/${id}`,addCRDman)
     .then((res) => {
       console.log(res.data);
-
-    setasDetails(res.data)
-  });
+    });
   addSalesmanToCRDs(arr);
 }
 
@@ -241,11 +228,9 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) =
     .put(`${http}/api/user/assignCRD/${id}`,addCrd1)
     .then((res) => {
       console.log(res.data);
-
-    setasDetails(res.data)
-  });
-  setcName('');
-  setstaate('');
+    });
+    setcName('');
+    setstaate('');
 
   }
 

@@ -30,7 +30,7 @@ const Sidenavbar = ({children}) => {
     })
   }, [screenSize])
 
-  console.log(screenSize.height)
+  //console.log(screenSize.height)
 
     const activeStyle = {
         backgroundColor: "white",

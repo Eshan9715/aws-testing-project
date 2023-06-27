@@ -2,7 +2,6 @@ import {TextField } from '@mui/material'
 import axios from 'axios'
 import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik'
 import React, {useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { userSchema9, userSchema9L } from '../Default/userValidation'
 
@@ -15,7 +14,6 @@ const AddSchedules = ({show,title,close,id,containerMode}) => {
     const navigate = useNavigate();
 
     const [yard, setyard] = useState('')
-    const [bdetails, setbDetails] = useState([])
 
     const initialValues = {
         SSchedules: [
@@ -66,9 +64,8 @@ const AddSchedules = ({show,title,close,id,containerMode}) => {
         .then((res) => {
           console.log(res.data);
     
-        setbDetails(res.data)
       });
-      navigate('/dashboard')
+      navigate('/req')
     }
 
     const sendNewRequest = async() =>{
@@ -91,8 +88,9 @@ const AddSchedules = ({show,title,close,id,containerMode}) => {
         .then((res) => {
           console.log(res.data);         
     
-        setbDetails(res.data)
       });
+      navigate('/req')
+
     }
     
 
@@ -119,8 +117,9 @@ const AddSchedules = ({show,title,close,id,containerMode}) => {
         .then((res) => {
           console.log(res.data);
     
-        setbDetails(res.data)
       });
+      navigate('/req')
+
 
     }
     var today = new Date();
