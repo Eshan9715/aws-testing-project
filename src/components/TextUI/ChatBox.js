@@ -34,20 +34,20 @@ const ChatBox = ({show,title,close,id,role,userID,loggedName,status,containerTyp
     )
 
     useEffect(() => {
-          // const getLRemarks = ()=>{
-          //   axios
-          //   .get(`${http}/api/lclquery/getRemarks/${id}`)
-          //   .then((res) => {
-          //     console.log(res.data);
-          //     setlRe(res.data.lclquery.remarks)
-          //     setlshRe(res.data.lclquery.shremarks)
+          const getLRemarks = ()=>{
+            axios
+            .get(`${http}/api/lclquery/getRemarks/${id}`)
+            .then((res) => {
+              console.log(res.data);
+              setlRe(res.data.lclquery.remarks)
+              setlshRe(res.data.lclquery.shremarks)
 
-          //   })
-          //   .catch(err=> {
-          //     console.log(err);
-          //   })     
-          // }
-          // getLRemarks();
+            })
+            .catch(err=> {
+              console.log(err);
+            })     
+          }
+          getLRemarks();
 
           const getFRemarks = ()=>{
             axios

@@ -47,6 +47,9 @@ const ChangeRole = ({show,close,title,name,id,role}) => {
                             <MenuItem value={"salesman"}>Salesman</MenuItem>
                             <MenuItem value={"crd"}>CRD</MenuItem>
                             <MenuItem value={"ratesmanager"}>Sales manager</MenuItem>
+                            <MenuItem value={"consolemanager"}>Console manager</MenuItem>
+                            <MenuItem value={"consoleoperator"}>Console operator</MenuItem>
+
 
                         </Select>
             </FormControl>

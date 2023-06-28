@@ -1,7 +1,7 @@
 import React from 'react'
 
 const AlertCutoff = ({cutof,show,close,title,containerMode}) => {
-    console.log(containerMode)
+    //console.log(containerMode)
 
     if(!show){
         return null

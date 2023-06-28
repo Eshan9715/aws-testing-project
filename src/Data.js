@@ -36,12 +36,12 @@ export const tabData = [
     {
         id:3,
         fact: "schedule pending",
-        topic: "Pending Schedules"
+        topic: "Vessel Schedule"
     },
     {
         id:4,
         fact: "vessel pending",
-        topic: "Vessel Pending"
+        topic: "Vessel Confirmation"
     },
     {
         id:5,
@@ -51,17 +51,17 @@ export const tabData = [
     {
         id:6,
         fact: "pending cut-off",
-        topic: "Pending Cut-Off"
+        topic: "Cargo Cut-Off"
     },
     {
         id:7,
         fact: "b/l pending",
-        topic: "Cutoff | Pending B/L"
+        topic: "B/L Instructions"
     },
     {
         id:8,
         fact: "b/l added",
-        topic: "Check | Confirm B/L"
+        topic: "B/L Confirmation"
     },
     {
         id:9,
@@ -74,12 +74,12 @@ export const ctabData = [
     {
         id:1,
         fact: "schedule pending",
-        topic: "Pending Schedules"
+        topic: "Vessel Schedule"
     },
     {
         id:2,
         fact: "vessel pending",
-        topic: "Vessel Pending"
+        topic: "Vessel Confirmation"
     },
     {
         id:3,
@@ -89,17 +89,17 @@ export const ctabData = [
     {
         id:4,
         fact: "pending cut-off",
-        topic: "Pending Cut-Off"
+        topic: "Cargo Cut-Off"
     },
     {
         id:5,
         fact: "b/l pending",
-        topic: "Cutoff | Pending B/L"
+        topic: "B/L Instructions"
     },
     {
         id:6,
         fact: "b/l added",
-        topic: "Check | Confirm B/L"
+        topic: "B/L Confirmation"
     },
     {
         id:7,
@@ -122,12 +122,12 @@ export const tabShiprData = [
     {
         id:3,
         fact: "schedule pending",
-        topic: "Pending Schedules"
+        topic: "Vessel Schedule"
     },   
     {
         id:4,
         fact: "vessel pending",
-        topic: "Vessel Pending"
+        topic: "Vessel Confirmation"
     },
     {
         id:5,
@@ -137,17 +137,17 @@ export const tabShiprData = [
     {
         id:6,
         fact: "pending cut-off",
-        topic: "Pending Cut-Off"
+        topic: "Cargo Cut-Off"
     },
     {
         id:7,
         fact: "b/l pending",
-        topic: "Cutoff | Pending B/L"
+        topic: "B/L Instructions"
     },
     {
         id:8,
         fact: "b/l added",
-        topic: "Check | Confirm B/L"
+        topic: "B/L Confirmation"
     },
     {
         id:9,
@@ -155,6 +155,13 @@ export const tabShiprData = [
         topic: "Completed Queries"
     },
 ]
+// Vessel Schedule
+// Vessel Confirmation
+// Booking & Release
+// Cargo Cut-Off
+// B/L Instructions
+// B/L Confirmation
+
 
 export const tabConsolData = [
     {
@@ -170,7 +177,7 @@ export const tabConsolData = [
     {
         id:3,
         fact: "vessel pending",
-        topic: "Vessel Pending"
+        topic: "Vessel Confirmation"
     },
     {
         id:4,

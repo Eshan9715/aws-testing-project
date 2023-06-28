@@ -174,7 +174,9 @@ const QueryTile = ({ OportName, DportName,containerMode, commodity,layout,yard,c
 
     }, [FlastSeen,LlastSeen,fre,lre,http,id]);
 
-    console.log(lnum)
+    //console.log(lnum)
+    //console.log(fnum)
+
   
     // const shipremarks = {
     //     status:'', remark:'', timeVal:'', userID: loggedID, adder: loggedNM,refID: '',}
