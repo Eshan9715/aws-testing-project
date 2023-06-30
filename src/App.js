@@ -13,6 +13,7 @@ import Sidenavbar from './components/Default/Sidenavbar';
 import NotFound from './pages/Common/NotFound';
 import Login from './pages/Common/Login';
 import Register from './pages/Common/Register';
+import Profile from './pages/Common/Profile';
 
 const Dashboard = lazy(() => import('./pages/Common/Dashboard'));
 const BQuering = lazy(() => import('./pages/Shipper/BQuering'));
@@ -69,7 +70,7 @@ function App() {
           <Route path='/viewrates' element={<ViewRates />} />
           <Route path='/addrates' element={<AddRates />} />
           <Route path='/staff' element={<Staff />} />
-
+          <Route path='/profile' element={<Profile />} />
 
         </Routes>
         </Suspense>

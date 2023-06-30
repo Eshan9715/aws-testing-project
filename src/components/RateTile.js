@@ -207,21 +207,25 @@ export const EditRatesSchedule = ({show,close,title,id,rates,placeholder,ldetail
   const [rateVal, setrateVal] = useState(rates)
   var http = process.env.REACT_APP_BASE_URL;
 
-  const UPDATEDRAT = {
-    ship:'',
-    validD: null,
-    rates: []
-  }
+  // const UPDATEDRAT = {
+  //   ship:'',
+  //   validD: null,
+  //   rates: []
+  // }
   console.log(id)
 
   const send = ()=>{
-    UPDATEDRAT.ship = shipVal
-    UPDATEDRAT.validD = fetchDate
-    UPDATEDRAT.rates = rateVal
+    // UPDATEDRAT.ship = shipVal
+    // UPDATEDRAT.validD = fetchDate
+    // UPDATEDRAT.rates = rateVal
     const EdittedRate = {
-      editRates: UPDATEDRAT
+      shipline: shipVal,
+      validDate: fetchDate,
+      rates: rateVal
+
+      // editRates: UPDATEDRAT
     }
-    console.log(UPDATEDRAT)
+    //console.log(UPDATEDRAT)
 
     axios
     .put(`${http}/api/rate/update/${id}`,EdittedRate)
@@ -230,7 +234,7 @@ export const EditRatesSchedule = ({show,close,title,id,rates,placeholder,ldetail
     });
 
     //navigate("/viewrates")
-    window.location.reload(false)
+    //window.location.reload(false)
 
   }
 
