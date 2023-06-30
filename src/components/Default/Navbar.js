@@ -57,7 +57,7 @@ const Navbar = ({childern}) => {
           <p className='track-wider' onClick={()=> navigate('/')}>FLI-BOOKING</p>
         </div>
 
-        <p className='tracking-widest text-lg font-semibold'>{role==='user'? 'SHIPPER': role.toUpperCase()}</p>
+        <p className='tracking-widest text-lg font-semibold'>{role==='user'? 'SHIPPER': role==='ratesmanager'? 'SALES MANAGER': role==='salesman'? 'SALES PERSON': role.toUpperCase()}</p>
       
         <div className='flex flex-col md:flex-row'>
             {

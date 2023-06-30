@@ -13,7 +13,6 @@ var lRates = {}
 var lratesArr = []
 var lre=[];
 
-
 const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
   var http = process.env.REACT_APP_BASE_URL;
   

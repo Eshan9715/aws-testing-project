@@ -531,210 +531,210 @@ const RueryTile = ({ OportName, DportName,containerMode,loggedID, updatedDate,lo
   return (
         <div className='w-full flex flex-col p-0.5 bg-slate-50 border-2 hover:shodow-lg rounded-md mt-3 mb-2'>
 
-        {layout!=='list'? 
-        <div className='w-full flex justify-start items-center'>
-            <div className={`w-[62%] flex flex-col p-4`}>
-                    <div className='w-full flex justify-start items-center gap-2'>
-                            <div className='flex justify-center items-center gap-2'>
-                                <span>{OportKeys[0]},</span>
-                                <span>{OportKeys[1]}</span>
-                                <img src={`https://flagcdn.com/20x15/${OportKeys[2].toLowerCase()}.png`} alt="flag" />
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd" />
-                            </svg>
-                            <div className='flex justify-center items-center gap-2'>
-                                <span>{DportKeys[0]},</span>
-                                <span>{DportKeys[1]}</span>
-                                <img src={`https://flagcdn.com/20x15/${DportKeys[2].toLowerCase()}.png`} alt="flag" />
-                            </div>
-
-                    </div>
-
-                    <div className='mt-2 flex justify-start items-center gap-4'>
-                    <p className={`${containerMode==='LCL'? 'bg-red-500 text-white':'bg-blue-500 text-white'} px-2 py-1 font-bold tracking-wider rounded-lg text-sm`}>{containerMode}</p>
-                    {((type!=="") && (containerMode==='LCL')) && <p className='bg-red-500 text-white px-2 py-1 font-bold tracking-wider rounded-lg text-sm'>{type}</p>}
-
-                    {containerMode==='FCL' && cargos?.map(cargo=>(
-                        <div className='bg-slate-200 px-2 py-1 rounded-lg text-sm tracking-wide gap-2' key={cargo.id}>{cargo.quantity} X {cargo.containerType}</div>
-                    ))}
-                    {containerMode==='LCL' && cargos?.map(cargo=>(
-                        <div className='flex gap-4' key={cargo.id}>
-                        <p className='bg-slate-200 tracking-wide flex justify-start px-2 py-1 rounded-lg text-sm gap-2'>{cargo.totalPackages}</p>
-                        <p className='bg-slate-200 tracking-wide flex justify-start px-2 py-1 rounded-lg text-sm gap-2'>{cargo.totalVolume} Cbm</p>
+            {layout!=='list'? 
+            <div className='w-full flex justify-start items-center'>
+                <div className={`w-[62%] flex flex-col p-4`}>
+                        <div className='w-full flex justify-start items-center gap-2'>
+                                <div className='flex justify-center items-center gap-2'>
+                                    <span>{OportKeys[0]},</span>
+                                    <span>{OportKeys[1]}</span>
+                                    <img src={`https://flagcdn.com/20x15/${OportKeys[2].toLowerCase()}.png`} alt="flag" />
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                                </svg>
+                                <div className='flex justify-center items-center gap-2'>
+                                    <span>{DportKeys[0]},</span>
+                                    <span>{DportKeys[1]}</span>
+                                    <img src={`https://flagcdn.com/20x15/${DportKeys[2].toLowerCase()}.png`} alt="flag" />
+                                </div>
 
                         </div>
-                    ))}
-                    <img src={boxes} alt='' className='w-6 h-6 ml-2' />
-                    <RateBox item='cargo' commodity={commodity} />
-                    <img src={factory} alt='' className='w-8 h-8 ml-2' />
-                    <RateBox item='fac' company={company} />
-                    <img src={officer} alt='' className='w-7 h-7 ml-2' />
-                    {role==='salesman' ? <RateBox item='mobileC' post='CRD:' crd={crd}/>: 
-                    role==='crd' ? <RateBox item='mobileC' post='Salesperson' crd={assigned}/>: 
-                    ((type!=='') && (containerMode==='LCL')) && <RateBox item='mobileC' post='Handled by:' crd={user}/>
-                    }
-                 
-                    <Badge color="error" badgeContent={containerMode==='FCL'? fnum: lnum} overlap="circular">
-                        <img src={chatLogo} alt='chat' className='w-9 h-9 cursor-pointer' onClick={containerMode==='LCL'? lastUpdateBtn: lastFUpdateBtn }/>
-                    </Badge>
-                    </div>
 
-            </div>
+                        <div className='mt-2 flex justify-start items-center gap-4'>
+                        <p className={`${containerMode==='LCL'? 'bg-red-500 text-white':'bg-blue-500 text-white'} px-2 py-1 font-bold tracking-wider rounded-lg text-sm`}>{containerMode}</p>
+                        {((type!=="") && (containerMode==='LCL')) && <p className='bg-red-500 text-white px-2 py-1 font-bold tracking-wider rounded-lg text-sm'>{type}</p>}
 
-            <div className="w-[30%] flex flex-col p-2 my-2 gap-0.5">
-                <div className='flex justify-end items-center gap-2'>
-                    <p className='text-sm text-gray-400'>ready by:</p>
-                    <p>{rDate.split(",")[1]}</p>
-                </div>
+                        {containerMode==='FCL' && cargos?.map(cargo=>(
+                            <div className='bg-slate-200 px-2 py-1 rounded-lg text-sm tracking-wide gap-2' key={cargo.id}>{cargo.quantity} X {cargo.containerType}</div>
+                        ))}
+                        {containerMode==='LCL' && cargos?.map(cargo=>(
+                            <div className='flex gap-4' key={cargo.id}>
+                            <p className='bg-slate-200 tracking-wide flex justify-start px-2 py-1 rounded-lg text-sm gap-2'>{cargo.totalPackages}</p>
+                            <p className='bg-slate-200 tracking-wide flex justify-start px-2 py-1 rounded-lg text-sm gap-2'>{cargo.totalVolume} Cbm</p>
 
-                <div className='flex justify-end items-center gap-2'>
-                    <p className='text-sm text-gray-400'>Added:</p>
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-5 h-5' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    <p>{moment(savedDate).fromNow()}</p>
-
-                </div>      
-
-                <div className='flex justify-end items-center gap-2'>
-                    <p className='text-sm text-gray-400'>Updated:</p>
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-5 h-5' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    <p>{moment(updatedDate).fromNow()}</p>
-
-                </div>                
-
-            </div>
-
-            <div className="w-[8%] flex justify-center items-center">
-
-                <div className='w-3/4 mdd:w-3/5 xl:w-1/2  flex justify-center items-center text-white rounded-full bg-red-500'>
-                {status ==="rates pending"?
-                    <button onClick={()=>setShow(!show)} className={`flex ${show? "border-2 text-black bg-white border-black":"bg-orange-500 text-white"} rounded-full items-center justify-center px-2 py-2 text-base tracking-wide capitalize transition-colors duration-300 transform focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50`}>
-                            <svg fill="none" stroke="currentColor" stroke-width="1.5" className="w-8 h-8 rtl:-scale-x-100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"></path>
-                            </svg>
-                        </button>
-                        : 
-                        <button onClick={()=>setMore(!more)} className={`flex w-full ${more? "border-2 text-black bg-white border-black":"bg-orange-500 text-white"} rounded-full items-center justify-center px-2.5 py-2 text-base tracking-wide capitalize transition-colors duration-300 transform focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50`}>
-                        {more && <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-8 h-8 rtl:-scale-x-100' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
-                                </svg>}
-                        {!more &&<svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-8 h-8 rtl:-scale-x-100' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
-                                </svg>}
-                        </button>
-                        
-                    }
+                            </div>
+                        ))}
+                        <img src={boxes} alt='' className='w-6 h-6 ml-2' />
+                        <RateBox item='cargo' commodity={commodity} />
+                        <img src={factory} alt='' className='w-8 h-8 ml-2' />
+                        <RateBox item='fac' company={company} />
+                        <img src={officer} alt='' className='w-7 h-7 ml-2' />
+                        {role==='salesman' ? <RateBox item='mobileC' post='CRD:' crd={crd}/>: 
+                        role==='crd' ? <RateBox item='mobileC' post='Salesperson' crd={assigned}/>: 
+                        ((type!=='') && (containerMode==='LCL')) && <RateBox item='mobileC' post='Handled by:' crd={user}/>
+                        }
                     
-                </div>
-            </div>
-        </div>:
-        
-        <div className='w-full flex justify-start items-center'>
-            <div className={`w-[55%] flex flex-col p-4`}>
-                    <div className='w-full flex justify-start items-center gap-2'>
-                            <div className='flex justify-center items-center gap-2'>
-                                <span>{OportKeys[0]},</span>
-                                <span>{OportKeys[1]}</span>
-                                <img src={`https://flagcdn.com/20x15/${OportKeys[2].toLowerCase()}.png`} alt="flag" />
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd" />
-                            </svg>
-                            <div className='flex justify-center items-center gap-2'>
-                                <span>{DportKeys[0]},</span>
-                                <span>{DportKeys[1]}</span>
-                                <img src={`https://flagcdn.com/20x15/${DportKeys[2].toLowerCase()}.png`} alt="flag" />
-                            </div>
-                            {arrCutOff.includes(status) && <img src={clock} alt="vessel" className='w-7 h-7 ml-8' />}
-
-                    </div>
-
-                    <div className='mt-2 flex justify-start items-center gap-4'>
-                    <p className={`${containerMode==='LCL'? 'bg-red-500 text-white':'bg-blue-500 text-white'} px-2 py-1 font-bold tracking-wider rounded-lg text-sm`}>{containerMode}</p>
-                    {((type!=="") && (containerMode==='LCL')) && <p className='bg-red-500 text-white px-2 py-1 font-bold tracking-wider rounded-lg text-sm'>{type}</p>}
-                    {containerMode==='FCL' && cargos?.map(cargo=>(
-                        <div className='bg-slate-200 px-2 py-1 rounded-lg text-sm tracking-wide gap-2' key={cargo.id}>{cargo.quantity} X {cargo.containerType}</div>
-                    ))}
-                    {containerMode==='LCL' && cargos?.map(cargo=>(
-                        <div className='flex gap-4' key={cargo.id}>
-                        <p className='bg-slate-200 tracking-wide flex justify-start px-2 py-1 rounded-lg text-sm gap-2'>{cargo.totalPackages}</p>
-                        <p className='bg-slate-200 tracking-wide flex justify-start px-2 py-1 rounded-lg text-sm gap-2'>{cargo.totalVolume} Cbm</p>
-
+                        <Badge color="error" badgeContent={containerMode==='FCL'? fnum: lnum} overlap="circular">
+                            <img src={chatLogo} alt='chat' className='w-9 h-9 cursor-pointer' onClick={containerMode==='LCL'? lastUpdateBtn: lastFUpdateBtn }/>
+                        </Badge>
                         </div>
-                    ))}
-                    <img src={boxes} alt='' className='w-6 h-6 ml-2' />
-                    <RateBox item='cargo' commodity={commodity} />
-                    <img src={factory} alt='' className='w-8 h-8 ml-2' />
-                    <RateBox item='fac' company={company} />
-                    {!arrVessel.includes(status) && <img src={ves} alt="vessel" className='w-6 h-6 ml-2' />}
-                    {!arrVessel.includes(status) && <RateBox item='ship' vessel={selVessel} voyage={selVoyage} />}
 
+                </div>
+
+                <div className="w-[30%] flex flex-col p-2 my-2 gap-0.5">
+                    <div className='flex justify-end items-center gap-2'>
+                        <p className='text-sm text-gray-400'>ready by:</p>
+                        <p>{rDate.split(",")[1]}</p>
                     </div>
 
-            </div>
-
-            <div className="w-[45%] flex  justify-center p-2 my-1 gap-1">
-                <div className='w-full flex'>
-                    <div className='w-[40%]'>
-                   
-                    <div className='w-full flex flex-col justify-center items-center text-center'>
-                        <p className='w-full text-center font-semibold px-2 my-1 py-1 border-[3px]  border-red-600 text-red-600 rounded-md'>{status.charAt(0).toUpperCase()+status.substring(1)}</p>                </div>
-                    
-                        {role==='salesman' && 
-                        <div className='flex justify-between items-center gap-2'>
-                            <p className='text-xm text-gray-400'>crd:</p>
-                            <p className='px-3 mt-1 py-1 border-2 rounded-md bg-white'>{crd}</p>
-                        </div>}
-
-                        {role==='crd' && 
-                        <div className='flex justify-between items-center gap-2'>
-                            <p className='text-xm text-gray-400'>salesman:</p>
-                            <p className='px-3 mt-1 py-1 border-2 rounded-md bg-white'>{assigned}</p>
-                        </div>}
-                    </div> 
-               
-                    <div className='w-[60%] flex-col '>
-                    <div className='w-full flex flex-col justify-center items-end'>
-                    <div className='flex justify-center items-end gap-2'>
-                    <p className='text-sm text-gray-400'>ready by:</p>
-                    <p>{rDate}</p>
-                    </div>
-
-                    <div className='flex justify-center items-end gap-2 mt-1'>
-                        <p className='text-sm text-gray-400'>Created by:</p>
+                    <div className='flex justify-end items-center gap-2'>
+                        <p className='text-sm text-gray-400'>Added:</p>
                         <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-5 h-5' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         <p>{moment(savedDate).fromNow()}</p>
 
-                    </div>
+                    </div>      
 
-                    <div className='flex justify-center items-end gap-2 mt-1'>
-                        <p className='text-sm text-gray-400'>Last updatedAt:</p>
+                    <div className='flex justify-end items-center gap-2'>
+                        <p className='text-sm text-gray-400'>Updated:</p>
                         <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-5 h-5' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         <p>{moment(updatedDate).fromNow()}</p>
 
-                    </div>               
-                    </div>
-                    </div>
+                    </div>                
+
                 </div>
 
+                <div className="w-[8%] flex justify-center items-center">
+
+                    <div className='w-3/4 mdd:w-3/5 xl:w-1/2  flex justify-center items-center text-white rounded-full bg-red-500'>
+                    {status ==="rates pending"?
+                        <button onClick={()=>setShow(!show)} className={`flex ${show? "border-2 text-black bg-white border-black":"bg-orange-500 text-white"} rounded-full items-center justify-center px-2 py-2 text-base tracking-wide capitalize transition-colors duration-300 transform focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50`}>
+                                <svg fill="none" stroke="currentColor" stroke-width="1.5" className="w-8 h-8 rtl:-scale-x-100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"></path>
+                                </svg>
+                            </button>
+                            : 
+                            <button onClick={()=>setMore(!more)} className={`flex w-full ${more? "border-2 text-black bg-white border-black":"bg-orange-500 text-white"} rounded-full items-center justify-center px-2.5 py-2 text-base tracking-wide capitalize transition-colors duration-300 transform focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50`}>
+                            {more && <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-8 h-8 rtl:-scale-x-100' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"></path>
+                                    </svg>}
+                            {!more &&<svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-8 h-8 rtl:-scale-x-100' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+                                    </svg>}
+                            </button>
+                            
+                        }
+                        
+                    </div>
+                </div>
+            </div>:
+            
+            <div className='w-full flex justify-start items-center'>
+                <div className={`w-[55%] flex flex-col p-4`}>
+                        <div className='w-full flex justify-start items-center gap-2'>
+                                <div className='flex justify-center items-center gap-2'>
+                                    <span>{OportKeys[0]},</span>
+                                    <span>{OportKeys[1]}</span>
+                                    <img src={`https://flagcdn.com/20x15/${OportKeys[2].toLowerCase()}.png`} alt="flag" />
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                                </svg>
+                                <div className='flex justify-center items-center gap-2'>
+                                    <span>{DportKeys[0]},</span>
+                                    <span>{DportKeys[1]}</span>
+                                    <img src={`https://flagcdn.com/20x15/${DportKeys[2].toLowerCase()}.png`} alt="flag" />
+                                </div>
+                                {arrCutOff.includes(status) && <img src={clock} alt="vessel" className='w-7 h-7 ml-8' />}
+
+                        </div>
+
+                        <div className='mt-2 flex justify-start items-center gap-4'>
+                        <p className={`${containerMode==='LCL'? 'bg-red-500 text-white':'bg-blue-500 text-white'} px-2 py-1 font-bold tracking-wider rounded-lg text-sm`}>{containerMode}</p>
+                        {((type!=="") && (containerMode==='LCL')) && <p className='bg-red-500 text-white px-2 py-1 font-bold tracking-wider rounded-lg text-sm'>{type}</p>}
+                        {containerMode==='FCL' && cargos?.map(cargo=>(
+                            <div className='bg-slate-200 px-2 py-1 rounded-lg text-sm tracking-wide gap-2' key={cargo.id}>{cargo.quantity} X {cargo.containerType}</div>
+                        ))}
+                        {containerMode==='LCL' && cargos?.map(cargo=>(
+                            <div className='flex gap-4' key={cargo.id}>
+                            <p className='bg-slate-200 tracking-wide flex justify-start px-2 py-1 rounded-lg text-sm gap-2'>{cargo.totalPackages}</p>
+                            <p className='bg-slate-200 tracking-wide flex justify-start px-2 py-1 rounded-lg text-sm gap-2'>{cargo.totalVolume} Cbm</p>
+
+                            </div>
+                        ))}
+                        <img src={boxes} alt='' className='w-6 h-6 ml-2' />
+                        <RateBox item='cargo' commodity={commodity} />
+                        <img src={factory} alt='' className='w-8 h-8 ml-2' />
+                        <RateBox item='fac' company={company} />
+                        {!arrVessel.includes(status) && <img src={ves} alt="vessel" className='w-6 h-6 ml-2' />}
+                        {!arrVessel.includes(status) && <RateBox item='ship' vessel={selVessel} voyage={selVoyage} />}
+
+                        </div>
+
+                </div>
+
+                <div className="w-[45%] flex  justify-center p-2 my-1 gap-1">
+                    <div className='w-full flex'>
+                        <div className='w-[40%]'>
+                    
+                        <div className='w-full flex flex-col justify-center items-center text-center'>
+                            <p className='w-full text-center font-semibold px-2 my-1 py-1 border-[3px]  border-red-600 text-red-600 rounded-md'>{status.charAt(0).toUpperCase()+status.substring(1)}</p>                </div>
+                        
+                            {role==='salesman' && 
+                            <div className='flex justify-between items-center gap-2'>
+                                <p className='text-xm text-gray-400'>crd:</p>
+                                <p className='px-3 mt-1 py-1 border-2 rounded-md bg-white'>{crd}</p>
+                            </div>}
+
+                            {role==='crd' && 
+                            <div className='flex justify-between items-center gap-2'>
+                                <p className='text-xm text-gray-400'>salesman:</p>
+                                <p className='px-3 mt-1 py-1 border-2 rounded-md bg-white'>{assigned}</p>
+                            </div>}
+                        </div> 
+                
+                        <div className='w-[60%] flex-col '>
+                        <div className='w-full flex flex-col justify-center items-end'>
+                        <div className='flex justify-center items-end gap-2'>
+                        <p className='text-sm text-gray-400'>ready by:</p>
+                        <p>{rDate}</p>
+                        </div>
+
+                        <div className='flex justify-center items-end gap-2 mt-1'>
+                            <p className='text-sm text-gray-400'>Created by:</p>
+                            <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-5 h-5' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            <p>{moment(savedDate).fromNow()}</p>
+
+                        </div>
+
+                        <div className='flex justify-center items-end gap-2 mt-1'>
+                            <p className='text-sm text-gray-400'>Last updatedAt:</p>
+                            <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-5 h-5' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            <p>{moment(updatedDate).fromNow()}</p>
+
+                        </div>               
+                        </div>
+                        </div>
+                    </div>
+
+
+                </div>
 
             </div>
-
-        </div>
         
-        }
+            }
 
             {more && 
                 <>

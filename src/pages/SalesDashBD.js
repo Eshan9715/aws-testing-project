@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 // import Slider from '../sliders/Slider'
 // import SliderAct from '../sliders/SliderActs'
@@ -19,18 +20,18 @@ const SalesDashBD = () => {
     useEffect(() => {
         // setID(localStorage.getItem("userID"))
   
-        // const getRates = ()=>{
-        //   axios
-        //   .get(`${http}/api/rate`)
-        //   .then((res) => {
-        //     console.log(res.data);
-        //     setViewRates(res.data.rates)
-        //   })
-        //   .catch(err=> {
-        //     console.log(err);
-        //   })     
-        // }
-        // getRates();
+        const getRates = ()=>{
+          axios
+          .get(`${http}/api/rate`)
+          .then((res) => {
+            console.log(res.data);
+            //setViewRates(res.data.rates)
+          })
+          .catch(err=> {
+            console.log(err);
+          })     
+        }
+        getRates();
         
     }, [http]);
     

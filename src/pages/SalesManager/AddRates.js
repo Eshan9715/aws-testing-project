@@ -108,9 +108,8 @@ const AddRates = () => {
 
         }        
           axios
-          .post(`${http}/api//rate/add`,newRate)
+          .post(`${http}/api/rate/add`,newRate)
           .then((res) => {
-            // console.log(res);
             console.log(res.data);
 
           });     
@@ -122,7 +121,7 @@ const AddRates = () => {
 
       const handleSend = () => {
           sendRRequest();
-          navigate("/dashboard")
+          navigate("/viewrates")
        
       }
 

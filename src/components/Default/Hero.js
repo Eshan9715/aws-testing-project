@@ -46,7 +46,7 @@ const Hero = () => {
 
                             { loggedUser.isLoggedIn && 
                             <button onClick={checkQuotes} className='flex justify-center font-Monserrat py-3 px-6 rounded md:ml-5 bg-white gap-2 text-black hover:bg-orange-500 hover:text-white'>
-                            Check Quotes<svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-6 h-6' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            Dashboard<svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-6 h-6' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
                             </svg>
                             </button>

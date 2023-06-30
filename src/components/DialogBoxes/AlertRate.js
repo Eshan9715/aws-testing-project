@@ -92,7 +92,7 @@ const AlertRate = ({origin, discharge, type,close, shipline, zipcode, destinatio
                             <div className='w-full'>
                                 <div className='flex flex-col gap-2 w-full justify-center items-start' key={index}>
                                     <div className='flex justify-center items-start gap-4'>
-                                        <p>* {remark}.</p>
+                                        <p># {remark}.</p>
                                        
                                     </div>
                                 

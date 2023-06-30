@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react'
 import TextField from '@mui/material/TextField';
 import dollar from '../../assets/dollar.png'
 import {FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import RateTile from '../../components/RateTile';
+import {RateTile} from '../../components/RateTile';
 import { useSelector } from 'react-redux';
 
 const ViewRates = () => {
@@ -12,13 +12,8 @@ const ViewRates = () => {
   const loggedUser = useSelector((state)=> state.auth.value);
 
     const [viewRates, setViewRates] = useState([])
-    //const [ldetails, setlDetails] = useState([])
-    //const [pdetails, setpDetails] = useState([])
-
-    //const [id,setID] = useState("");
 
     useEffect(() => {
-      //setID(loggedUser.userID)
 
       const getRates = ()=>{
         axios
@@ -32,32 +27,6 @@ const ViewRates = () => {
         })     
       }
       getRates();
-
-      // const getPorts = ()=>{
-      //   axios
-      //   .get(`${http}/api/destination`)
-      //   .then((res) => {
-      //     console.log(res.data);
-      //     //setpDetails(res.data.destinations)
-      //   })
-      //   .catch(err=> {
-      //     console.log(err);
-      //   })     
-      // }
-      // getPorts();
-
-      // const getLines = ()=>{
-      //   axios
-      //   .get(`${http}/api/line`)
-      //   .then((res) => {
-      //     console.log(res.data);
-      //     //setlDetails(res.data.lines)
-      //   })
-      //   .catch(err=> {
-      //     console.log(err);
-      //   })     
-      // }
-      // getLines();
       
   }, [http,loggedUser]);
 
@@ -100,14 +69,14 @@ const ViewRates = () => {
                 </div>
               </div>
 
-              <div className='w-[95%] mt-[140px] flex flex-col justify-between items-center overflow-y-auto overflow-x-hidden border'>
+              <div className='w-[95%] mt-[140px] flex flex-col justify-between items-center overflow-y-auto overflow-x-hidden'>
 
                   <div className='w-full flex flex-col'>
                     {catomode==='Discharge'?  
                     <>
                     {viewRates?.filter((rat)=> search.toLowerCase()===''? rat: rat.discharge.toLowerCase().includes(search.toLowerCase())).map((rat)=>{
                       return(
-                      <RateTile key={rat.id} 
+                      <RateTile key={rat._id} 
                           origin={rat.origin}
                           destination={rat.destination}
                           discharge={rat.discharge}
@@ -117,6 +86,7 @@ const ViewRates = () => {
                           rates={rat.rates}
                           remarks={rat.remarks}
                           zipcode={rat.zipCode}
+                          id={rat._id}
                       />
                     )})} 
                     </> 
@@ -125,7 +95,7 @@ const ViewRates = () => {
                     <>
                     {viewRates?.filter((rat)=> search.toLowerCase()===''? rat: rat.shipline.toLowerCase().includes(search.toLowerCase())).map((rat)=>{
                       return(
-                      <RateTile key={rat.id} 
+                      <RateTile key={rat._id} 
                           origin={rat.origin}
                           destination={rat.destination}
                           discharge={rat.discharge}
@@ -135,6 +105,8 @@ const ViewRates = () => {
                           rates={rat.rates}
                           remarks={rat.remarks}
                           zipcode={rat.zipCode}
+                          id={rat._id}
+
                       />
                     )})} 
                     </> 
@@ -143,7 +115,7 @@ const ViewRates = () => {
                     <>
                     {viewRates?.filter((rat)=> search.toLowerCase()===''? rat: rat.deliveryMode.toLowerCase().includes(search.toLowerCase())).map((rat)=>{
                       return(
-                      <RateTile key={rat.id} 
+                      <RateTile key={rat._id} 
                           origin={rat.origin}
                           destination={rat.destination}
                           discharge={rat.discharge}
@@ -153,6 +125,8 @@ const ViewRates = () => {
                           rates={rat.rates}
                           remarks={rat.remarks}
                           zipcode={rat.zipCode}
+                          id={rat._id}
+
                       />
                     )})} 
                     </> 
@@ -161,7 +135,7 @@ const ViewRates = () => {
                     <>
                     {viewRates?.filter((rat)=> search.toLowerCase()===''? rat: rat.destination.toLowerCase().includes(search.toLowerCase())).map((rat)=>{
                       return(
-                      <RateTile key={rat.id} 
+                      <RateTile key={rat._id} 
                           origin={rat.origin}
                           destination={rat.destination}
                           discharge={rat.discharge}
@@ -171,6 +145,8 @@ const ViewRates = () => {
                           rates={rat.rates}
                           remarks={rat.remarks}
                           zipcode={rat.zipCode}
+                          id={rat._id}
+
                       />
                     )})} 
                     </> 
@@ -178,7 +154,7 @@ const ViewRates = () => {
                     <>
                     {viewRates.map((rat)=>{
                       return(
-                      <RateTile key={rat.id} 
+                      <RateTile key={rat._id} 
                           origin={rat.origin}
                           destination={rat.destination}
                           discharge={rat.discharge}
@@ -188,6 +164,8 @@ const ViewRates = () => {
                           rates={rat.rates}
                           remarks={rat.remarks}
                           zipcode={rat.zipCode}
+                          id={rat._id}
+
                       />
                     )})} 
                     </>
@@ -195,7 +173,8 @@ const ViewRates = () => {
                   </div>               
               </div>
           </div>
-      </div>
+        </div>
+
     </div>
     </> 
     
