@@ -43,7 +43,27 @@ function App() {
        //console.log(res.data);
        setIP(res.data.IPv4)
    }
-   console.log(ip)
+   //console.log(ip)
+
+   const getCurrentDimension = () =>{
+    return {
+        width: window.innerWidth,
+        height: window.innerHeight
+    }
+  }
+  const [screenSize, setScreenSize] = useState(getCurrentDimension());
+
+  	useEffect(() => {
+      const updateDimension = () => {
+          setScreenSize(getCurrentDimension())
+      }
+      window.addEventListener('resize', updateDimension);
+
+
+    return(() => {
+        window.removeEventListener('resize', updateDimension);
+    })
+  }, [screenSize])
 
    
    useEffect(()=>{
@@ -52,6 +72,9 @@ function App() {
        setpath(location.pathname)
 
    },[loggedUser,location])
+
+   //console.log(screenSize.height)
+
 
    const PrivateRoutes  = ()=>{
     return(

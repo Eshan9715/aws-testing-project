@@ -4,6 +4,7 @@ import RateBox from '.././components/Viewings/RateBox'
 import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export const RateTile = ({vdate,origin,destination,discharge,zipcode,shipline,rates,deliveryMode,remarks,id}) => {
   const[show, setShow] = useState(false)
@@ -206,6 +207,7 @@ export const EditRatesSchedule = ({show,close,title,id,rates,placeholder,ldetail
   const [fetchDate, setfetchDate] = useState(validDate)
   const [rateVal, setrateVal] = useState(rates)
   var http = process.env.REACT_APP_BASE_URL;
+  const navigate = useNavigate();
 
   // const UPDATEDRAT = {
   //   ship:'',
@@ -233,7 +235,7 @@ export const EditRatesSchedule = ({show,close,title,id,rates,placeholder,ldetail
       console.log(res.data);
     });
 
-    //navigate("/viewrates")
+    navigate("/viewrates")
     //window.location.reload(false)
 
   }

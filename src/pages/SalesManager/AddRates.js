@@ -106,7 +106,8 @@ const AddRates = () => {
                   })),
           user:id,
 
-        }        
+        }    
+        console.log(newRate)    
           axios
           .post(`${http}/api/rate/add`,newRate)
           .then((res) => {

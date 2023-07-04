@@ -31,7 +31,7 @@ const Profile = () => {
         console.log(res.data);
         setuser(res.data.user)
         setImage(res.data.user.image)
-        setMail(user.mail)
+        setMail(user.email)
         setName(user.name)
         //setViewRates(res.data.rates)
       })
@@ -70,8 +70,8 @@ const Profile = () => {
    <div className={`w-full h-screen flex overflow-hidden justify-end items-center text-black bg-white`}>               
         <div className='w-[100%] mdd:w-[90%] flex justify-start items-center h-full flex-col p-4 gap-3'>
 
-          <div className="flex flex-col min-w-0 break-words mt-[80px]  bg-white w-[95%] mb-6 shadow-xl rounded-lg p-4">
-            <div className="px-6">
+          <div className="flex flex-col min-w-0 break-words mt-[80px]  bg-white w-[95%] mb-6 shadow-md rounded-lg p-4">
+            <div className="px-6 h-[75vh]">
 
               <div className="flex flex-wrap justify-center">   
                 <div className="w-full lg:w-4/12 px-4">
@@ -95,7 +95,7 @@ const Profile = () => {
                   </div>
                 </div>
 
-                <div className="w-full lg:w-4/12 px-4 lg:text-right lg:self-center">
+                <div className="w-full lg:w-4/12 px-4 lg:text-right flex lg:justify-end justify-center lg:self-center">
                   <div className="py-6 px-3 mt-32 sm:mt-0">
                     <button className="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" type="button">
                     

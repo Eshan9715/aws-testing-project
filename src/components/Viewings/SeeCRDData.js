@@ -7,7 +7,7 @@ import user from '../../assets/user.png'
 //var http =  "https://cute-plum-caterpillar-tie.cyclic.app" 
 
 const SeeCRDData = ({show,title,close,id,name,arr}) => {
-    console.log(arr)
+    //console.log(arr)
     const [salesmans, setSalesmans] = useState([])
     const [vcrds, setvcrds] = useState([])
     //console.log((vcrds.filter(t=>t._id===id)[0].assigned))

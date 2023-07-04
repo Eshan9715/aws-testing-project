@@ -286,8 +286,8 @@ const BQuering = () => {
                 {screenSize.width < 1610 && 
                     <div className="flex w-[90%] lg:mt-[65px] mt-[45px] md:mt-[50px] justify-center fixed items-start">
                     
-                    {role==='user' && <SliderTabs SData={finalizedFullCargo} Data={tabShiprData} chooseTab={chooseTab} role={role} />}
-                    {role==='consoleOperator' && <SliderTabs SData={finalizedFullCargo} Data={tabConsolData} chooseTab={chooseTab} role={role} />}
+                    {role==='user' && <SliderTabs SData={finalizedFullCargo} Data={tabShiprData} chooseTab={chooseTab} role={role} type='topbar' />}
+                    {role==='consoleOperator' && <SliderTabs SData={finalizedFullCargo} Data={tabConsolData} chooseTab={chooseTab} role={role} type='topbar' />}
 
                     </div>                   
                 }

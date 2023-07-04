@@ -24,26 +24,26 @@ const Staff = () => {
     const [crddetails, setcrdDetails] = useState([])
     const [othdetails, setothDetails] = useState([])
     const [role,setRole] = useState('')
-    //const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(false)
 
     useEffect(() => {
         setRole(loggedUser.role)
+
         const getStaff = ()=>{
-            // setLoading(true)
+        setLoading(true)
           axios
           .get(`${http}/api/member`)
           .then((res) => {
             //console.log(res.data);
+            setLoading(false)   
             setsDetails(res.data.member)
             setcrdDetails(sdetails.filter((e)=>e.role==="crd"))
             setspDetails(sdetails.filter((e)=>e.role==="salesman"))
             setothDetails(sdetails.filter((e)=>(e.role!=="salesman" && e.role!=="crd" )))
-
           })
           .catch(err=> {
             console.log(err);
           })  
-        //   setLoading(false)   
         }
         getStaff();
         
@@ -52,44 +52,44 @@ const Staff = () => {
     const conditionalComponent = () => {
         if(tabmode==='Salesman'){
             if(catomode==='Name') {
-                return <DataTable role={role}  tabmode={tabmode} data={spdetails?.filter((sdetail)=> search.toLowerCase()===''? sdetail :sdetail.name.toLowerCase().includes(search.toLowerCase()))} />;
+                return <DataTable role={role} loading={loading}  tabmode={tabmode} data={spdetails?.filter((sdetail)=> search.toLowerCase()===''? sdetail :sdetail.name.toLowerCase().includes(search.toLowerCase()))} />;
             }else if(catomode==='Email'){
-                return <DataTable role={role} tabmode={tabmode} data={spdetails?.filter((sdetail)=> search.toLowerCase()===''? sdetail :sdetail.email.toLowerCase().includes(search.toLowerCase()))} />;
+                return <DataTable role={role} loading={loading} tabmode={tabmode} data={spdetails?.filter((sdetail)=> search.toLowerCase()===''? sdetail :sdetail.email.toLowerCase().includes(search.toLowerCase()))} />;
             }else if(catomode==='Assigned'){
-                return <DataTable role={role} tabmode={tabmode} data={spdetails?.filter((sdetail)=> search.toLowerCase()===''? sdetail :sdetail.assigned.includes(search.toLowerCase()))} />;
+                return <DataTable role={role} loading={loading} tabmode={tabmode} data={spdetails?.filter((sdetail)=> search.toLowerCase()===''? sdetail :sdetail.assigned.includes(search.toLowerCase()))} />;
             }else if(satomode==="NameByDSC"){
-                return <DataTable role={role} tabmode={tabmode} data={spdetails?.filter((sdetail)=> sdetail.name).sort().reverse()} />; 
+                return <DataTable role={role} loading={loading} tabmode={tabmode} data={spdetails?.filter((sdetail)=> sdetail.name).sort().reverse()} />; 
             // }else if(satomode==="Max: Bookings"){
-            //     return <DataTable role={role} tabmode={tabmode} data={spdetails?.filter((sdetail)=> sdetail.bookings.length).sort().reverse()} />;
+            //     return <DataTable role={role} loading={loading} tabmode={tabmode} data={spdetails?.filter((sdetail)=> sdetail.bookings.length).sort().reverse()} />;
             }else if(satomode==="Max: Clients"){
-                return <DataTable role={role} tabmode={tabmode} data={spdetails?.filter((sdetail)=> sdetail.clients.length!==0? sdetail.clients.length.sort().reverse(): sdetail)} />;
+                return <DataTable role={role} loading={loading} tabmode={tabmode} data={spdetails?.filter((sdetail)=> sdetail.clients.length!==0? sdetail.clients.length.sort().reverse(): sdetail)} />;
             }else{
-                return <DataTable role={role} tabmode={tabmode} data={spdetails} />;
+                return <DataTable role={role} loading={loading} tabmode={tabmode} data={spdetails} />;
 
             }
        }else if(tabmode==='CRD'){
             if(catomode==='Name') {
-                return <DataTable role={role} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> search.toLowerCase()===''? crddetail :crddetail.name.toLowerCase().includes(search.toLowerCase()))} />;
+                return <DataTable role={role} loading={loading} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> search.toLowerCase()===''? crddetail :crddetail.name.toLowerCase().includes(search.toLowerCase()))} />;
             }else if(catomode==='Email'){
-                return <DataTable role={role} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> search.toLowerCase()===''? crddetail :crddetail.email.toLowerCase().includes(search.toLowerCase()))} />;
+                return <DataTable role={role} loading={loading} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> search.toLowerCase()===''? crddetail :crddetail.email.toLowerCase().includes(search.toLowerCase()))} />;
             }else if(satomode==="NameByDSC"){
-                return <DataTable role={role} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> crddetail.name).sort().reverse()} />; 
+                return <DataTable role={role} loading={loading} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> crddetail.name).sort().reverse()} />; 
             // }else if(satomode==="Max: Bookings"){
-            //     return <DataTable role={role} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> crddetail.bookings.length!==0? crddetail.bookings.length.sort().reverse(): crddetail)} />;
+            //     return <DataTable role={role} loading={loading} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> crddetail.bookings.length!==0? crddetail.bookings.length.sort().reverse(): crddetail)} />;
             }else if(satomode==="Max: Clients"){
-                return <DataTable role={role} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> crddetail.clients.length!==0? crddetail.clients.length.sort().reverse(): crddetail)} />;
+                return <DataTable role={role} loading={loading} tabmode={tabmode}  data={crddetails?.filter((crddetail)=> crddetail.clients.length!==0? crddetail.clients.length.sort().reverse(): crddetail)} />;
             }else{
-                return <DataTable role={role} tabmode={tabmode}  data={crddetails} />;
+                return <DataTable role={role} loading={loading} tabmode={tabmode}  data={crddetails} />;
             }
        }else if(tabmode==='Others'){
             if(catomode==='Name') {
-                return <AdminDataTable role={role}  data={othdetails?.filter((othdetail)=> search.toLowerCase()===''? othdetail :othdetail.name.toLowerCase().includes(search.toLowerCase()))} />;
+                return <AdminDataTable role={role} loading={loading}  data={othdetails?.filter((othdetail)=> search.toLowerCase()===''? othdetail :othdetail.name.toLowerCase().includes(search.toLowerCase()))} />;
             }else if(catomode==='Email'){
-                return <AdminDataTable role={role}  data={othdetails?.filter((othdetail)=> search.toLowerCase()===''? othdetail :othdetail.email.toLowerCase().includes(search.toLowerCase()))} />;
+                return <AdminDataTable role={role} loading={loading}  data={othdetails?.filter((othdetail)=> search.toLowerCase()===''? othdetail :othdetail.email.toLowerCase().includes(search.toLowerCase()))} />;
             }else if(satomode==="NameByDSC"){
-                return <AdminDataTable role={role}  data={othdetails?.filter((othdetail)=> othdetail.name).sort().reverse()} />;            
+                return <AdminDataTable role={role} loading={loading}  data={othdetails?.filter((othdetail)=> othdetail.name).sort().reverse()} />;            
             }else{
-                return <AdminDataTable role={role} data={othdetails}  />;
+                return <AdminDataTable role={role} loading={loading} data={othdetails}  />;
             }
         }
     }

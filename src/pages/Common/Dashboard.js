@@ -1,17 +1,19 @@
-import React from 'react'
-import SalesDashBD from '../SalesDashBD'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import ConsoleDashBD from '../Console/ConsoledashBD';
+import SalesDashBD from '../Salesman/SalesDashBD';
 
 const Dashboard = () => {
-    //const loggedUser = useSelector((state)=> state.auth.value);
+    const loggedUser = useSelector((state)=> state.auth.value);
 
-    // const [role,setRole] = useState("");
-    // const [id,setID] = useState("");
+    const [role,setRole] = useState("");
+    const [id,setID] = useState("");
 
-    // useEffect(() => {
-    //     setRole(loggedUser.role)
-    //     setID(loggedUser.userID)
+    useEffect(() => {
+        setRole(loggedUser.role)
+        setID(loggedUser.userID)
     
-    // }, [loggedUser]);
+    }, [loggedUser]);
 
   return (
     <>
@@ -19,6 +21,7 @@ const Dashboard = () => {
       <div className='w-[100%] mdd:w-[90%] flex justify-center items-center'>
           <div className='w-full mt-[70px] h-full justify-center items-center p-2'>
             <SalesDashBD/>
+            {/* <ConsoleDashBD/> */}
 
           </div>
       </div>

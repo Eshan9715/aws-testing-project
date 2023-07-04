@@ -6,12 +6,13 @@ import Nodata from '../Default/Nodata';
 import SeeCRDData from './SeeCRDData';
 import ValuesBox from './ValuesBox';
 import ChangeRole from '../Addings/ChangeRole';
+import pend from '../../assets/pend.gif' 
 
-const DataTable = ({data, role,tabmode,term,name}) => {
+const DataTable = ({data, role,tabmode,term,name,loading}) => {
+    //console.log(loading)
     const [addAsg, setAddAsg] = useState(false)
     const [addSal, setAddSal] = useState(false)
     const [alterRole, setalterRole] = useState(false)
-
 
     const [addCRD, setAddCRD] = useState(false)
 
@@ -31,7 +32,6 @@ const DataTable = ({data, role,tabmode,term,name}) => {
     const [crname,setCrname] = useState('');
     const [doer,setDoer] = useState('');
     const [rolez,setrolez] = useState('');
-
 
     const addAssigner = (x,y,z)=>{
         setAddAsg(true)
@@ -95,7 +95,6 @@ const DataTable = ({data, role,tabmode,term,name}) => {
                     {((term==='clients') && (role!=='salesman')) && <th className={`p-3 ${tabmode==='pending'? 'w-[15%]': 'w-[25%]'}`}>Assinged</th>}
                     {((term==='clients') && (role==='salesman')) && <th className='py-3 w-[15%] text-center'>AssingedCRD</th>}
 
-
                     {role==='ratesmanager' && <th className='py-3 w-[10%] text-center'>Action</th>}
                     {role==='salesman' && <th className='py-3 w-[10%] text-center'>Action</th>}
                     {((role==='admin') && (tabmode==='pending')) && <th className='py-3 w-[10%] text-center'>Action</th>}
@@ -104,11 +103,16 @@ const DataTable = ({data, role,tabmode,term,name}) => {
                 </tr>
             </thead>
 
-            <tbody className='bg-slate-50 flex flex-col items-center justify-between overflow-y-scroll w-full max-h-[340px]'>
+            <tbody className='bg-slate-50 flex flex-col items-center justify-between overflow-y-scroll w-full max-h-[60vh]'>
                 <>                   
                     <>
                         {
-                                data.length===0? <Nodata/> : 
+                            (data.length===0 && loading)? 
+                            <div className='w-full flex flex-col justify-center items-center font-semibold gap-3 min-h-[200px]'>
+                            <img src={pend} alt='' className='w-12 h-12'/>
+                            <p>Loading Data...</p>
+                            </div>
+                            :(data.length===0 && !loading)? <Nodata/> : 
                                 role==='salesman'? 
                                 data.map((sdetail,i)=>(
                                 <tr className='text-center items-center flex w-full mb-4' key={i}>
@@ -119,7 +123,7 @@ const DataTable = ({data, role,tabmode,term,name}) => {
                                                 src={sdetail.image}
                                                 alt=""
                                             /> 
-                                            <div className='flex flex-col gap-1'>
+                                            <div className='flex justify-center items-start flex-col gap-1'>
                                             <p className='ml-2'>{sdetail.name}</p>
                                             {(data.filter(e=>e.role==='user')).length!==0?<p className='ml-2 text-[14px] text-start text-red-500 font-semibold'>{sdetail.companyName}</p>:<p className='ml-2 text-[14px] text-start text-red-500 font-semibold'>{sdetail.role}</p>}
                                             </div>
@@ -164,7 +168,7 @@ const DataTable = ({data, role,tabmode,term,name}) => {
                                                 src={sdetail.image}
                                                 alt=""
                                             /> 
-                                            <div className='flex flex-col gap-1'>
+                                            <div className='flex justify-center items-start flex-col gap-1'>
                                             <p className='ml-2'>{sdetail.name}</p>
                                             {(data.filter(e=>e.role==='user')).length!==0?<p className='ml-2 text-[14px] text-start text-red-500 font-semibold'>{sdetail.companyName}</p>:<p className='ml-2 text-[14px] text-start text-red-500 font-semibold'>{sdetail.role}</p>}
                                             </div>

@@ -32,32 +32,6 @@ const AddAssigner = ({show,title,close,id,name,role,term,track,sal,doer,arrz}) =
     //console.log(cName)
 
     useEffect(() => {
-        // const getSalesmans = ()=>{
-        //     axios
-        //     .get(`${http}/api/member?role=salesman`)
-        //     .then((res) => {
-        //       console.log(res.data);
-        //       setSalesmans(res.data.member)
-        //     })
-        //     .catch(err=> {
-        //       console.log(err);
-        //     })     
-        //   }
-        //   getSalesmans();
-
-        //   const getCrds = ()=>{
-        //     axios
-        //     .get(`${http}/api/member?role=crd`)
-        //     .then((res) => {
-        //       console.log(res.data);
-        //       setCrds(res.data.member)
-        //     })
-        //     .catch(err=> {
-        //       console.log(err);
-        //     })     
-        //   }
-        //   getCrds();
-
           const getUsers = ()=>{
             axios
             .get(`${http}/api/user`)

@@ -105,7 +105,7 @@ const Requests = () => {
     const [tabmode, setTabmode] = useState('rates pending')
     const [ctabmode, setcTabmode] = useState('schedule pending')
 
-    //console.log(tabmode)
+    //console.log(screenSize.height)
     
     cRfinalizedFullCargo = [...cfrueryData, ...clrueryData]
     sRfinalizedFullCargo = [...sfrueryData, ...slrueryData]
@@ -150,8 +150,8 @@ const Requests = () => {
 
                 {screenSize.width < 1610 && 
                     <div className="flex w-[90%] lg:mt-[65px] mt-[45px] md:mt-[50px] justify-center fixed items-start">
-                    {role==='salesman' && <SliderTabs SData={sRfinalizedFullCargo} Data={tabData} chooseTab={chooseTab} role={role} />}
-                    {role==='crd' && <SliderTabs SData={cRfinalizedFullCargo} Data={ctabData} chooseTab={chooseTab} role={role} />}
+                    {role==='salesman' && <SliderTabs SData={sRfinalizedFullCargo} Data={tabData} chooseTab={chooseTab} role={role} type='topbar' />}
+                    {role==='crd' && <SliderTabs SData={cRfinalizedFullCargo} Data={ctabData} chooseTab={chooseTab} role={role} type='topbar' />}
 
                     </div>                   
                 }
