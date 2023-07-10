@@ -1,23 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-// import Slider from '../sliders/Slider'
-// import SliderAct from '../sliders/SliderActs'
-// import {recentAct} from '../Data'
-// import SliderMails from '../sliders/'
+
 import { useEffect } from 'react'
 import SliderRates from '../../sliders/SliderRates';
 import { tabData } from '../../Data';
 import { useSelector } from 'react-redux';
 import SliderDashTabs from '../../sliders/SliderDashTabs';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
-import { TextField } from '@mui/material';
 import DBTable from '../../components/Viewings/DBTable';
-//import { useState } from 'react'
-//import axios from 'axios'
-// import { useSelector } from 'react-redux'
 
-//var http = "http://localhost:5000";  
-//var http =  "https://cute-plum-caterpillar-tie.cyclic.app" 
 var sRfinalizedFullCargo = []
 
 const SalesDashBD = () => {
@@ -72,8 +63,6 @@ const SalesDashBD = () => {
     }, [http,name,loggedUser]);
 
     sRfinalizedFullCargo = [...sfrueryData, ...slrueryData]
-    //console.log(sRfinalizedFullCargo)
-
     
   const gridParts = [
         {
@@ -181,7 +170,7 @@ const SalesDashBD = () => {
 
             <div className='w-full flex justify-start items-start gap-3'>
               <div className='w-[15%] mt-1 flex flex-col gap-2 items-start '>
-                <SliderDashTabs SData={sRfinalizedFullCargo} Data={tabData} type='dashbar' />
+                <SliderDashTabs SData={sRfinalizedFullCargo} Data={tabData} type='dashbar' align='vertiz' />
               </div>
               
               <div className='w-[40%] mt-1 flex flex-col gap-2 items-start'>

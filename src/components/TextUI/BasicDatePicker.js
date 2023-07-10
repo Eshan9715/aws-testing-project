@@ -56,9 +56,11 @@ export const BasicDatePicker = ({label,setDate}) => {
   //let format3 = `${year}-${month+1}-${day}`
   //console.log(format3); 
   let Imonth = month>9? (month+1) : `0${(month+1)}`
+  let Iday = day>9? (day) : `0${(day)}`
 
-  let format4 = `${year}-${Imonth}-${day}`
-  //console.log(format4); 
+
+  let format4 = `${year}-${Imonth}-${Iday}`
+  console.log(format4); 
 
   const handleChange = (event) => {
     setValue(event.target.value);

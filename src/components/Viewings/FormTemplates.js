@@ -413,65 +413,64 @@ export const CargoDesc = ({formData, setFormData,ischeck}) => {
 export const CargoQuantity = ({formData, setFormData,ischeck}) => {
     return (
     <div className='w-full grid grid-cols-2 justify-center items-center py-1 gap-2'>
-    <div className='w-full flex flex-col'>
-    <TextField 
-        id="outlined-basic" 
-        label={'No Packages'} variant="outlined" 
-        placeholder={''}   
-        className='w-full'
-        value={formData?.NoPackages}
-        onChange={(event,value) =>
-            setFormData({ ...formData, NoPackages: event.target.value })
-         }      
-    />
-        {((formData?.NoPackages==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add No of Packages here!</p>}   
-    </div>
+        <div className='w-full flex flex-col'>
+        <TextField 
+            id="outlined-basic" 
+            label={'No Packages'} variant="outlined" 
+            placeholder={''}   
+            className='w-full'
+            value={formData?.NoPackages}
+            onChange={(event,value) =>
+                setFormData({ ...formData, NoPackages: event.target.value })
+            }      
+        />
+            {((formData?.NoPackages==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add No of Packages here!</p>}   
+        </div>
 
-    <div className='w-full flex flex-col'>
-     <TextField 
-        id="outlined-basic" 
-        label={'Gross Weight'} variant="outlined" 
-        placeholder={''}   
-        type='number'
-        className='w-full'
-        value={formData?.GrossWeight}
-        onChange={(event,value) =>
-            setFormData({ ...formData, GrossWeight: event.target.value })
-        }      
-    />
-        {((formData?.GrossWeight==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Gross Weight here!</p>}   
-    </div>
+        <div className='w-full flex flex-col'>
+        <TextField 
+            id="outlined-basic" 
+            label={'Gross Weight'} variant="outlined" 
+            placeholder={''}   
+            type='number'
+            className='w-full'
+            value={formData?.GrossWeight}
+            onChange={(event,value) =>
+                setFormData({ ...formData, GrossWeight: event.target.value })
+            }      
+        />
+            {((formData?.GrossWeight==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Gross Weight here!</p>}   
+        </div>
 
-    <div className='w-full flex flex-col'>
-     <TextField 
-        id="outlined-basic" 
-        label={'Net Weight'} variant="outlined" 
-        placeholder={''}   
-        type='number'
-        className='w-full'
-        value={formData?.NetWeight}
-        onChange={(event,value) =>
-            setFormData({ ...formData, NetWeight: event.target.value })
-        }      
-    />
-        {((formData?.NetWeight==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Net Weight here!</p>}   
-    </div>
+        <div className='w-full flex flex-col'>
+        <TextField 
+            id="outlined-basic" 
+            label={'Net Weight'} variant="outlined" 
+            placeholder={''}   
+            type='number'
+            className='w-full'
+            value={formData?.NetWeight}
+            onChange={(event,value) =>
+                setFormData({ ...formData, NetWeight: event.target.value })
+            }      
+        />
+            {((formData?.NetWeight==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Net Weight here!</p>}   
+        </div>
 
-    <div className='w-full flex flex-col'>
-     <TextField 
-        id="outlined-basic" 
-        label={'Volume'} variant="outlined" 
-        placeholder={''}   
-        type='number'
-        className='w-full'
-        value={formData?.Volume}
-        onChange={(event,value) =>
-            setFormData({ ...formData, Volume: event.target.value })
-        }      
-    />    
-        {((formData?.Volume==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Cargo volumes in Cbm here!</p>}   
-    </div>
-
+        <div className='w-full flex flex-col'>
+        <TextField 
+            id="outlined-basic" 
+            label={'Volume'} variant="outlined" 
+            placeholder={''}   
+            type='number'
+            className='w-full'
+            value={formData?.Volume}
+            onChange={(event,value) =>
+                setFormData({ ...formData, Volume: event.target.value })
+            }      
+        />    
+            {((formData?.Volume==='') && (ischeck)) && <p className='w-full text-[13px] text-red-600 mb-1 flex justify-start'>Add Cargo volumes in Cbm here!</p>}   
+        </div>
     </div>
     )
 }

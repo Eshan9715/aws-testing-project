@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AlertQuery = ({origin, destination, type, cargosFCL,cargosLCL, show, close, rDate, title, send, errorStaus,como, freight,forwarder,sta}) => {
+const AlertQuery = ({origin, destination,serviceMode, type, cargosFCL,cargosLCL, show, close, rDate, title, send, errorStaus,como, freight,forwarder,sta}) => {
 
     if(!show){
         return null
@@ -42,6 +42,17 @@ const AlertQuery = ({origin, destination, type, cargosFCL,cargosLCL, show, close
 
                     <div className='w-[50%] flex flex-col justify-center items-start'>
                     <p>{como}</p>
+                    </div>
+
+                </div>
+
+                <div className='w-full flex justify-center items-center p-1'>
+                    <div className='w-[50%] flex flex-col justify-center items-end px-10 font-semibold'>
+                        <p>Service Mode :</p>
+                    </div>
+
+                    <div className='w-[50%] flex flex-col justify-center items-start'>
+                    <p>{serviceMode}</p>
                     </div>
 
                 </div>

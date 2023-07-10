@@ -81,6 +81,8 @@ const AddQuery = () => {
   const [wordEntered, setWordEntered] = useState("");
   const [noPkg, setNoPkg] = useState('')
   const [vol, setVol] = useState('')
+  const [shmode, setShMode] = useState('')
+
   const [filteredData, setFilteredData] = useState([]);
 
  useEffect(() => {
@@ -237,7 +239,7 @@ const AddQuery = () => {
       origin: origin,
       destination: destination,
       containerMode: mode,
-
+      serviceMode: shmode,
       cargo: 
       fclCargo.map((item) => ({
         containerType: item.containerType,
@@ -318,8 +320,6 @@ const AddQuery = () => {
     setTab(!tab);
 
   }
-
-
 
   return (
     <div className={`w-full h-screen flex overflow-hidden justify-end items-center text-black bg-white`}>               
@@ -443,10 +443,50 @@ const AddQuery = () => {
                     </Box>
 
                     {freight==='' && (checkCargo==='added' || search===true) && <p className='text-[13px] text-red-600 mb-1'>Add your freight details!</p>}
-                </div>   
                 </div>
 
-                <div className='w-full flex justify-center items-center mt-4'>
+                  <div className='flex flex-col'>
+                            <Box sx={{ width: '100%'}}>
+                              <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Service Mode</InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  label="Service Mode"
+                                  value={shmode}
+                                  onChange={(e)=>setShMode(e.target.value)}
+                                
+                              >
+                              <MenuItem value={"CY / CY"}>CY / CY</MenuItem>
+                              <MenuItem value={"CY / CFS"}>CY / CFS</MenuItem>
+                              <MenuItem value={"CY / DOOR"}>CY / DOOR</MenuItem>
+                              <MenuItem value={"CY / RAMP"}>CY / RAMP</MenuItem>
+                              <MenuItem value={"CFS / CFS"}>CFS / CFS</MenuItem>
+                             
+                              </Select>
+                              </FormControl>
+                            </Box> 
+
+                          {shmode==='' && (checkCargo==='added' || search===true) && <p className='text-[13px] text-red-600 mb-1'>Add your service Mode!</p>}
+
+                  </div>
+
+                  <div className='w-full flex justify-center items-center'>
+                    <button onClick={handleQuery}
+                        className="flex items-center justify-between w-full h-[55px] px-4 py-1 text-sm font-semibold text-white capitalize bg-orange-500 rounded-md hover:bg-white hover:text-black hover:border-2 border-black focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                        <span>Search results</span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button> 
+                  </div>
+   
+                </div>
+
+                {/* <div className='w-full flex justify-center items-center mt-4'>
                 <div className='w-[30%] flex justify-center items-center'>
                 <button onClick={handleQuery}
                     className="flex items-center justify-between w-full h-[55px] px-4 py-1 text-sm font-semibold text-white capitalize bg-orange-500 rounded-md hover:bg-white hover:text-black hover:border-2 border-black focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
@@ -459,11 +499,11 @@ const AddQuery = () => {
                     </svg>
                 </button> 
                 </div>
-                </div>
+                </div> */}
 
             </div>
 
-            {role==='user' && <AlertQuery title={"Query Summery"}  send={handleSend} origin={origin} rDate={rdate} show={showAlert} close={handleClose} freight={freight} destination={destination} como={wordEntered} type={mode} cargosFCL={finalizedCargo} cargosLCL={lclCargo} sta={shStatus}/>}
+            {role==='user' && <AlertQuery title={"Query Summery"} serviceMode={shmode} send={handleSend} origin={origin} rDate={rdate} show={showAlert} close={handleClose} freight={freight} destination={destination} como={wordEntered} type={mode} cargosFCL={finalizedCargo} cargosLCL={lclCargo} sta={shStatus}/>}
 
             {role==='consoleOperator' && <AlertQuery title={"Query Summery"}  send={handleSend} origin={origin} rDate={rdate} forwarder={forwd} show={showAlert} close={handleClose} freight={freight} destination={destination} como={wordEntered} type={mode} cargosLCL={lclCargo} sta={shStatus}/>}
 

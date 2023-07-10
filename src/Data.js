@@ -155,13 +155,6 @@ export const tabShiprData = [
         topic: "Completed Queries"
     },
 ]
-// Vessel Schedule
-// Vessel Confirmation
-// Booking & Release
-// Cargo Cut-Off
-// B/L Instructions
-// B/L Confirmation
-
 
 export const tabConsolData = [
     {
@@ -206,7 +199,6 @@ export const salesPersons =[
     {name: 'Sanoli Peris', img:  {user}}, 
 ]
 
-
 export const shipperName =[
     'Venura Silva', 'Chaminda Perera' 
 ]
@@ -222,7 +214,6 @@ export const shipperTele =[
 export const shippermail =[
     'e@gmail.com', 'c@gmail.com' 
 ]
-
 
 export const consigneeName =[
     'Venura Silva', 'Chaminda Perera' 
@@ -264,9 +255,6 @@ export const cargoDDesc =[
     'Marks and Numbers is an optional field used to identify different pieces of cargo so that there is no problem identifying them at the port',
     'orrect and complete marking of packages helps to prevent incorrect handling, accidents, incorrect delivery, losses of weight and volume and Customs fines' 
 ]
-
-
-
 
 export const seaRates = [
     {
@@ -442,7 +430,6 @@ export const forwarders = [
     }
 ]
 
-
 export const ports = [
     {
         object: "Dubai",
@@ -518,9 +505,6 @@ export const Eports = [
         State: 'Port'
     }
 ]
-
-
-
 
 export const countries = [
     { code: 'AD', label: 'Andorra', phone: '376' },
@@ -1115,7 +1099,6 @@ export const booking = [
 
 //         },
 //     ]
-
 export const gridParts = [
         {
             id:1,
@@ -1294,5 +1277,455 @@ export const recentMails = [
 
     }
 
+]
+
+export const currencies = 
+[
+	{
+		name: "US Dollar",
+		symbol_native: "$",
+		code: "USD",
+	},
+	{
+		name: "Canadian Dollar",
+		symbol_native: "$",
+		code: "CAD",
+	},
+	{
+		name: "Euro",
+		symbol_native: "€",
+		code: "EUR",
+	},
+	{
+		name: "United Arab Emirates Dirham",
+		symbol_native: "د.إ.",
+				code: "AED",
+	},
+	{
+		name: "Afghan Afghani",
+		symbol_native: "؋",
+				code: "AFN",
+	},
+	{
+		name: "Albanian Lek",
+		symbol_native: "Lek",
+		code: "ALL",
+	},
+	{
+		 
+		name: "Armenian Dram",
+		symbol_native: "դր.",
+		
+		code: "AMD",
+	},
+	{
+		name: "Argentine Peso",
+		symbol_native: "$",
+		
+		code: "ARS",
+	},
+	{
+		name: "Australian Dollar",
+		symbol_native: "$",
+		code: "AUD",
+	},
+	{
+		name: "Bangladeshi Taka",
+		symbol_native: "৳",
+		code: "BDT",
+	},
+	{
+		name: "Bulgarian Lev",
+		symbol_native: "лв.",
+		code: "BGN",
+	},
+	{
+		name: "Bahraini Dinar",
+		symbol_native: "د.ب.",
+				code: "BHD",
+	},
+	
+	{
+		
+		name: "Brunei Dollar",
+		symbol_native: "$",
+		
+		code: "BND",
+	},
+	{
+		
+		name: "Bolivian Boliviano",
+		symbol_native: "Bs",
+		
+		code: "BOB",
+		
+	},
+	{
+		
+		name: "Brazilian Real",
+		symbol_native: "R$",
+		
+		code: "BRL",
+	},
+	{
+		
+		name: "Botswanan Pula",
+		symbol_native: "P",
+		
+		code: "BWP",
+		 
+	},
+	{
+		
+		name: "Belarusian Ruble",
+		symbol_native: "руб.",
+		
+		code: "BYN",
+		 
+	},
+	{
+		 
+		name: "Swiss Franc",
+		symbol_native: "CHF",
+		
+		code: "CHF",
+		
+	},
+	{
+		
+		name: "Chilean Peso",
+		symbol_native: "$",
+		
+		code: "CLP",
+		 
+	},
+	{
+		
+		name: "Chinese Yuan",
+		symbol_native: "CN¥",
+		
+		code: "CNY",
+		 
+	},
+	{
+		
+		name: "Colombian Peso",
+		symbol_native: "$",
+		
+		code: "COP",
+		
+	},
+	{
+		
+		name: "Costa Rican Colón",
+		symbol_native: "₡",
+		
+		code: "CRC",
+		
+	},
+	
+	{
+		
+		name: "Czech Republic Koruna",
+		symbol_native: "Kč",
+		
+		code: "CZK",
+		
+	},
+	
+	{
+		
+		name: "Danish Krone",
+		symbol_native: "kr",
+		
+		code: "DKK",
+		
+	},
+	{
+		
+		name: "Dominican Peso",
+		symbol_native: "RD$",
+		code: "DOP",
+		
+	},
+	{
+		
+		name: "Algerian Dinar",
+		symbol_native: "د.ج.",		
+				code: "DZD",
+		
+	},
+	{
+		
+		name: "Estonian Kroon",
+		symbol_native: "kr",
+		
+		code: "EEK",
+		 
+	},
+	{
+		
+		name: "Egyptian Pound",
+		symbol_native: "ج.م.",
+				code: "EGP",
+		
+	},
+	
+	{
+		
+		name: "Ethiopian Birr",
+		symbol_native: "Br",
+		
+		code: "ETB",
+		 
+	},
+	{
+		
+		name: "British Pound Sterling",
+		symbol_native: "£",
+		
+		code: "GBP",
+		
+	},
+	{
+		
+		name: "Georgian Lari",
+		symbol_native: "GEL",
+		
+		code: "GEL",
+		
+	},
+	
+	{
+		 
+		name: "Hong Kong Dollar",
+		symbol_native: "$",
+		
+		code: "HKD",
+		
+	},
+	{
+		
+		name: "Honduran Lempira",
+		symbol_native: "L",
+	
+		code: "HNL",
+		
+	},
+	{
+		 
+		name: "Croatian Kuna",
+		symbol_native: "kn",
+		
+		code: "HRK",
+		
+	},
+	{
+		
+		name: "Hungarian Forint",
+		symbol_native: "Ft",
+		
+		code: "HUF",
+		
+	},
+	{
+		
+		name: "Indonesian Rupiah",
+		symbol_native: "Rp",
+		
+		code: "IDR",
+	},
+	
+	{
+		
+		name: "Indian Rupee",
+		symbol_native: "টকা",
+		
+		code: "INR",
+		
+	},
+	{
+		
+		name: "Iraqi Dinar",
+		symbol_native: "د.ع.‏",
+		
+				code: "IQD",
+	},
+	{
+		
+		name: "Iranian Rial",
+		symbol_native: "﷼",
+		
+		code: "IRR",
+	
+	},
+	
+	{
+		
+		name: "Jamaican Dollar",
+		symbol_native: "$",
+		
+		code: "JMD",
+		
+	},
+	{
+		
+		name: "Jordanian Dinar",
+		symbol_native: "د.أ.",
+		
+				code: "JOD",
+		
+	},
+	{
+		 
+		name: "Japanese Yen",
+		symbol_native: "￥",
+		
+		code: "JPY",
+		
+	},
+	
+	{
+		
+		name: "South Korean Won",
+		symbol_native: "₩",
+		
+		code: "KRW",
+		
+	},
+	{
+		
+		name: "Kuwaiti Dinar",
+		symbol_native: "د.ك",
+		
+				code: "KWD",
+		
+	},
+	
+	{
+		
+		name: "Sri Lankan Rupee",
+		symbol_native: "SL Re",
+		
+		code: "LKR",
+		
+	},
+	
+	
+	{
+		
+		name: "New Zealand Dollar",
+		symbol_native: "$",
+		
+		code: "NZD",
+		
+	},
+	{
+		
+		name: "Omani Rial",
+		symbol_native: "ر.ع.‏",
+		
+				code: "OMR",
+		
+	},
+	
+	{
+		
+		name: "Philippine Peso",
+		symbol_native: "₱",
+		
+		code: "PHP",
+		
+	},
+	{
+		
+		name: "Pakistani Rupee",
+		symbol_native: "₨",
+		
+		code: "PKR",
+		 
+	},
+	
+	
+	{
+		
+		name: "Qatari Rial",
+		symbol_native: "ر.ق.",
+	    code: "QAR",
+	},
+	
+	{
+		
+		name: "Russian Ruble",
+		symbol_native: "₽.",
+		code: "RUB",
+	},
+	
+	{
+		
+		name: "Saudi Riyal",
+		symbol_native: "ر.س.",
+		code: "SAR",
+	},
+	
+	
+	{
+		
+		name: "Singapore Dollar",
+		symbol_native: "$",
+		
+		code: "SGD",
+	},
+	{
+		
+		name: "Thai Baht",
+		symbol_native: "฿",
+		
+		code: "THB",
+		
+	},
+	
+	
+	{
+		
+		name: "Turkish Lira",
+		symbol_native: "TL",
+		
+		code: "TRY",
+		
+	},
+	
+	{
+		
+		name: "New Taiwan Dollar",
+		symbol_native: "NT$",
+		
+		code: "TWD",
+		
+	},
+	
+	{
+		 
+		name: "Ukrainian Hryvnia",
+		symbol_native: "₴",
+		
+		code: "UAH",
+	},
+	
+	{
+		name: "Yemeni Rial",
+		symbol_native: "ر.ي.",
+		code: "YER",
+	},
+	{
+		
+		name: "South African Rand",
+		symbol_native: "R",
+		
+		code: "ZAR",
+		
+	},
+	
+	
 ]
 

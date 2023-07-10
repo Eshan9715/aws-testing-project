@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
-const SliderDashTabs = ({Data,SData,chooseTab,role,type})=>  {
+const SliderDashTabs = ({Data,SData,chooseTab,role,type,align})=>  {
   
     const SampleNextArrow = (props) =>{
         const { className, style, onClick } = props;
@@ -96,9 +96,8 @@ const SliderDashTabs = ({Data,SData,chooseTab,role,type})=>  {
               }
 
               {((type==='dashbar') && (SData?.length>0) && (SData?.length<=4)) && 
-                <div className="w-full flex flex-col">
-                  {/* <p className="text-[17px] font-semibold">Ongoing Shipments</p> */}
-                  <div className="w-full flex flex-col max-h-[200px] overflow-y-auto">
+                <div className="w-full flex">
+                  {align==='vertiz' && <div className="w-full flex flex-col max-h-[200px] overflow-y-auto">
                   {Data.map(e=>(SData?.filter(er=> er.status===e.fact).length>0 && 
                     <li className="mr-2 py-1.5 flex">
                       <div className={`flex w-full gap-2 justify-between bg-white text-black  border px-2 py-3 rounded-lg active`}>
@@ -109,7 +108,20 @@ const SliderDashTabs = ({Data,SData,chooseTab,role,type})=>  {
                       </div>
                     </li>
                   ))}
-                  </div>
+                  </div>}
+
+                  {align==='horiz' && <div className="w-full flex">
+                  {Data.map(e=>(SData?.filter(er=> er.status===e.fact).length>0 && 
+                    <li className="mr-2 py-1.5 flex">
+                      <div className={`flex w-full gap-2 justify-between bg-white text-black  border px-2 py-3 rounded-lg active`}>
+                        <p className="font-semibold text-lg text-left bg-red-500 rounded-full w-6 h-6 flex justify-center items-center text-white">
+                          {SData?.filter(er=> er.status===e.fact).length}
+                        </p>
+                        <p className="flex text-end">{e.topic}</p>
+                      </div>
+                    </li>
+                  ))}
+                  </div>}
                 </div>
               
                          

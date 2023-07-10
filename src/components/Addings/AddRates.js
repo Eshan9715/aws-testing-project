@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom'
 import { lclRates, userSchema8 } from '../Default/userValidation'
 import { TextFields } from '../TextUI/TextFields'
 import Automan from '../TextUI/AutoText'
+import { currencies } from '../../Data'
+import Selects from '../TextUI/Selects'
+import LCLSelects from '../TextUI/LCLSelects'
 
 var rates=[];
 var lRates = {}
@@ -82,9 +85,20 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
     
     }, [id,http]);
 
+  //const dataFilter = data?.filter(e=>e);
+  // const currencyData = data.map(({item_name, price})=>{ 
+  //   return {item_name, price};
+  // });
+
+  //console.log(dataFilter)
+  //console.log(currencyData)
+
+
     const initialLCL = {
         rate: '',
         validDate: '',
+        currency:''
+
       }
 
     const initialValues = {
@@ -93,7 +107,8 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
               sLine: '',
               containerType: '',
               rate: '',
-              date: ''
+              date: '',
+              currency:''
             },
           ],
     }
@@ -121,13 +136,14 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
                 validDate: item.date,
                 container: item.containerType,
                 rate: item.rate,
+                currency: item.currency,
                 isFinal: false
             })), 
         id: id,
         remarks:
         re.map((item) => ({
             status: item.status,
-            remark: item.remark,
+            remark: item.remark===''? 'I added rates for your shipment.please check it!': item.remark,
             dDate: item.timeVal,
             userID: item.userID,
             adder: item.adder,
@@ -157,6 +173,7 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
               validDate: item.date,
               container: item.containerType,
               rate: item.rate,
+              currency: item.currency,
               isFinal: true
           })), 
       id: id,
@@ -177,6 +194,7 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
     lratesArr.map((item) => ({
       rate: item.rate,
       validDate: item.validDate,
+      currency: item.currency,
       isFinal: true
       
     })), 
@@ -218,6 +236,7 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
         lratesArr.map((item) => ({
           rate: item.rate,
           validDate: item.validDate,
+          currency: item.currency,
           isFinal: false
           
         })), 
@@ -225,7 +244,7 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
         remarks:
         lre.map((item) => ({
             status: item.status,
-            remark: item.remark,
+            remark: item.remark===''? 'I added rates for your shipment.please check it!': item.remark,
             dDate: item.timeVal,
             userID: item.userID,
             adder: item.adder,
@@ -269,6 +288,7 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
     lratesArr.map((item) => ({
       rate: item.rate,
       validDate: item.validDate,
+      currency: item.currency,
       isFinal: false
       
     })), 
@@ -308,7 +328,7 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
 
   return (
     <div className={`${show? "fixed inset-0" : "hidden"}  bg-gray-900 bg-opacity-50 z-20 w-full flex justify-center items-center md:ml-20`}>
-            <div className={`w-[55%] flex flex-col bg-white gap-4 rounded-lg shadow-lg`}>
+            <div className={`w-[65%] flex flex-col bg-white gap-4 rounded-lg shadow-lg`}>
             <div className='w-full flex justify-center items-center bg-sky-700'>
                 <h3 className='w-full text-lg font-semibold text-center p-2.5  text-white'>{title}</h3>
                 <svg fill="none" onClick={close} className='w-8 h-8 mr-2 text-white font-semibold cursor-pointer bg-red-500 rounded-full p-1' stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -389,43 +409,60 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
                                 
                                     <div className='text-sm flex  justify-center items-center ml-1'>
 
-                                        <div className='flex flex-col gap-2'>
-                                        <label htmlFor={`SRates.${index}.rate`}>Rate</label>
-                                            <Field
-                                            name={`SRates.${index}.rate`}
-                                            placeholder=""
-                                            type="number"
-                                            className='text-center p-2 w-[150px] rounded-md border'
-                                            />
-                                            <ErrorMessage name={`SRates.${index}.rate`} component="div" className='text-[10px] text-red-600 mb-1'/>
+                                      <div className='flex flex-col gap-2'>
+                                            <label htmlFor={`SRates.${index}.currency`}>Currency</label>
 
-                                        </div>
+                                            <Field as="select" 
+                                                  name={`SRates.${index}.currency`}
+                                                  className='text-center p-2 w-[100px] rounded-md border'>
+                                                 
+                                                  {currencies?.map(e=> (
+                                                    <option value={e.code}>{e.code} </option>
+                                                  ))}
 
-                                        <div className='flex flex-col gap-2 ml-2'>
-                                        <label htmlFor={`SRates.${index}.date`}>Valid until</label>
-                                            <Field
-                                            name={`SRates.${index}.date`}
-                                            placeholder=""
-                                            type="date"
-                                            format='MMM Do YYYY'
-                                            min={today}
-                                            className='text-center p-2 w-[150px] rounded-md border'
-                                            />
-                                            <ErrorMessage name={`SRates.${index}.date`} component="div" className='text-[10px] text-red-600 mb-1'/>
+                                              </Field>
+                                      
+                                      
+                                          <ErrorMessage name={`SRates.${index}.currency`} component="div" className='text-[12px] text-red-600 mb-1'/>                                                  
+                                      </div>
 
-                                        </div>
+                                      <div className='flex flex-col gap-2'>
+                                      <label htmlFor={`SRates.${index}.rate`}>Rate</label>
+                                          <Field
+                                          name={`SRates.${index}.rate`}
+                                          placeholder=""
+                                          type="number"
+                                          className='text-center p-2 w-[150px] rounded-md border'
+                                          />
+                                          <ErrorMessage name={`SRates.${index}.rate`} component="div" className='text-[10px] text-red-600 mb-1'/>
 
-                                        <button onClick={() => remove(index)} disabled={values.SRates.length===1}>
-                                                    <svg fill="none" stroke="currentColor" className='w-7 h-7 mb-3 bg-red-600 p-1 text-white cursor-pointer font-extrabold rounded-full ml-5 mt-5' stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"  aria-hidden="true">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                                                    </svg>
-                                                </button>
+                                      </div>
 
-                                                <button onClick={() => push({ sLine: '', containerType: '',  rate: '', date: ''})} >
-                                                    <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-7 h-7 mb-3 bg-green-600 p-1 text-white cursor-pointer font-extrabold rounded-full ml-2 mt-5' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"></path>
-                                                    </svg> 
-                                                </button>
+                                      <div className='flex flex-col gap-2 ml-2'>
+                                      <label htmlFor={`SRates.${index}.date`}>Valid until</label>
+                                          <Field
+                                          name={`SRates.${index}.date`}
+                                          placeholder=""
+                                          type="date"
+                                          format='MMM Do YYYY'
+                                          min={today}
+                                          className='text-center p-2 w-[150px] rounded-md border'
+                                          />
+                                          <ErrorMessage name={`SRates.${index}.date`} component="div" className='text-[10px] text-red-600 mb-1'/>
+
+                                      </div>
+
+                                      <button onClick={() => remove(index)} disabled={values.SRates.length===1}>
+                                                  <svg fill="none" stroke="currentColor" className='w-7 h-7 mb-3 bg-red-600 p-1 text-white cursor-pointer font-extrabold rounded-full ml-5 mt-5' stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"  aria-hidden="true">
+                                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                  </svg>
+                                      </button>
+
+                                      <button onClick={() => push({ sLine: '', containerType: '',  rate: '', date: '', currency: ''})} >
+                                          <svg fill="none" stroke="currentColor" stroke-width="1.5" className='w-7 h-7 mb-3 bg-green-600 p-1 text-white cursor-pointer font-extrabold rounded-full ml-2 mt-5' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"></path>
+                                          </svg> 
+                                      </button>
                                     </div>  
 
                                 </div>
@@ -490,6 +527,8 @@ const AddRates = ({show,title,close,id,type,mode, loggedID,loggedName}) => {
                               <p className='py-2 px-2 min-w-[100px] rounded-md text-center font-semibold border-2 border-black mt-4 mr-4'>1 Cbm</p>                        
                               <TextFields label="Rate ($)" name="rate" type="number" />
                               <TextFields label="Valid Until" name="validDate" min={today} type="date" />
+                              <LCLSelects label="Currency" name="currency" options={currencies} />
+
                             </div>
 
                             {mode!=="" && <>

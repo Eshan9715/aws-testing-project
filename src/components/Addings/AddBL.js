@@ -345,7 +345,7 @@ const AddBL = ({show,title,close,id, blData}) => {
     <div className={`${show? "fixed inset-0" : "hidden"} bg-gray-900 bg-opacity-50 z-20 mt-16 w-full flex justify-center items-center md:ml-20`}>
       <DialogBox open={openDialog} close={()=>setopenDialog(false)} send={()=>finalAdding()}/>
 
-        <div className='flex flex-col justify-center items-center bg-white w-[50%] rounded-lg shadow-lg'>
+        <div className='flex flex-col justify-center items-center bg-white w-[60%] rounded-lg shadow-lg'>
             <div className='w-full flex justify-center items-center bg-sky-700'>
                 <h3 className='w-full text-lg font-semibold text-center p-2.5  text-white'>{title}</h3>
                 <svg fill="none" onClick={close} className='w-8 h-8 mr-2 text-white font-semibold cursor-pointer bg-red-500 rounded-full p-1' stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
